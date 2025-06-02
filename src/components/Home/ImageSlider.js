@@ -11,26 +11,26 @@ const slides = [
 	{
 		id: 1,
 		img: img,
-		title: '01 — Spring Sale',
-		discount: '30% OFF',
+		subtitle: '01 — Spring Sale',
+		title: 'Inner Peace',
 	},
 	{
 		id: 2,
 		img: img,
-		title: '02 — Summer Drop',
-		discount: '40% OFF',
+		subtitle: '02 — Summer Drop',
+		title: 'Inner Peace',
 	},
 	{
 		id: 3,
 		img: img,
-		title: '03 — Autumn Flash',
-		discount: '20% OFF',
+		subtitle: '03 — Autumn Flash',
+		title: 'Inner Peace',
 	},
 	{
 		id: 4,
 		img: img,
-		title: '04 — Winter Warmers',
-		discount: '50% OFF',
+		subtitle: '04 — Winter Warmers',
+		title: 'Inner Peace',
 	},
 ];
 
@@ -65,7 +65,7 @@ const ImageSlider = () => {
 						<div
 							className={`relative h-[500px] rounded-xl transition-all duration-300 ${activeIndex === index
 								? 'scale-100 w-full'
-								: 'scale-95 opacity-70'
+								: 'scale-75  opacity-70'
 								}`}
 						>
 							<Image
@@ -74,9 +74,14 @@ const ImageSlider = () => {
 								className="w-full h-full object-cover"
 							/>
 							{activeIndex === index && (
-								<div className="absolute bottom-6 left-6 bg-[#565449] p-4 rounded-md shadow-md z-10">
-									<p className="text-xs text-white">{slide.title}</p>
-									<p className="text-xl font-bold text-white">{slide.discount}</p>
+								<div className='absolute bottom-6 left-6 z-10 flex'>
+									<div className=" bg-[#FFFFFFB8] backdrop-blur-sm p-4">
+										<p className="text-xs text-white">{slide.subtitle}</p>
+										<p className="text-xl font-bold text-white">{slide.title}</p>
+									</div>
+									<div className='absolute bottom-0 -right-[32%]'>
+										<img className='w-[48px] h-[48px]' src="/asset/CTA.png" alt="" />
+									</div>
 								</div>
 							)}
 						</div>

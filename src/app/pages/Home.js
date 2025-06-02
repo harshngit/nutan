@@ -25,26 +25,26 @@ const Home = () => {
       </section>
       {/* lg:pt-[690px] xl:pt-[695px] pt-[600px] */}
       {/* Second Section Below */}
-      {/* <section className="relative 
+      <section className="relative 
        overflow-hidden lg:pt-[750px] xl:pt-[750px] pb-[100px] pt-[650px]">
         <AboutHome />
-      </section> */}
+      </section>
       {/* Second Section Below */}
-      {/* <section className="relative  overflow-hidden">
+      <section className="relative  overflow-hidden">
         <Deal />
       </section>
       <section className='relative overflow-hidden'>
         <Photosection />
       </section>
-      <section className='relative overflow-hidden'>
-        <ProductsHome />
-      </section> */}
       {/* <section className='relative overflow-hidden'>
+        <ProductsHome />
+      </section>
+      <section className='relative overflow-hidden'>
         <CTA />
       </section> */}
-      {/* <section className=''>
+      <section className=''>
         <Footer />
-      </section> */}
+      </section>
       {/* <Footer /> */}
       {/* </ThemeProvider> */}
     </div>
