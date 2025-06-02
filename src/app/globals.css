@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.carousel-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    color: white !important;
+    font-size: 20px !important;
+    background: #565449;
+    border-radius: 100%;
+
+    width: 40px !important;
+    height: 40px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-button-prev {
+    top: 470px !important;
+    left: 10px !important;
+}
+
+.swiper-button-next {
+    top: 470px !important;
+    left: 60px !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-family: swiper-icons;
+    font-size: 22px !important;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+}
+
+.swiper-pagination {
+    display: none;
+    position: absolute;
+    text-align: center;
+    transition: 300ms opacity;
+    transform: translate3d(0, 0, 0);
+    z-index: 10 !important;
+    bottom: 39px !important;
+}
+
+/* Black */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* ExtraBold */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+/* Bold */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* SemiBold */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+/* Medium */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* Regular */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Italic */
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../webfonts/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Alike';
+    src: url('../webfonts/Alike-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
