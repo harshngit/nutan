@@ -36,10 +36,10 @@ const Home = () => {
       <section className='relative overflow-hidden'>
         <Photosection />
       </section>
-      {/* <section className='relative overflow-hidden'>
+      <section className='relative overflow-hidden'>
         <ProductsHome />
       </section>
-      <section className='relative overflow-hidden'>
+      {/* <section className='relative overflow-hidden'>
         <CTA />
       </section> */}
       <section className=''>

@@ -1,188 +1,69 @@
 'use client'
-
-import Image from 'next/image'
 import React from 'react'
-import img from '../../../public/asset/Home/abouthome2.png'
-import { FaStar } from "react-icons/fa";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import Link from 'next/link';
-import SwiperCollection from './SwiperCollection';
-import SwiperMob from './SwiperMob';
+import Image from 'next/image'
+import blogImg from '../../../public/asset/products/1.png' // Replace with your image path
+
+const blogData = [
+	{
+		id: 1,
+		title: 'Blog1',
+		date: 'Date',
+		author: 'Owner',
+		description: 'Our designer already made a lot of beautiful prototype of rooms that inspire you',
+		image: blogImg,
+	},
+	{
+		id: 2,
+		title: 'Blog2',
+		date: 'Date',
+		author: 'Owner',
+		description: 'Our designer already made a lot of beautiful prototype of rooms that inspire you',
+		image: blogImg,
+	},
+	{
+		id: 3,
+		title: 'Blog3',
+		date: 'Date',
+		author: 'Owner',
+		description: 'Our designer already made a lot of beautiful prototype of rooms that inspire you',
+		image: blogImg,
+	},
+	{
+		id: 4,
+		title: 'Blog4',
+		date: 'Date',
+		author: 'Owner',
+		description: 'Our designer already made a lot of beautiful prototype of rooms that inspire you',
+		image: blogImg,
+	},
+]
+
 const ProductsHome = () => {
 	return (
-		<div className='w-full lg:h-auto bg-white lg:py-5 lg:px-5 py-5 px-5'>
-			<div className='flex flex-col justify-center items-center pt-10 '>
-				{/* <div className='w-[100px] h-2 rounded-lg bg-[#D9D9D933] hidden lg:block'></div> */}
-				<h2 className='lg:text-[32px] text-[20px] text-center text-[#000] font-normal font-playfair'>The Art of Fewer, Better Choices</h2>
-				<p className='lg:text-[16px] text-[13px] mt-5 lg:w-[45%] w-[80%] font-light text-center text-[#000]'>Opting for quality over quantity means selecting timeless, durable, and responsibly made items. This approach simplifies our lives and fosters a deeper appreciation for our surroundings. Emphasizing longevity and responsible production resonates with a more sustainable and mindful lifestyle.</p>
-				{/* <div className='bg-[#D9D9D9] px-5 py-2 mt-5 rounded-2xl flex gap-3 justify-center items-center'>
-					<h3>New Colection</h3>
-					<Link href="">
-						<div className='bg-black px-1 py-1 rounded-full text-white'>
-							<IoIosArrowRoundForward className='text-[20px]' />
-						</div>
-					</Link>
-				</div> */}
-				{/* <div className='w-[100px] h-2 rounded-lg bg-[#D9D9D933] hidden lg:block'></div> */}
+		<div className="w-full bg-white py-10 px-5 lg:px-20">
+			<div className="text-center mb-10">
+				<h2 className="text-[20px] lg:text-[40px] font-bold text-[#3A3A3A]">Our Blogs</h2>
 			</div>
-			{/* <div className='grid lg:grid-cols-3 grid-cols-1 mt-7 gap-10	'>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-						</div>
-					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
+
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{blogData.map((blog) => (
+					<div key={blog.id} className="bg-[#F4F5F7] rounded-md overflow-hidden shadow-sm">
+						<Image
+							src={blog.image}
+							alt={blog.title}
+							className="w-full h-[200px] object-cover"
+						/>
+						<div className="p-4">
+							<h3 className="text-lg font-semibold text-[#3A3A3A]">{blog.title}</h3>
+							<div className="flex items-center text-sm text-gray-500 gap-2 my-1">
+								<span className='flex justify-center items-center gap-2'><img src="/asset/blog/date.png" alt="" />{blog.date}</span>
+								<span>•</span>
+								<span className='flex justify-center items-center gap-2'><img src="/asset/blog/profile.png" alt="" />{blog.date}</span>
+							</div>
+							<p className="text-sm text-gray-600 mt-2">{blog.description}</p>
 						</div>
 					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-						</div>
-					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-						</div>
-					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-						</div>
-					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-				<div className='lg:w-[386px] lg:h-[438px] bg-white py-5 px-5 rounded-[10px]'>
-					<div className='flex justify-center items-center'>
-						<Image src={img} width={336} height={244} className='rounded-[10px]' />
-					</div>
-					<div className='flex justify-between items-center mt-2'>
-						<div className='flex justify-start items-start flex-col'>
-							<h3 className='text-[20px] font-normal'>shirt1</h3>
-							<p className='text-gray-600 text-[12px]'>Al Karam</p>
-						</div>
-						<div className='flex justify-start items-start'>
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-							<FaStar className='w-5 text-[#FCA120]' />
-						</div>
-					</div>
-					<div className='flex justify-start items-start mt-2'>
-						<h4 className='text-[20px] text-black'>(4.1k) Customer Reviews</h4>
-					</div>
-					<div className='flex justify-between items-start mt-2'>
-						<h4 className='text-[18px] text-black'>$95.50</h4>
-						<p className='text-[15px] text-[#FF4646] '>Almost Sold Out</p>
-					</div>
-				</div>
-			</div> */}
-			{/* Slider */}
-			<div className='mb-[250px] lg:block hidden'>
-				<SwiperCollection />
-			</div>
-			<div className='lg:mb-[250px] lg:hidden block'>
-				<SwiperMob />
+				))}
 			</div>
 		</div>
 	)

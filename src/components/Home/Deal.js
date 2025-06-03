@@ -15,9 +15,9 @@ const Deal = () => {
 				<h2 className='font-bold lg:text-[32px] text-[#3A3A3A] text-[18px]'>Our Products</h2>
 			</div>
 			<div className="p-8">
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-6">
 					{allProducts.map((product, index) => (
-						<div key={index} className="relative w-[285px] group border rounded-lg overflow-hidden">
+						<div key={index} className="relative lg:w-[285px] group border rounded-lg overflow-hidden">
 							<img src={product.image} alt={product.name} className="w-full" />
 
 							{product.discount && (
