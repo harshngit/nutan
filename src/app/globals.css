@@ -14,9 +14,9 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    color: white !important;
+    color: #B88E2F !important;
     font-size: 20px !important;
-    background: #565449;
+    background: #fff;
     border-radius: 100%;
     width: 40px !important;
     height: 40px !important;
@@ -30,7 +30,7 @@
 
 .swiper-button-next {
     top: 50% !important;
-    left: 95% !important;
+    left: 92% !important;
 }
 
 .swiper-button-prev:after,

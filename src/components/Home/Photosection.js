@@ -31,7 +31,7 @@ const Photosection = () => {
 				<div className='lg:w-[40%] w-full flex lg:justify-start justify-center items-center lg:items-start flex-col gap-10'>
 					<div className='flex lg:justify-start justify-center items-center lg:items-start flex-col gap-10'>
 						<h2 className='lg:text-[46px] text-[30px] font-normal text-[#3A3A3A]'>100+ products</h2>
-						<p className='font-normal text-[#616161] text-center text-[16px]'>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
+						<p className='font-normal text-[#616161] text-left text-[16px]'>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
 					</div>
 					<div className='flex lg:justify-start justify-center items-center lg:items-start w-full'>
 						<Button className='bg-[#B88E2F] !rounded-none py-[10px] font-normal px-[10px] w-[40%] text-[#fff] text-[16px]'>Buy Now</Button>
