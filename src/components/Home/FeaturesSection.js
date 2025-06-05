@@ -4,22 +4,22 @@ import { FaShippingFast, FaHeadset, FaUndo, FaShieldAlt } from 'react-icons/fa';
 export default function ServiceFeatures() {
   const features = [
     {
-      icon: <FaShippingFast className="w-8 h-8 text-gray-700" />,
+      img: "/asset/Home/shipping-fast.png",
       title: "Free Shipping",
       description: "Free shipping on all US order or order above $200"
     },
     {
-      icon: <FaHeadset className="w-8 h-8 text-gray-700" />,
+     img: "/asset/Home/customer-support.png",
       title: "Support 24/7",
       description: "Contact us 24 hours a day, 7 days a week"
     },
     {
-      icon: <FaUndo className="w-8 h-8 text-gray-700" />,
+     img: "/asset/Home/icons_exchange.png",
       title: "30 Days Return",
       description: "Simply return it within 30 days for an exchange"
     },
     {
-      icon: <FaShieldAlt className="w-8 h-8 text-gray-700" />,
+     img: "/asset/Home/secure-payment.png",
       title: "100% Payment Secure",
       description: "We ensure secure payment with PEV"
     }
@@ -32,8 +32,8 @@ export default function ServiceFeatures() {
           {features.map((feature, index) => (
             <div key={index} className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center ">
-                  {feature.icon}
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                  <img src={feature.img} alt={feature.title} className="w-10 h-10 object-contain" />
                 </div>
               </div>
               <h3 className="text-[19px] font-semibold text-gray-900 mb-2">

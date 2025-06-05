@@ -147,13 +147,15 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 						<button
 							key={size}
 							onClick={() => setSelectedSize(size)}
-							className={`w-10 h-10  text-sm font-medium rounded transition-all duration-150 ${selectedSize === size
+							className={`w-10 h-10 text-sm font-medium rounded transition-all duration-150
+								${selectedSize === size
 								? "bg-[#B88E2F] text-white"
-								: "bg-white text-black border-black hover:bg-[#B88E2F]"
-								}`}
-						>
+								: "bg-[#F9F1E7] text-black hover:bg-[#B88E2F] hover:text-white"}
+							`}
+							>
 							{size}
 						</button>
+
 					))}
 				</div>
 
