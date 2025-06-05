@@ -14,6 +14,7 @@ import Footer from '@/components/Layout/Footer.js'
 import Photosection from '@/components/Home/Photosection.js'
 import Topbar from '@/components/Layout/Topbar.js'
 import HeroSection from '@/components/Home/HeroSection.js'
+import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 const Home = () => {
   return (
     <div className='relative'>
@@ -39,6 +40,11 @@ const Home = () => {
       <section className='relative overflow-hidden'>
         <ProductsHome />
       </section>
+      <section className='relative overflow-hidden'>
+        <ServiceFeatures />
+      </section>
+
+
       {/* <section className='relative overflow-hidden'>
         <CTA />
       </section> */}

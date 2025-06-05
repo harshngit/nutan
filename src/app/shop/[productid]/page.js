@@ -7,6 +7,9 @@ import Footer from '@/components/Layout/Footer';
 import ProductDetail from '@/components/Shop/Details/ProductDetail';
 import Recommended from '@/components/Shop/Details/Recommended';
 import DetailCta from '@/components/Shop/Details/DetailCta';
+import RelatedProduct from '@/components/Shop/Details/RelatedProductpg';
+import RelatedProductpg from '@/components/Shop/Details/RelatedProductpg';
+import ProductDescriptionTabs from '@/components/Shop/Details/ProductDescription';
 
 export default function ProductDetailPage() {
 	// const { productId } = useParams();
@@ -25,19 +28,30 @@ export default function ProductDetailPage() {
 
 	return (
 		<>
-			<div className=' font-playfair'>
+			<div className=' font-poppins'>
 				<Navbar />
 				<section className="relative pt-[130px] pb-[50px]">
 					{/* Adjust padding to avoid navbar overlap */}
 					<ProductDetail />
 				</section>
+				<section className="relative pt-[] pb-[50px] border-b-2">
+					{/* Adjust padding to avoid navbar overlap */}
+					<ProductDescriptionTabs />
+				</section>
+				<section className="relative pt-[] pb-[50px]">
+					{/* Adjust padding to avoid navbar overlap */}
+					<RelatedProductpg />
+				</section>
+				
+
+
 				<section className="relative">
 					{/* Adjust padding to avoid navbar overlap */}
-					<Recommended />
+					{/* <Recommended /> */}
 				</section>
 				<section className="relative">
 					{/* Adjust padding to avoid navbar overlap */}
-					<DetailCta />
+					{/* <DetailCta /> */}
 				</section>
 				<section className="relative">
 					<Footer />

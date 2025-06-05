@@ -10,8 +10,9 @@ export default withMT({
   theme: {
     extend: {
       fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
         playfair: ['PlayfairDisplay', 'serif'],
-        alike: ['Alike']
+        alike: ['Alike'],
       },
       screens: {
         xxl: '1408px', // Custom screen at ~110% of 1280px

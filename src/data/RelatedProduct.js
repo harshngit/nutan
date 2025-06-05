@@ -1,0 +1,42 @@
+const RelatedProduct = [
+	{
+		name: "Syltherine",
+		description: "Stylish cafe chair",
+		price: 2500000,
+		originalPrice: 3500000,
+		image: "/asset/products/1.png",
+		discount: 30,
+		isNew: false,
+	},
+	{
+		name: "Leviosa",
+		description: "Stylish cafe chair",
+		price: 2500000,
+		originalPrice: null,
+		image: "/asset/products/2.png",
+		discount: null,
+		isNew: false,
+	},
+	{
+		name: "Lolito",
+		description: "Luxury big sofa",
+		price: 7000000,
+		originalPrice: 14000000,
+		image: "/asset/products/3.png",
+		discount: 50,
+		isNew: false,
+	},
+	{
+		name: "Respira",
+		description: "Outdoor bar table and stool",
+		price: 500000,
+		originalPrice: null,
+		image: "/asset/products/4.png",
+		discount: null,
+		isNew: true,
+	},
+	
+
+
+];
+export default RelatedProduct
