@@ -34,26 +34,26 @@ const data = [
 
 
 const Details = ({ rating = 4, total = 5, count = 3 }) => {
-		const [quantity, setQuantity] = useState(1)
+	const [quantity, setQuantity] = useState(1)
 
-  // Remove TypeScript type annotations - this is the fix for your error
-  const handleQuantityChange = (action) => {
-    if (action === "increase") {
-      setQuantity((prev) => prev + 1)
-    } else if (action === "decrease" && quantity > 1) {
-      setQuantity((prev) => prev - 1)
-    }
-  }
+	// Remove TypeScript type annotations - this is the fix for your error
+	const handleQuantityChange = (action) => {
+		if (action === "increase") {
+			setQuantity((prev) => prev + 1)
+		} else if (action === "decrease" && quantity > 1) {
+			setQuantity((prev) => prev - 1)
+		}
+	}
 
-  const handleAddToCart = () => {
-    console.log(`Adding ${quantity} items to cart`)
-    // Add your cart logic here
-  }
+	const handleAddToCart = () => {
+		console.log(`Adding ${quantity} items to cart`)
+		// Add your cart logic here
+	}
 
-  const handleCompare = () => {
-    console.log("Adding to compare")
-    // Add your compare logic here
-  }
+	const handleCompare = () => {
+		console.log("Adding to compare")
+		// Add your compare logic here
+	}
 	const [timeLeft, setTimeLeft] = useState(5 * 60 + 59 + 47 / 100); // 5:59:47 (MM:SS:MS)
 
 	useEffect(() => {
@@ -106,7 +106,7 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 			</div>
 
 			<div className='flex flex-row justify-start items-center gap-5 w-full'>
-			 	<div className="flex flex-row justify-start items-center gap-1 ">
+				<div className="flex flex-row justify-start items-center gap-1 ">
 					<FaStar className="text-[#FFC700]" ></FaStar>
 					<FaStar className="text-[#FFC700]" ></FaStar>
 					<FaStar className="text-[#FFC700]" ></FaStar>
@@ -135,7 +135,7 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 			<div className=" w-full">
 				{/* Size */}
 				<div className="flex justify-between items-center mb-4">
-					<div className="text-lg font-semibold">Size: 
+					<div className="text-lg font-semibold">Size:
 						<span className="font-normal gap-4">{selectedSize}</span>
 					</div>
 					{/* <a href="#" className="underline font-medium text-black hover:text-blue-600">
@@ -149,10 +149,10 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 							onClick={() => setSelectedSize(size)}
 							className={`w-10 h-10 text-sm font-medium rounded transition-all duration-150
 								${selectedSize === size
-								? "bg-[#B88E2F] text-white"
-								: "bg-[#F9F1E7] text-black hover:bg-[#B88E2F] hover:text-white"}
+									? "bg-[#B88E2F] text-white"
+									: "bg-[#F9F1E7] text-black hover:bg-[#B88E2F] hover:text-white"}
 							`}
-							>
+						>
 							{size}
 						</button>
 
@@ -160,7 +160,7 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 				</div>
 
 				{/* Color */}
-				<div className="text-lg py-4 font-semibold mb-2">
+				<div className="text-lg lg:py-4 font-semibold mb-2">
 					Color: <span className="font-normal">{selectedColor}</span>
 				</div>
 				<div className="flex gap-4">
@@ -176,106 +176,106 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 					))}
 				</div>
 			</div>
-			<div className="w-full flex flex-row py-4 gap-2 border-b-2">
+			<div className="w-full flex  flex-row lg:py-4 gap-2 border-b-2">
 
 				<div className="flex flex-col sm:flex-row gap-4 mb-8">
 					{/* Quantity Selector */}
 					<div className="flex items-center border border-gray-300 rounded-lg">
-					<button
-						onClick={() => handleQuantityChange("decrease")}
-						className="p-3 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-						disabled={quantity <= 1}
-					>
-						<FiMinus className="w-4 h-4" />
-					</button>
-					<span className="px-6 py-3 text-center min-w-[60px] font-medium text-[20px]">{quantity}</span>
-					<button onClick={() => handleQuantityChange("increase")} className="p-3 hover:bg-gray-50 transition-colors">
-						<FiPlus className="w-4 h-4" />
-					</button>
+						<button
+							onClick={() => handleQuantityChange("decrease")}
+							className="p-3 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+							disabled={quantity <= 1}
+						>
+							<FiMinus className="w-4 h-4" />
+						</button>
+						<span className="px-6 py-3 text-center min-w-[60px] font-medium text-[20px]">{quantity}</span>
+						<button onClick={() => handleQuantityChange("increase")} className="p-3 hover:bg-gray-50 transition-colors">
+							<FiPlus className="w-4 h-4" />
+						</button>
 					</div>
 
 					{/* Add to Cart Button */}
 					<button
-					onClick={handleAddToCart}
-					className="flex-1 sm:flex-none text-[20px] px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
+						onClick={handleAddToCart}
+						className="flex-1 text-[20px] px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
 					>
-					Add To Cart
+						Add To Cart
 					</button>
 
 					{/* Compare Button */}
 					<button
-					onClick={handleCompare}
-					className="flex items-center text-[20px] justify-center gap-2 px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
+						onClick={handleCompare}
+						className="flex items-center text-[20px] justify-center gap-2 px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
 					>
-					<FiPlus className="w-4 h-4" />
-					Compare
+						<FiPlus className="w-4 h-4" />
+						Compare
 					</button>
 				</div>
 			</div>
 
 			{/* Product Information */}
-				<div className="space-y-4 text-sm">
-					{/* SKU */}
-					<div className="flex items-center gap-4">
+			<div className="space-y-4 text-sm">
+				{/* SKU */}
+				<div className="flex items-center gap-4">
 					<span className="text-gray-500 text-[16px] w-20">SKU</span>
 					<span className="text-gray-500 text-[16px]">:</span>
 					<span className="text-gray-600 text-[16px]">SS001</span>
-					</div>
+				</div>
 
-					{/* Category */}
-					<div className="flex items-center gap-4">
+				{/* Category */}
+				<div className="flex items-center gap-4">
 					<span className="text-gray-500 text-[16px] w-20">Category</span>
 					<span className="text-gray-500 text-[16px]">:</span>
 					<span className="text-gray-600 text-[16px]">Sofas</span>
-					</div>
+				</div>
 
-					{/* Tags */}
-					<div className="flex items-center gap-4">
+				{/* Tags */}
+				<div className="flex items-center gap-4">
 					<span className="text-gray-500 w-20 text-[16px] ">Tags</span>
 					<span className="text-gray-500 text-[16px]">:</span>
 					<div className="flex flex-wrap text-[16px] gap-1">
 						{["Sofa", "Chair", "Home", "Shop"].map((tag, index) => (
-						<span key={tag} className="text-gray-600">
-							{tag}
-							{index < 3 && <span className="text-gray-400 ml-1">,</span>}
-						</span>
+							<span key={tag} className="text-gray-600">
+								{tag}
+								{index < 3 && <span className="text-gray-400 ml-1">,</span>}
+							</span>
 						))}
 					</div>
-					</div>
+				</div>
 
-					{/* Share */}
-					<div className="flex items-center  gap-4">
+				{/* Share */}
+				<div className="flex items-center  gap-4">
 					<span className="text-gray-500 text-[16px] w-20">Share</span>
 					<span className="text-gray-500 text-[16px] ">:</span>
 					<div className="flex items-center gap-3">
-					
+
 						<a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
-							<img 
-							src="/asset/Shop/facebook.png" 
-							alt="LinkedIn" 
-							className="w-8 h-8 p-1  hover:opacity-80"
+							<img
+								src="/asset/Shop/facebook.png"
+								alt="LinkedIn"
+								className="w-8 h-8 p-1  hover:opacity-80"
 							/>
 						</a>
 						<a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
-							<img 
-							src="/asset/Shop/linkdin.png" 
-							alt="LinkedIn" 
-							className="w-8 h-8 p-1  hover:opacity-80"
+							<img
+								src="/asset/Shop/linkdin.png"
+								alt="LinkedIn"
+								className="w-8 h-8 p-1  hover:opacity-80"
 							/>
 						</a>
 
 						<a href="https://twitter.com/your-profile" target="_blank" rel="noopener noreferrer">
-							<img 
-							src="/asset/Shop/twitter.png" 
-							alt="Twitter" 
-							className="w-8 h-8 p-1  hover:opacity-80"
+							<img
+								src="/asset/Shop/twitter.png"
+								alt="Twitter"
+								className="w-8 h-8 p-1  hover:opacity-80"
 							/>
 						</a>
-						</div>
-
 					</div>
+
 				</div>
-			
+			</div>
+
 			{/* <div className="flex justify-start items-center gap-1 text-black">
 				{[...Array(fullStars)].map((_, i) => (
 					<FaStar key={`full-${i}`} fill="black" className="w-4 h-4" />

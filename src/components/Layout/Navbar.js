@@ -183,7 +183,7 @@ export default function Navbar() {
     </ul>
   );
   return (
-    <div className="fixed top-0 left-0 w-screen z-[9999]">
+    <div className=" font-poppins fixed top-0 left-0 w-screen z-[9999]">
       {/* <div className='bg-black w-full px-1 py-1 flex justify-center items-center'>
         <div className='font-400  text-[11px] text-white'>
           Complimentary U.S. No-Rush Shipping on orders of $95 or more. Shop now
@@ -205,7 +205,7 @@ export default function Navbar() {
             </div>
           </Link>
           {/* Desktop Menu */}
-          <div className="hidden lg:w-[33%] lg:flex justify-start items-center ">
+          <div className="hidden lg:w-[35%] lg:flex justify-center items-center ">
             {/* <div className="">
               <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
             </div> */}

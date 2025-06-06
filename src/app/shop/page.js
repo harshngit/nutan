@@ -10,12 +10,13 @@ import ProductFilterToolbar from '@/components/Shop/ProductFilterToolbar'
 import ProductPage from '@/components/Shop/ProductPage'
 import ProductGrid from '@/components/Shop/ProductsGrid'
 import React from 'react'
+import NavbarTwo from '../../components/Layout/Navbar.js'
 
 const Shop = () => {
 	return (
 		<div className=' font-playfair'>
-			<Navbar />
-			<section className="relative pt-[90px] pb-[]">
+			<NavbarTwo />
+			<section className="relative lg:pt-[90px] pt-[50px]">
 				{/* Adjust padding to avoid navbar overlap */}
 				<BannerBreadcrumb />
 			</section>
@@ -33,7 +34,7 @@ const Shop = () => {
 			</section>
 
 
-	
+
 			<section className="relative">
 				{/* <BannerCta /> */}
 			</section>
