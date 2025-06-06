@@ -23,7 +23,7 @@ export default function ProductBadage() {
   ];
 
   return (
-    <div className="w-full bg-[#FAF3EA] py-[100px] px-[53px]">
+    <div className="w-full bg-[#FAF3EA] py-[100px] lg:px-[53px] px-[40px]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-[55px]">
           {features.map((feature, index) => (

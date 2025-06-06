@@ -15,7 +15,7 @@ const Shop = () => {
 	return (
 		<div className=' font-playfair'>
 			<Navbar />
-			<section className="relative pt-[130px] pb-[]">
+			<section className="relative pt-[90px] pb-[]">
 				{/* Adjust padding to avoid navbar overlap */}
 				<BannerBreadcrumb />
 			</section>

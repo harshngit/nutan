@@ -32,10 +32,10 @@ const ProductPage = () => {
             {/* <div className='lg:py-1 py-5 px-5 lg:px-10 flex justify-center items-center'>
                 <h2 className='font-bold lg:text-[32px] text-[#3A3A3A] text-[18px]'>Our Products</h2>
             </div> */}
-            <div className="px-[90px]">
+            <div className="px-8 lg:px-[90px]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-[32px]">
                     {LargeProductData.map((product, index) => (
-                      //  <Link href={`/shop/${product.id}`}>
+                       <Link href={`/shop/${product.id}`}>
                          <div key={index} className="relative lg:w-[285px] group border  overflow-hidden">
                             <img src={product.image} alt={product.name} className="w-full" />
 
@@ -94,7 +94,7 @@ const ProductPage = () => {
                                 </p>
                             </div>
                         </div>
-                      //  </Link>
+                       </Link>
                     ))}
                 </div>
                 

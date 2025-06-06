@@ -15,7 +15,7 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 const navItems = [
   {
     label: "Home",
-    href: "",
+    href: "/",
     children: [
       // { label: "Brand Story", href: "/brand-story" },
     ],

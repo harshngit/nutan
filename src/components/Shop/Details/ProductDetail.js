@@ -17,7 +17,7 @@ const ProductDetail = () => {
 							Home
 						</Link>
 						
-						<IoChevronForward className="w-4 h-4 text-gray-400" />
+						<IoChevronForward className="w-4 h-4 text-black" />
 						
 						<Link 
 							href="/shop" 
@@ -26,9 +26,10 @@ const ProductDetail = () => {
 							Shop
 						</Link>
 						
-						<IoChevronForward className="w-4 h-4 text-gray-400" />
+						<IoChevronForward className="w-4 h-4 text-blsck" />
 						
-						<span className="text-gray-900 font-medium py-8 border-l-2">
+						<h1 className=" py-8 text-gray-500 hover:text-gray-700 transition-colors duration-200">|</h1>
+						<span className="text-gray-900 font-medium py-8 px-2">
 							Asgaard sofa
 						</span>
 					</nav>

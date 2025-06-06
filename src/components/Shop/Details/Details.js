@@ -96,7 +96,7 @@ const Details = ({ rating = 4, total = 5, count = 3 }) => {
 				<FaHeart className='text-[#F24822] text-[25px]' />
 			</div> */}
 			<div className='flex justify-start w-full'>
-				<h2 className='font-normal text-[25px] text-[#000]'>FOR HIM</h2>
+				<h2 className='font-normal text-[25px] text-[#000]'>Asgaard sofa</h2>
 			</div>
 			<div className='flex justify-start items-center gap-5 w-full'>
 				<h2 className='font-normal text-[27px] text-[#000]'>Rs. 250,000.00

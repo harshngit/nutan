@@ -9,18 +9,19 @@ export default function ProductFilterToolbar() {
         {/* Left Section - Filter and View Controls */}
         <div className="flex items-center gap-3 ">
           {/* Filter Button */}
-          <div className="flex items-center gap-2 px-3 py-2  text-gray-700 cursor-pointer hover:text-gray-900 hover:bg-stone-200 rounded-md transition-colors">
-            <FiFilter className="w-4 h-4" />
+          <div className="flex items-center gap-2 px-3 py-2 text-gray-700 cursor-pointer hover:text-gray-900 hover:bg-stone-200 rounded-md transition-colors">
+            <img src="/asset/Shop/system-filtering.png" alt="Filter" className="w-5 h-5" />
             <span className="text-sm font-medium">Filter</span>
           </div>
 
+
           {/* View Toggle Buttons */}
-          <div className="flex items-center border border-stone-300 rounded-md overflow-hidden">
-            <div className="px-3 py-2 bg-white text-gray-900 border-r border-stone-300 cursor-pointer">
-              <BsGrid3X3Gap className="w-4 h-4" />
+          <div className="flex items-center overflow-hidden">
+            <div className="px-3 py-2 text-gray-900  cursor-pointer">
+              <img src="/asset/Shop/grid-big-round.png" alt="Filter" className="w-5 h-5" />
             </div>
             <div className="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-stone-200 cursor-pointer transition-colors">
-              <FiList className="w-4 h-4" />
+              <img src="/asset/Shop/view-list.png" alt="Filter" className="w-5 h-5" />
             </div>
           </div>
         </div>

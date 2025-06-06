@@ -30,7 +30,7 @@ export default function ProductDetailPage() {
 		<>
 			<div className=' font-poppins'>
 				<Navbar />
-				<section className="relative pt-[100px] pb-[50px]">
+				<section className="relative pt-[90px] pb-[50px]">
 					{/* Adjust padding to avoid navbar overlap */}
 					<ProductDetail />
 				</section>

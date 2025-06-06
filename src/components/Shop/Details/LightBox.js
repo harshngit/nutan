@@ -14,7 +14,7 @@ const LightBox = () => {
 	return (
 		<div className="flex flex-col-reverse md:flex-row gap-8 items-start justify-start">
 			{/* Thumbnails */}
-			<div className="flex justify-start items-start md:flex-col gap-4">
+			<div className="flex flex-wrap justify-start items-start md:flex-col gap-4">
 				{images.map((img, index) => (
 					<img
 						key={index}
