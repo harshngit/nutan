@@ -150,6 +150,7 @@ export default function FilterSidebar({
 								{materials.map((material) => (
 									<label key={material} className="flex items-center gap-2">
 										<input
+										 suppressHydrationWarning={true}
 											type="checkbox"
 											checked={filters.materials.includes(material)}
 											onChange={() =>
@@ -172,6 +173,7 @@ export default function FilterSidebar({
 								{categories.map((cat) => (
 									<label key={cat} className="flex items-center gap-2">
 										<input
+										 suppressHydrationWarning={true}
 											type="checkbox"
 											checked={filters.categories.includes(cat)}
 											onChange={() =>

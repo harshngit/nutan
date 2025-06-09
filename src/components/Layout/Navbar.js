@@ -12,6 +12,9 @@ import { RxCross1 } from "react-icons/rx";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
+import CartSidebar from "../Cart/CartSidebar";
+
 const navItems = [
   {
     label: "Home",
@@ -30,10 +33,12 @@ const navItems = [
   },
   {
     label: "Contact",
-    href: "",
+    href: "/Contact",
   },
 ];
+
 export default function Navbar() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
   const pathname = usePathname();
@@ -44,6 +49,7 @@ export default function Navbar() {
 
   const handleMouseEntercart = () => setOpenDropdown(true);
   const handleMouseLeavecart = () => setOpenDropdown(false);
+  
   useEffect(() => {
     const handleScroll = () => {
       setScrolling(window.scrollY > window.innerHeight);
@@ -52,6 +58,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef(null);
 
@@ -69,7 +76,6 @@ export default function Navbar() {
   useEffect(() => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
-
 
   const navList = (
     <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-3 text-white uppercase font-normal !text-sm tracking-wide">
@@ -115,9 +121,9 @@ export default function Navbar() {
       })}
     </ul>
   );
+
   const navListMobile = (
     <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-white uppercase font-medium !text-sm tracking-wide">
-
       <div className="flex flex-col items-center relative">
         <div className="flex justify-center items-center gap-2">
           <Link href="/forhim">
@@ -129,22 +135,7 @@ export default function Navbar() {
             {/* {isOpen ? <img className="w-[20px]" src="asset/up.png" alt="dropdown icon" /> : <img className="w-[20px]" src="asset/down.png" alt="dropdown icon" />} */}
           </div>
         </div>
-
-        {/* {isOpen && (
-          <div className="absolute top-4 mt-2 left-0 rounded w-[200px] z-10">
-            <li>
-              <Link
-                href="/brand-story"
-                className="block px-4 py-2 text-[15px] text-[#2F3435] hover:bg-gray-100 "
-              >
-                Brand Story
-              </Link>
-            </li>
-          </div>
-        )} */}
       </div>
-
-
 
       <li className="">
         <Link
@@ -165,30 +156,17 @@ export default function Navbar() {
       </li>
       <li className="">
         <Link
-          href=""
+          href="/Contact"
           className="cursor-pointer text-[20px] text-[#2F3435]   transition"
         >
           Contact
         </Link>
       </li>
-      {/* <li className="">
-        <Link
-          href="/wishlist"
-          className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-        >
-          Wishlist
-        </Link>
-      </li> */}
-
     </ul>
   );
+
   return (
-    <div className=" font-poppins fixed top-0 left-0 w-screen z-[9999]">
-      {/* <div className='bg-black w-full px-1 py-1 flex justify-center items-center'>
-        <div className='font-400  text-[11px] text-white'>
-          Complimentary U.S. No-Rush Shipping on orders of $95 or more. Shop now
-        </div>
-      </div> */}
+    <div className="fixed top-0 left-0 w-screen z-[9999]">
       <div
         className={`w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]`}
       >
@@ -204,20 +182,18 @@ export default function Navbar() {
               />
             </div>
           </Link>
+          
           {/* Desktop Menu */}
-          <div className="hidden lg:w-[35%] lg:flex justify-center items-center ">
-            {/* <div className="">
-              <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
-            </div> */}
+          <div className="hidden lg:w-[33%] lg:flex justify-start items-center ">
             <div>{navList}</div>
           </div>
+          
           <div className="lg:hidden  lf:w-[33.33%] flex justify-start items-center"
             onClick={() => setOpenDrawer(true)}>
             <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
           </div>
-          {/* Logo */}
 
-          {/* menu */}
+          {/* Desktop Icons */}
           <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
             <Link href="">
               <img src="/asset/Navbar/account.png" className="w-[28px]" alt="" />
@@ -228,19 +204,27 @@ export default function Navbar() {
             <Link href="">
               <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="" />
             </Link>
-            <Link href="">
-              <img src="/asset/Navbar/cart.png" className="w-[28px]" alt="" />
-            </Link>
+            
+            {/* Cart Button - Fixed with suppressHydrationWarning */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              aria-label="Open shopping cart"
+              suppressHydrationWarning={true}
+            >
+              <img
+                src="/asset/Navbar/cart.png"
+                alt="Cart"
+                className="w-[28px] h-[28px] object-contain"
+              />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                2
+              </span>
+            </button>
           </div>
-
-          {/* Mobile Icon */}
-          {/* <div
-            variant="text"
-            className="text-black lg:hidden w-[50px] h-[50px] flex justify-center items-center"
-            onClick={() => setOpenDrawer(true)}
-          >
-
-          </div> */}
+          
+          {/* Cart Sidebar */}
+          <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
       </div>
 
@@ -259,29 +243,6 @@ export default function Navbar() {
           </div>
         </div>
         {navListMobile}
-        {/* <div className="mt-5">
-          <ul className="flex flex-col justify-start items-start gap-[15px]">
-            <li className="cursor-pointer text-[14px] text-[#2F3435] font-light  uppercase">FAQS</li>
-            <li className="cursor-pointer text-[14px] text-[#2F3435] font-light  uppercase">Testimonials</li>
-            <li className="cursor-pointer text-[14px] text-[#2F3435] font-light  uppercase">We work with</li>
-            <li className="cursor-pointer text-[14px] text-[#2F3435] font-light  uppercase">Send Inquiry</li>
-            <li className="cursor-pointer text-[14px] text-[#2F3435] font-light  uppercase">Book your visit</li>
-          </ul>
-        </div> */}
-        {/* <div className="flex justify-start item-center gap-5 mt-5">
-          <Link href="">
-            <img className="w-[24px]" src="/asset/navbar/Facebook.png" alt="" />
-          </Link>
-          <Link href="">
-            <img className="w-[24px]" src="/asset/navbar/Instagram.png" alt="" />
-          </Link>
-          <Link href="">
-            <img className="w-[24px]" src="/asset/navbar/Linkedin.png" alt="" />
-          </Link>
-        </div> */}
-        {/* <div className="flex justify-center item-center">
-          <img className="w-screen h-[134px]" src="/asset/navbar/havdorblack.png" alt="" />
-        </div> */}
       </div>
     </div>
   );

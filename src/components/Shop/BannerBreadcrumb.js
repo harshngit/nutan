@@ -13,13 +13,16 @@ export default function BreadcrumbHero() {
       }}
     >
       {/* Logo */}
-      {/* <div className="mb-6">
-        <div className="w-12 h-12 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 text-amber-500" fill="currentColor">
-            <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z" />
-          </svg>
+      <div className="mb-1">
+        <div className="w-16 h-12 flex items-center justify-center">
+          <img 
+            src="/asset/Shop/banner-logo.png" 
+            alt="Icon"
+            className="w-32 h-32 object-contain" 
+          />
         </div>
-      </div> */}
+      </div>
+
 
       {/* Page Title */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Shop</h1>
