@@ -12,14 +12,14 @@ export default function CartSidebar({ isOpen, onClose }) {
       name: "Asgaard sofa",
       price: 250000,
       quantity: 1,
-      image: "/asset/Shop/1.png",
+      image: "/asset/Shop/1.webp",
     },
     {
       id: "2",
       name: "Casaliving Wood",
       price: 270000,
       quantity: 1,
-      image: "/asset/Shop/2.png",
+      image: "/asset/Shop/5.webp",
     },
   ])
 

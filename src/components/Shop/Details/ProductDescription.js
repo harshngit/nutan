@@ -54,14 +54,14 @@ export default function ProductDescriptionTabs() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mt-8">
             <div className="bg-[#FAF3EA] p-8 rounded-lg flex items-center justify-center">
               <img
-                src="/asset/Shop/Description-img.png"
+                src="/asset/Shop/Description-img.webp"
                 alt="Sofa - Straight Configuration"
                 className="max-w-full h-auto"
               />
             </div>
             <div className="bg-[#FAF3EA] p-8 rounded-lg flex items-center justify-center">
               <img
-                src="/asset/Shop/Description-img2.png"
+                src="/asset/Shop/Description-img2.webp"
                 alt="Sofa - L-Shaped Configuration"
                 className="max-w-full h-auto"
               />

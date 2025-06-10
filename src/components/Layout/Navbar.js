@@ -37,12 +37,24 @@ const navItems = [
   },
 ];
 
+// Account dropdown items
+const accountItems = [
+  { label: "My Account", href: "/account" },
+  { label: "My Orders", href: "/orders" },
+  { label: "Wishlist", href: "/wishlist" },
+  { label: "Address Book", href: "/addresses" },
+  { label: "Sign In", href: "/signin" },
+  { label: "Sign Up", href: "/signup" },
+  { label: "Logout", href: "/logout" },
+];
+
 export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [openAccountDropdown, setOpenAccountDropdown] = useState(false);
 
   const isActive = (href) => pathname === href;
   const [openDropdowncart, setOpenDropdowncart] = useState(false);
@@ -61,6 +73,7 @@ export default function Navbar() {
   
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef(null);
+  const accountTimeoutRef = useRef(null);
 
   const handleMouseEnter = (label) => {
     clearTimeout(timeoutRef.current);
@@ -73,8 +86,23 @@ export default function Navbar() {
     }, 150); // delay to allow smooth mouse movement
   };
 
+  // Account dropdown handlers
+  const handleAccountMouseEnter = () => {
+    clearTimeout(accountTimeoutRef.current);
+    setOpenAccountDropdown(true);
+  };
+
+  const handleAccountMouseLeave = () => {
+    accountTimeoutRef.current = setTimeout(() => {
+      setOpenAccountDropdown(false);
+    }, 150);
+  };
+
   useEffect(() => {
-    return () => clearTimeout(timeoutRef.current);
+    return () => {
+      clearTimeout(timeoutRef.current);
+      clearTimeout(accountTimeoutRef.current);
+    };
   }, []);
 
   const navList = (
@@ -123,46 +151,88 @@ export default function Navbar() {
   );
 
   const navListMobile = (
-    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-white uppercase font-medium !text-sm tracking-wide">
-      <div className="flex flex-col items-center relative">
-        <div className="flex justify-center items-center gap-2">
-          <Link href="/forhim">
-            <li className="cursor-pointer text-[20px] text-[#2F3435] ">
-              Home
-            </li>
-          </Link>
-          <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
-            {/* {isOpen ? <img className="w-[20px]" src="asset/up.png" alt="dropdown icon" /> : <img className="w-[20px]" src="asset/down.png" alt="dropdown icon" />} */}
+    <div className="flex flex-col gap-[40px]">
+      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-white uppercase font-medium !text-sm tracking-wide">
+        <div className="flex flex-col items-center relative">
+          <div className="flex justify-center items-center gap-2">
+            <Link href="/forhim">
+              <li className="cursor-pointer text-[20px] text-[#2F3435] ">
+                Home
+              </li>
+            </Link>
+            <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
+              {/* {isOpen ? <img className="w-[20px]" src="asset/up.png" alt="dropdown icon" /> : <img className="w-[20px]" src="asset/down.png" alt="dropdown icon" />} */}
+            </div>
           </div>
         </div>
+
+        <li className="">
+          <Link
+            href=""
+            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
+          >
+            Shop
+          </Link>
+        </li>
+
+        <li className="">
+          <Link
+            href="/shop"
+            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
+          >
+            About
+          </Link>
+        </li>
+        <li className="">
+          <Link
+            href="/Contact"
+            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
+          >
+            Contact
+          </Link>
+        </li>
+        <li className="">
+          <Link
+            href="/login"
+            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
+          >
+            Login
+          </Link>
+        </li>
+        <li className="">
+          <Link
+            href="/register"
+            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
+          >
+            Register
+          </Link>
+        </li>
+      </ul>
+
+      {/* Mobile Icons - Same as Desktop */}
+      <div className="flex gap-8 justify-start items-center">
+        <Link href="">
+          <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
+        </Link>
+        <Link href="">
+          <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
+        </Link>
+        
+        {/* Cart Button - Link to cart page in mobile */}
+        <Link href="/cart">
+          <div className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer">
+            <img
+              src="/asset/Navbar/cart.png"
+              alt="Cart"
+              className="w-[28px] h-[28px] object-contain"
+            />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              2
+            </span>
+          </div>
+        </Link>
       </div>
-
-      <li className="">
-        <Link
-          href=""
-          className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-        >
-          Shop
-        </Link>
-      </li>
-
-      <li className="">
-        <Link
-          href="/shop"
-          className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-        >
-          About
-        </Link>
-      </li>
-      <li className="">
-        <Link
-          href="/Contact"
-          className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-        >
-          Contact
-        </Link>
-      </li>
-    </ul>
+    </div>
   );
 
   return (
@@ -195,14 +265,35 @@ export default function Navbar() {
 
           {/* Desktop Icons */}
           <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
+            {/* Account Dropdown */}
+            <div className="relative">
+              <div
+                onMouseEnter={handleAccountMouseEnter}
+                onMouseLeave={handleAccountMouseLeave}
+                className="cursor-pointer"
+              >
+                <img src="/asset/Navbar/account.png" className="w-[28px]" alt="Account" />
+                
+                {/* Account Dropdown Menu */}
+                {openAccountDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                    {accountItems.map((item, index) => (
+                      <Link key={index} href={item.href}>
+                        <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 last:border-b-0 first:rounded-t-lg last:rounded-b-lg">
+                          {item.label}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
             <Link href="">
-              <img src="/asset/Navbar/account.png" className="w-[28px]" alt="" />
+              <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
             </Link>
             <Link href="">
-              <img src="/asset/Navbar/search.png" className="w-[28px]" alt="" />
-            </Link>
-            <Link href="">
-              <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="" />
+              <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
             </Link>
             
             {/* Cart Button - Fixed with suppressHydrationWarning */}

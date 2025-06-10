@@ -6,7 +6,7 @@ export default function BreadcrumbHero() {
     <div
       className="relative w-full h-[300px] flex flex-col items-center justify-center text-center"
       style={{
-        backgroundImage: ` url('/asset/Shop/Rectangle 1.png')`,
+        backgroundImage: ` url('/asset/Shop/Rectangle 1.webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -16,7 +16,7 @@ export default function BreadcrumbHero() {
       <div className="mb-1">
         <div className="w-16 h-12 flex items-center justify-center">
           <img 
-            src="/asset/Shop/banner-logo.png" 
+            src="/asset/banner-logo.webp" 
             alt="Icon"
             className="w-32 h-32 object-contain" 
           />

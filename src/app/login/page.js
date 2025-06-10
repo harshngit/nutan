@@ -8,11 +8,11 @@ const Login = () => {
 			{/* Blurred Background Layer */}
 			<div
 				className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-sm scale-110"
-				style={{ backgroundImage: "url('/asset/Login/loginbanner.png')" }}
+				style={{ backgroundImage: "url('/asset/Shop/5.webp')" }}
 			></div>
 
 			{/* Foreground Content */}
-			<div className="relative w-[100%] lg:left-[35%] left-[5%] z-10 ">
+			<div className="relative w-[100%]  z-10 ">
 				<LoginForm />
 			</div>
 		</div>

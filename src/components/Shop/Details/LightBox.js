@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 const LightBox = () => {
 	const images = [
-		"/asset/Shop/1.png",
-		"/asset/Shop/2.png",
-		"/asset/Shop/3.png",
-		"/asset/Shop/5.png",
-		"/asset/Shop/6.png",
-		"/asset/Shop/7.png",
+		"/asset/Shop/1.webp",
+		"/asset/Shop/5.webp",
+		"/asset/Shop/6.webp",
+		"/asset/Shop/7.webp",
+		"/asset/Shop/8.webp",
+		
 		
 	];
 	const [selectedImage, setSelectedImage] = useState(images[0]);

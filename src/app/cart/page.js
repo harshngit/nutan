@@ -11,7 +11,7 @@ const Cart = () => {
 	return (
 		<div className=' font-playfair'>
 			<Navbar />
-			<section className="relative pt-[130px] ">
+			<section className="relative lg:pt-[90px] pt-[60px] ">
 				{/* Adjust padding to avoid navbar overlap */}
 				<BreadcrumbHero />
 			</section>

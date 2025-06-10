@@ -14,7 +14,7 @@ export default function ComparisonPage() {
       price: 'Rs. 250,000',
       rating: 4.7,
       reviews: 204,
-      image: '/asset/Shop/1.png',
+      image: '/asset/Shop/1.webp',
       specs: {
         salesPackage: '1 sectional sofa',
         modelNumber: 'TFCBLIGRBL6SRHS',
@@ -46,7 +46,7 @@ export default function ComparisonPage() {
       price: 'Rs. 224,000',
       rating: 4.2,
       reviews: 145,
-      image: '/asset/Shop/2.png',
+      image: '/asset/Shop/1.webp',
       specs: {
         salesPackage: '1 Three Seater, 2 Single Seater',
         modelNumber: 'DTUBLIGRBL568',

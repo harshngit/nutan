@@ -55,7 +55,7 @@ export default function CartPage() {
                   <div className="col-span-5 md:col-span-4 flex items-center space-x-4">
                     <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
                       <img 
-                        src="/asset/Shop/1.png"
+                        src="/asset/Shop/1.webp"
                         alt="Asgaard sofa"
                         className="w-full h-full object-cover"
                       />
