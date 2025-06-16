@@ -12,7 +12,7 @@ const Login = () => {
 			></div>
 
 			{/* Foreground Content */}
-			<div className="relative w-[100%]  z-10 ">
+			<div className="relative w-[100%] z-10 ">
 				<LoginForm />
 			</div>
 		</div>
