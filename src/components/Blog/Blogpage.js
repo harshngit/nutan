@@ -8,7 +8,7 @@ const blogPosts = [
       id: 1,
       title: "Going all-in with millennial design",
       excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
-      image: "/asset/blog/blog1.jpg",
+      image: "/asset/blog/blog1.webp",
       author: "Admin",
       date: "14 Oct 2022",
       category: "Wood"
@@ -17,7 +17,7 @@ const blogPosts = [
       id: 2,
       title: "Exploring new ways of decorating",
       excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
-      image: "/asset/blog/blog2.jpg",
+      image: "/asset/blog/blog2.webp",
       author: "Admin",
       date: "14 Oct 2022",
       category: "Handmade"
@@ -26,7 +26,7 @@ const blogPosts = [
       id: 3,
       title: "Handmade pieces that took time to make",
       excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
-      image: "/asset/blog/blog3.jpg",
+      image: "/asset/blog/blog3.webp",
       author: "Admin",
       date: "14 Oct 2022",
       category: "Wood"
@@ -45,24 +45,24 @@ const blogPosts = [
     {
       title: "Going all-in with millennial design",
       date: "03 Aug 2022",
-      image: "/asset/Blog/post1.jpg",
+      image: "/asset/Blog/post1.webp",
     },
     {
       title: "Exploring new ways of decorating",
       date: "03 Aug 2022",
-    image: "/asset/Blog/post2.jpg",    },
+    image: "/asset/Blog/post2.webp",    },
     {
       title: "Handmade pieces that took time to make",
       date: "03 Aug 2022",
-    image: "/asset/Blog/post3.jpg",    },
+    image: "/asset/Blog/post3.webp",    },
     {
       title: "Modern home in Milan",
       date: "03 Aug 2022",
-    image: "/asset/Blog/post4.jpg",    },
+    image: "/asset/Blog/post4.webp",    },
     {
       title: "Colorful office redesign",
       date: "03 Aug 2022",
-    image: "/asset/Blog/post5.jpg",    }
+    image: "/asset/Blog/post5.webp",    }
   ];
 
 

@@ -18,7 +18,7 @@ const Cart = () => {
             </section>
             <section className="relative pt-[60px] ">
                 {/* Adjust padding to avoid navbar overlap */}
-                {/* <Blogpage /> */}
+                <Blogpage />
             </section>
             <section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
                 <ProductBadage />
