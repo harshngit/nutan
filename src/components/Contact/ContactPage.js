@@ -72,7 +72,7 @@ export default function ContactPage() {
               <div className="flex-shrink-0 mt-1">
                 <div className="w-12 h-12 flex items-center justify-center">
                   <img 
-                      src="/asset/location.png" 
+                      src="/asset/Location.png" 
                       alt="Icon" 
                       className="h-6 w-6 object-contain text-white" 
                     />
