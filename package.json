@@ -12,6 +12,7 @@
     "@hotjar/browser": "^1.0.9",
     "@material-tailwind/react": "^2.1.8",
     "@next/third-parties": "^14.0.5-canary.59",
+    "@reduxjs/toolkit": "^2.8.2",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "firebase": "^10.12.3",
@@ -21,8 +22,9 @@
     "react": "^18",
     "react-countdown": "^2.3.6",
     "react-dom": "^18",
-    "react-icons": "^5.2.1",
+    "react-icons": "^5.5.0",
     "react-lazy-load-image-component": "^1.6.2",
+    "react-redux": "^9.2.0",
     "swiper": "^11.2.6",
     "yet-another-react-lightbox": "^3.21.7"
   },

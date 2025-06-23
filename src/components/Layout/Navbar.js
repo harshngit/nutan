@@ -39,13 +39,12 @@ const navItems = [
 
 // Account dropdown items
 const accountItems = [
+  { label: "Login", href: "/login" },
+  { label: "Register", href: "/register" },
   { label: "My Account", href: "/account" },
-  { label: "My Orders", href: "/orders" },
-  { label: "Wishlist", href: "/wishlist" },
-  { label: "Address Book", href: "/addresses" },
-  { label: "Sign In", href: "/signin" },
-  { label: "Sign Up", href: "/signup" },
-  { label: "Logout", href: "/logout" },
+  // { label: "Logout", href: "/logout" },
+  // { label: "My Orders", href: "/orders" },
+  // { label: "Wishlist", href: "/wishlist" },
 ];
 
 export default function Navbar() {

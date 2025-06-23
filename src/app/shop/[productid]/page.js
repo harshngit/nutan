@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import Navbar from '@/components/Layout/Navbar';
 import Footer from '@/components/Layout/Footer';
 import ProductDetail from '@/components/Shop/Details/ProductDetail';
@@ -10,21 +8,40 @@ import DetailCta from '@/components/Shop/Details/DetailCta';
 import RelatedProduct from '@/components/Shop/Details/RelatedProductpg';
 import RelatedProductpg from '@/components/Shop/Details/RelatedProductpg';
 import ProductDescriptionTabs from '@/components/Shop/Details/ProductDescription';
+import { useEffect, useState } from 'react'
+import { doc, onSnapshot, collection, query, where, limit } from 'firebase/firestore'
+import { db } from '@/app/firebase.config'
+import { useParams } from 'next/navigation'
 
-export default function ProductDetailPage() {
-	// const { productId } = useParams();
-	// const [product, setProduct] = useState(null);
+export default function ProductDetailPage({ params }) {
+ const [productDetails, setProductDetails] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const id = params.productid; // ✅ Use as string
 
-	// useEffect(() => {
-	// 	const fetchProduct = async () => {
-	// 		const data = await getProductById(productId);
-	// 		setProduct(data);
-	// 	};
+	useEffect(() => {
+		if (!id) return;
 
-	// 	fetchProduct();
-	// }, [productId]);
+		const unsub = onSnapshot(doc(db, "Product", id), (docSnap) => {
+			if (docSnap.exists()) {
+				setProductDetails({ id: docSnap.id, ...docSnap.data() });
+			} else {
+				console.warn("No product found.");
+				setProductDetails(null);
+			}
+			setLoading(false);
+		}, (error) => {
+			console.error("Snapshot error:", error);
+			setLoading(false);
+		});
 
-	// if (!product) return <p>Loading...</p>;
+		return () => unsub(); // ✅ Cleanup on unmount
+	}, [id]);
+
+
+	console.log(productDetails)
+
+	if (loading) return <div className="text-center py-20">Loading...</div>;
+	if (!productDetails) return <div className="text-center py-20 text-red-600">Product not found</div>;
 
 	return (
 		<>
@@ -32,26 +49,15 @@ export default function ProductDetailPage() {
 				<Navbar />
 				<section className="relative lg:pt-[90px] pt-[50px] pb-[50px]">
 					{/* Adjust padding to avoid navbar overlap */}
-					<ProductDetail />
+					<ProductDetail productDetails={productDetails}  />
 				</section>
 				<section className="relative pt-[] pb-[50px] border-b-2">
 					{/* Adjust padding to avoid navbar overlap */}
-					<ProductDescriptionTabs />
+					<ProductDescriptionTabs productDetails={productDetails} />
 				</section>
 				<section className="relative pt-[] pb-[50px]">
 					{/* Adjust padding to avoid navbar overlap */}
 					<RelatedProductpg />
-				</section>
-
-
-
-				<section className="relative">
-					{/* Adjust padding to avoid navbar overlap */}
-					{/* <Recommended /> */}
-				</section>
-				<section className="relative">
-					{/* Adjust padding to avoid navbar overlap */}
-					{/* <DetailCta /> */}
 				</section>
 				<section className="relative">
 					<Footer />

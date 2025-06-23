@@ -1,42 +1,47 @@
+'use client'
 import React, { useState } from 'react'
 
-const LightBox = () => {
-	const images = [
-		"/asset/Shop/1.webp",
-		"/asset/Shop/5.webp",
-		"/asset/Shop/6.webp",
-		"/asset/Shop/7.webp",
-		"/asset/Shop/8.webp",
-		
-		
-	];
-	const [selectedImage, setSelectedImage] = useState(images[0]);
-	return (
-		<div className="flex flex-col-reverse md:flex-row gap-8 items-start justify-start">
-			{/* Thumbnails */}
-			<div className="flex flex-wrap justify-start items-start md:flex-col gap-4">
-				{images.map((img, index) => (
-					<img
-						key={index}
-						src={img}
-						alt={`Thumbnail ${index}`}
-						onClick={() => setSelectedImage(img)}
-						className={`w-16 object-cover cursor-pointer border ${selectedImage === img ? "border-black" : "border-gray-300"
-							}`}
-					/>
-				))}
-			</div>
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * LightBox component displays a gallery of product images with a main image
+ * and selectable thumbnails. Users can click on thumbnails to change the
+ * main displayed image.
+ *
+ * @param {Object} product - The product object containing image data.
+ * @param {Array} product.productImages - An array of image URLs for the product.
+ */
 
-			{/* Main Image */}
-			<div className="w-full max-w-full">
-				<img
-					src={selectedImage}
-					alt="Selected"
-					className="w-full lg:h-[600px] h-[400px] object-cover rounded"
-				/>
-			</div>
-		</div>
-	)
+/*******  18197ad8-d31e-4f6c-9ba5-166927067471  *******/
+
+const LightBox = ({ productDetails }) => {
+  const [selectedImage, setSelectedImage] = useState(0)
+  const images = productDetails?.productImages || []
+
+  return (
+    <div className="flex flex-col-reverse md:flex-row gap-8 items-start">
+      <div className="flex flex-wrap justify-start md:flex-col gap-4">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Thumbnail ${index}`}
+            onClick={() => setSelectedImage(index)}
+            className={`w-16 h-16 object-cover cursor-pointer border ${
+              selectedImage === index ? "border-[#B88E2F]" : "border-gray-300"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="w-full">
+        <img
+          src={images[selectedImage]}
+          alt="Selected"
+          className="w-full lg:h-[500px] h-[400px] object-cover rounded-lg"
+        />
+      </div>
+    </div>
+  )
 }
 
 export default LightBox

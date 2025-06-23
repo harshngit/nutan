@@ -4,9 +4,14 @@ import { FiShare2, FiRefreshCw, FiHeart } from "react-icons/fi"
 import LargeProductData from '@/data/LargeProductData'
 import Link from 'next/link'
 
-const ProductPage = () => {
+const ProductPage = ({ products = [], loading }) => {
+  const formatPrice = (price) => `Rp ${price?.toLocaleString("id-ID") || '0'}`
 
-    const formatPrice = (price) => `Rp ${price.toLocaleString("id-ID")}`;
+  if (loading) return (
+    <div className="bg-white w-full lg:h-auto h-auto pt-10">
+      <div className="p-8 text-center">Loading products...</div>
+    </div>
+  )
 
     const [currentPage, setCurrentPage] = useState(1)
   const productsPerPage = 8
@@ -34,11 +39,25 @@ const ProductPage = () => {
             </div> */}
             <div className="px-8 lg:px-[90px]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-[32px]">
-                    {LargeProductData.map((product, index) => (
+                     {products.map((product) => (
                        <Link href={`/shop/${product.id}`}>
-                         <div key={index} className="relative lg:w-[285px] group border  overflow-hidden">
-                            <img src={product.image} alt={product.name} className="w-full" />
+                         <div key={product.id} className="relative lg:w-[285px] group border  overflow-hidden">
+                            <div className="relative h-[250px]">
+                            <img 
+                              src={product.productImages?.[0] || "/default-product.jpg"} 
+                              alt={product.productName} 
+                              className="w-full h-full object-cover"
+                            />
+                            {product.productImages?.[1] && (
+                              <img
+                                src={product.productImages[1]}
+                                alt={`${product.productName} hover`}
+                                className="w-full h-full hidden lg:block object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                              />
+                            )}
+                          </div>
 
+                            {/* Product badges */}
                             {product.discount && (
                                 <span className="absolute w-12 h-12 flex justify-center items-center rounded-full top-2 left-2 bg-[#E97171] text-white text-[16px] px-2 py-2">
                                     -{product.discount}%
@@ -81,16 +100,19 @@ const ProductPage = () => {
 
                             <div className="p-2 bg-[#F4F5F7]">
                                 
-                                <h3 className="font-semibold text-lg">{product.name}</h3>
+                               <h3 className="font-semibold text-lg">{product.productName}</h3>
                               
-                                <p className="text-sm text-gray-500">{product.description}</p>
+                                <p className="text-gray-500 text-sm mt-1 line-clamp-2">
+								{(product?.productDescription || '').replace(/<[^>]+>/g, '')}
+								
+				</p>
                                 <p className="text-base font-semibold text-black">
-                                    {formatPrice(product.price)}
+                                     {formatPrice(product.productPrice)}
                                     {product.originalPrice && (
-                                        <span className="text-gray-400 line-through text-sm ml-2">
-                                            {formatPrice(product.originalPrice)}
-                                        </span>
-                                    )}
+                                    <p className="text-gray-400 line-through text-sm ml-2">
+                                      {formatPrice(product.originalPrice)}
+                                    </p>
+                                  )}
                                 </p>
                             </div>
                         </div>
