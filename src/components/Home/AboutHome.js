@@ -15,15 +15,15 @@ const AboutHome = () => {
 			<div className='grid lg:grid-cols-3 mt-10 grid-cols-1 justify-center items-center gap-[30px]'>
 				<div className='flex flex-col gap-[20px] justify-center items-center'>
 					<img className='rounded-lg' src="/asset/browse/1.png" alt="" />
-					<h3 className='text-black text-[24px]'>Office Supplies</h3>
+					<h3 className='text-black font-semibold text-[24px]'>Office Supplies</h3>
 				</div>
 				<div className='flex flex-col gap-[20px] justify-center items-center'>
 					<img className='rounded-lg' src="/asset/browse/2.png" alt="" />
-					<h3 className='text-black text-[24px]'>Print</h3>
+					<h3 className='text-black font-semibold text-[24px]'>Print</h3>
 				</div>
 				<div className='flex flex-col gap-[20px] justify-center items-center'>
 					<img className='rounded-lg' src="/asset/browse/3.png" alt="" />
-					<h3 className='text-black text-[24px]'>Bedroom</h3>
+					<h3 className='text-black font-semibold text-[24px]'>Bedroom</h3>
 				</div>
 			</div>
 		</section>

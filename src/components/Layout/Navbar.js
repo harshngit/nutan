@@ -105,7 +105,7 @@ export default function Navbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-3 text-white uppercase font-normal !text-sm tracking-wide">
+    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-3 text-white uppercase font-[poppins] font-medium !text-sm tracking-wide">
       {navItems.map((item, idx) => {
         const hasChildren = item.children && item.children.length > 0;
         const isParentActive =
@@ -119,7 +119,7 @@ export default function Navbar() {
             >
               <Link
                 href={item.href}
-                className={`group px-3 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"
+                className={`group px-6 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"
                   }`}
               >
                 {item.label}

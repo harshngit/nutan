@@ -20,11 +20,11 @@ const Deal = ({ products = [], loading }) => {
       </div>
       
       <div className="p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-[32px]">
           {products.map((product) => (
-            <div key={product.id} className="relative lg:w-[100%] group border rounded-[28px] overflow-hidden">
+            <div key={product.id} className="relative lg:w-[320px] group border overflow-hidden">
               {/* Product images with hover effect */}
-              <div className="relative h-[250px]">
+              <div className="relative h-[280px]">
                 <img 
                   src={product.productImages?.[0] || "/default-product.jpg"} 
                   alt={product.productName} 
