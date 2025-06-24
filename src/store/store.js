@@ -5,6 +5,6 @@ import authReducer from '../reducers/authReducer'; // ✅ FIXED path
 
 export const store = configureStore({
 	reducer: {
-		auth: authReducer,
+		user: authReducer,
 	},
 });

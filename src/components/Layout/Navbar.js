@@ -1,78 +1,71 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-  Typography,
-} from "@material-tailwind/react";
-import { RxCross1 } from "react-icons/rx";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
-import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { FaShoppingBag } from "react-icons/fa";
-import CartSidebar from "../Cart/CartSidebar";
+import { usePathname, useRouter } from 'next/navigation';
+import { RxCross1 } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/actions/authActions";
+import CartSidebar from "../Cart/CartSidebar";  // Assuming you already have this component
 
 const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    children: [
-      // { label: "Brand Story", href: "/brand-story" },
-    ],
-  },
-  {
-    label: "Shop",
-    href: "/shop",
-  },
-  {
-    label: "About",
-    href: "",
-  },
-  {
-    label: "Contact",
-    href: "/Contact",
-  },
+  { label: "Home", href: "/", children: []},
+  { label: "Shop", href: "/shop"},
+  { label: "About", href: "" },
+  { label: "Contact", href: "/Contact"},
 ];
 
-// Account dropdown items
-const accountItems = [
-  { label: "Login", href: "/login" },
-  { label: "Register", href: "/register" },
-  { label: "My Account", href: "/account" },
-  // { label: "Logout", href: "/logout" },
-  // { label: "My Orders", href: "/orders" },
-  // { label: "Wishlist", href: "/wishlist" },
-];
+// const accountItems = [
+//   { label: "Login", href: "/login" },
+//   { label: "Register", href: "/register" },
+//   { label: "My Account", href: "/account" },
+// ];
 
 export default function Navbar() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const pathname = usePathname();
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [openAccountDropdown, setOpenAccountDropdown] = useState(false);
+  const [openDropdownSearch, setOpenDropdownSearch] = useState(false);
 
-  const isActive = (href) => pathname === href;
-  const [openDropdowncart, setOpenDropdowncart] = useState(false);
-
-  const handleMouseEntercart = () => setOpenDropdown(true);
-  const handleMouseLeavecart = () => setOpenDropdown(false);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolling(window.scrollY > window.innerHeight);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
   const accountTimeoutRef = useRef(null);
+
+  const userState = useSelector((state) => state.user);
+  const { isAuthenticated, userProfile } = userState || {};
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout()).unwrap();
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
+  const isActive = (href) => pathname === href;
+  console.log(isAuthenticated)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdownSearch(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutRef.current);
+      clearTimeout(accountTimeoutRef.current);
+    };
+  }, []);
 
   const handleMouseEnter = (label) => {
     clearTimeout(timeoutRef.current);
@@ -82,10 +75,9 @@ export default function Navbar() {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setOpenDropdown(false);
-    }, 150); // delay to allow smooth mouse movement
+    }, 150);
   };
 
-  // Account dropdown handlers
   const handleAccountMouseEnter = () => {
     clearTimeout(accountTimeoutRef.current);
     setOpenAccountDropdown(true);
@@ -97,45 +89,24 @@ export default function Navbar() {
     }, 150);
   };
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeoutRef.current);
-      clearTimeout(accountTimeoutRef.current);
-    };
-  }, []);
-
   const navList = (
     <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-3 text-white uppercase font-[poppins] font-medium !text-sm tracking-wide">
       {navItems.map((item, idx) => {
         const hasChildren = item.children && item.children.length > 0;
-        const isParentActive =
-          isActive(item.href) || item.children?.some((child) => isActive(child.href));
+        const isParentActive = isActive(item.href) || item.children?.some((child) => isActive(child.href));
 
         return (
           <li key={idx} className="relative">
-            <div
-              onMouseEnter={() => handleMouseEnter(item.label)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link
-                href={item.href}
-                className={`group px-6 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"
-                  }`}
-              >
+            <div onMouseEnter={() => handleMouseEnter(item.label)} onMouseLeave={handleMouseLeave}>
+              <Link href={item.href} className={`group px-6 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"}`}>
                 {item.label}
               </Link>
 
-              {/* Dropdown */}
               {hasChildren && openDropdown === item.label && (
                 <div className="absolute left-0 mt-1 z-20 shadow-lg w-48">
                   {item.children.map((child, i) => (
                     <Link key={i} href={child.href}>
-                      <div
-                        className={`px-4 py-2 transition cursor-pointer ${isActive(child.href)
-                          ? "bg-[#89898933] text-lightgrey"
-                          : "bg-[#DDDDDD33] hover:bg-[#DDDDDD33] hover:border-[1px] text-lightgrey border-[#89898933]"
-                          }`}
-                      >
+                      <div className={`px-4 py-2 transition cursor-pointer ${isActive(child.href) ? "bg-[#89898933] text-lightgrey" : "bg-[#DDDDDD33] hover:bg-[#DDDDDD33] hover:border-[1px] text-lightgrey border-[#89898933]"}`}>
                         {child.label}
                       </div>
                     </Link>
@@ -151,80 +122,42 @@ export default function Navbar() {
 
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
-      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-white uppercase font-medium !text-sm tracking-wide">
-        <div className="flex flex-col items-center relative">
-          <div className="flex justify-center items-center gap-2">
-            <Link href="/forhim">
-              <li className="cursor-pointer text-[20px] text-[#2F3435] ">
-                Home
-              </li>
-            </Link>
-            <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
-              {/* {isOpen ? <img className="w-[20px]" src="asset/up.png" alt="dropdown icon" /> : <img className="w-[20px]" src="asset/down.png" alt="dropdown icon" />} */}
-            </div>
-          </div>
-        </div>
+      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-black uppercase font-medium !text-sm tracking-wide">
+  <li><Link href="/">Home</Link></li>
+  <li><Link href="/shop">Shop</Link></li>
+  <li><Link href="">About</Link></li>
+  <li><Link href="/Contact">Contact</Link></li>
 
-        <li className="">
-          <Link
-            href=""
-            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-          >
-            Shop
-          </Link>
-        </li>
+  {isAuthenticated ? (
+    <>
+      <li><Link href="/account">My Account</Link></li>
+      <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
+    </>
+  ) : (
+    <>
+      <li><Link href="/login">Login</Link></li>
+      <li><Link href="/register">Register</Link></li>
+      <li><Link href="/account">My Account</Link></li>
+    </>
+  )}
+</ul>
 
-        <li className="">
-          <Link
-            href="/shop"
-            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-          >
-            About
-          </Link>
-        </li>
-        <li className="">
-          <Link
-            href="/Contact"
-            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-          >
-            Contact
-          </Link>
-        </li>
-        <li className="">
-          <Link
-            href="/login"
-            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-          >
-            Login
-          </Link>
-        </li>
-        <li className="">
-          <Link
-            href="/register"
-            className="cursor-pointer text-[20px] text-[#2F3435]   transition"
-          >
-            Register
-          </Link>
-        </li>
-      </ul>
 
-      {/* Mobile Icons - Same as Desktop */}
       <div className="flex gap-8 justify-start items-center">
+        {/* Search - Mobile */}
         <Link href="">
           <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
         </Link>
-        <Link href="">
+
+        {/* Wishlist - Mobile */}
+        <Link href="/wishlist">
           <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
         </Link>
-        
-        {/* Cart Button - Link to cart page in mobile */}
+
+        {/* Cart - Mobile */}
         <Link href="/cart">
           <div className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer">
-            <img
-              src="/asset/Navbar/cart.png"
-              alt="Cart"
-              className="w-[28px] h-[28px] object-contain"
-            />
+            <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               2
             </span>
@@ -236,101 +169,96 @@ export default function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 w-screen z-[9999]">
-      <div
-        className={`w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]`}
-      >
+      <div className="w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]">
         <div className="w-full lg:pt-[30px] lg:pl-[30px] lg:pb-[20px] flex">
-          <Link href="/"
-            className="lg:w-[33%] w-[90%] lg:flex lg:justify-start justify-center items-center"
-          >
-            <div className="">
-              <img
-                className="lg:w-[100px] w-[50px] "
-                src="/asset/Navbar/nutan.png"
-                alt="logo"
-              />
-            </div>
+          <Link href="/" className="lg:w-[33%] w-[90%] lg:flex lg:justify-start justify-center items-center">
+            <img className="lg:w-[100px] w-[50px]" src="/asset/Navbar/nutan.png" alt="logo" />
           </Link>
-          
-          {/* Desktop Menu */}
-          <div className="hidden lg:w-[33%] lg:flex justify-start items-center ">
-            <div>{navList}</div>
+
+          <div className="hidden lg:w-[33%] lg:flex justify-start items-center">
+            {navList}
           </div>
-          
-          <div className="lg:hidden  lf:w-[33.33%] flex justify-start items-center"
-            onClick={() => setOpenDrawer(true)}>
+
+          <div className="lg:hidden lf:w-[33.33%] flex justify-start items-center" onClick={() => setOpenDrawer(true)}>
             <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
           </div>
 
-          {/* Desktop Icons */}
           <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
             {/* Account Dropdown */}
-            <div className="relative">
-              <div
-                onMouseEnter={handleAccountMouseEnter}
-                onMouseLeave={handleAccountMouseLeave}
-                className="cursor-pointer"
-              >
-                <img src="/asset/Navbar/account.png" className="w-[28px]" alt="Account" />
-                
-                {/* Account Dropdown Menu */}
-                {openAccountDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                    {accountItems.map((item, index) => (
-                      <Link key={index} href={item.href}>
-                        <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 last:border-b-0 first:rounded-t-lg last:rounded-b-lg">
-                          {item.label}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>
+              <img src="/asset/Navbar/account.png" className="w-[28px] cursor-pointer" alt="Account" />
+            {openAccountDropdown && (
+  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+    {isAuthenticated ? (
+      <>
+        <Link href="/account">
+          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
+            My Account
+          </div>
+        </Link>
+        <div
+          className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg cursor-pointer"
+          onClick={handleLogout}
+        >
+          Logout
+        </div>
+      </>
+    ) : (
+      <>
+        <Link href="/login">
+          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
+            Login
+          </div>
+        </Link>
+        <Link href="/register">
+          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100">
+            Register
+          </div>
+        </Link>
+        <Link href="/account">
+          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg">
+            My Account
+          </div>
+        </Link>
+      </>
+    )}
+  </div>
+)}
+
             </div>
 
-            <Link href="">
-              <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
-            </Link>
-            <Link href="">
+            {/* Search with Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <img src="/asset/Navbar/search.png" className="w-[28px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
+              {openDropdownSearch && (
+                <div className="absolute right-0 mt-2 z-20 shadow-lg w-60 bg-white p-3 rounded border">
+                  <input type="text" placeholder="Type to search..." className="w-full px-3 py-2 border border-gray-300 rounded text-black text-sm focus:outline-none" />
+                </div>
+              )}
+            </div>
+
+            {/* Wishlist */}
+            <Link href="/wishlist">
               <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
             </Link>
-            
-            {/* Cart Button - Fixed with suppressHydrationWarning */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200"
-              aria-label="Open shopping cart"
-              suppressHydrationWarning={true}
-            >
-              <img
-                src="/asset/Navbar/cart.png"
-                alt="Cart"
-                className="w-[28px] h-[28px] object-contain"
-              />
+
+            {/* Cart */}
+            <button onClick={() => setIsCartOpen(true)} className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200" aria-label="Open shopping cart" suppressHydrationWarning={true}>
+              <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 2
               </span>
             </button>
           </div>
-          
-          {/* Cart Sidebar */}
+
           <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 w-screen h-screen bg-[#FFFFFF] z-[9998] px-6 pt-6 transform transition-transform duration-300 ${openDrawer ? "translate-x-0" : "translate-x-full"
-          }`}
-      >
+      <div className={`fixed top-0 right-0 w-screen h-screen bg-[#FFFFFF] z-[9998] px-6 pt-6 transform transition-transform duration-300 ${openDrawer ? "translate-x-0" : "translate-x-full"}`}>
         <div className="flex justify-end items-center mb-4">
-          <div
-            variant="text"
-            className="text-black"
-            onClick={() => setOpenDrawer(false)}
-          >
-            <RxCross1 className="text-[20px] " />
-          </div>
+          <RxCross1 className="text-[20px] cursor-pointer" onClick={() => setOpenDrawer(false)} />
         </div>
         {navListMobile}
       </div>
