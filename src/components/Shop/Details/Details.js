@@ -1,31 +1,81 @@
 'use client'
-import React, { useState } from 'react'
+import { addToCart } from "@/actions/cartAction";
+import React, { useState, useEffect } from 'react'
 import { FiMinus, FiPlus , FiStar } from 'react-icons/fi'
 import { GoStarFill } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Details = ({ productDetails }) => {
   const [quantity, setQuantity] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
   const [selectedColor, setSelectedColor] = useState("")
+  const dispatch = useDispatch();
+
+const userState = useSelector((state) => state.user);
+const { cartItems } = useSelector((state) => state.cart);
+
+const {
+  error,
+  loading,
+  isAuthenticated,
+  users,
+  userProfile,
+} = userState || {};
+
 
   // Extract unique sizes and colors
-  const sizes = [...new Set(productDetails.variation?.map(v => v.size) || [])]
-  const colors = [...new Set(productDetails.variation?.map(v => v.color) || [])]
+const sizes = [...new Set(productDetails?.variation?.map(v => v.size) || [])];
+const colors = [...new Set(productDetails?.variation?.map(v => v.color) || [])];
+
+useEffect(() => {
+  if (sizes.length > 0) setSelectedSize(sizes[0]);
+  if (colors.length > 0) setSelectedColor(colors[0]);
+}, [sizes, colors]);
 
   const handleQuantityChange = (action) => {
     setQuantity(prev => action === "increase" ? prev + 1 : Math.max(1, prev - 1))
   }
 
-  const handleAddToCart = () => {
-    // Placeholder: Replace with your cart logic
-    console.log("Added to cart:", {
-      productId: productDetails.id,
-      selectedSize,
-      selectedColor,
-      quantity
-    })
+// Pre-select size & color on load
+useEffect(() => {
+  if (sizes.length > 0) setSelectedSize(sizes[0]);
+  if (colors.length > 0) setSelectedColor(colors[0]);
+}, [productDetails]);
+
+const handleAddToCart = () => {
+  if (!selectedSize || !selectedColor) {
+    return alert("Please select size and color");
   }
+
+  const itemExists = cartItems?.some(
+    (item) =>
+      item.product === (productDetails._id || productDetails.id) &&
+      item.size === selectedSize &&
+      item.color === selectedColor
+  );
+
+  if (itemExists) {
+    alert("This item is already in your cart.");
+    return;
+  }
+
+  const cartItem = {
+    user: userProfile,
+    product: productDetails._id || productDetails.id,
+    name: productDetails.productName,
+     price: Number(productDetails.productPrice),
+    image: productDetails.productImages?.[0],
+    size: selectedSize,
+    quantity: quantity,
+    color: selectedColor,
+  };
+
+  dispatch(addToCart(cartItem));
+};
+
+
+
 
   const handleCompare = () => {
     // Placeholder: Replace with your compare logic
@@ -33,6 +83,8 @@ const Details = ({ productDetails }) => {
   }
 
   const formatPrice = (price) => `Rp ${price?.toLocaleString("id-ID") || '0'}`
+
+  
 
   return (
     <div className='px-5 py-5 w-full flex flex-col gap-6'>

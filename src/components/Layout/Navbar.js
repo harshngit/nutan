@@ -24,6 +24,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
+   const { cartItems } = useSelector((state) => state.cart);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -158,9 +159,11 @@ export default function Navbar() {
         <Link href="/cart">
           <div className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer">
             <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
+            {cartItems.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              2
+              {cartItems.length}
             </span>
+          )}
           </div>
         </Link>
       </div>
@@ -243,12 +246,21 @@ export default function Navbar() {
             </Link>
 
             {/* Cart */}
-            <button onClick={() => setIsCartOpen(true)} className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200" aria-label="Open shopping cart" suppressHydrationWarning={true}>
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              aria-label="Open shopping cart"
+              suppressHydrationWarning={true}
+            >
               <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                2
-              </span>
+              
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
             </button>
+
           </div>
 
           <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

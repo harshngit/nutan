@@ -1,65 +1,61 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateCartQuantity, removeCartItem } from '@/actions/cartAction';
 
 const CartBucket = () => {
-	const items = [
-		{
-			id: 1,
-			name: 'For Him',
-			color: 'Black',
-			quantity: 1,
-			price: 14.9,
-			image: '/asset/Cart/1.png', // Replace with your image
-		},
-		{
-			id: 2,
-			name: 'For Him',
-			color: 'Black',
-			quantity: 1,
-			price: 14.9,
-			image: '/asset/Cart/2.png',
-		},
-		{
-			id: 3,
-			name: 'For Him',
-			color: 'Red',
-			quantity: 1,
-			price: 14.9,
-			image: '/asset/Cart/3.png',
-		},
-	];
+	const dispatch = useDispatch();
+	const { cartItems } = useSelector(state => state.cart);
 
-	const total = 100;
+	const handleRemove = (item) => {
+		dispatch(removeCartItem(item.product, item.size, item.color));
+	};
+
+	const handleQuantityChange = (item, delta) => {
+		const newQty = item.quantity + delta;
+		if (newQty >= 1) {
+			dispatch(updateCartQuantity(item.product, item.size, item.color, newQty));
+		}
+	};
+
+	const total = cartItems.reduce(
+		(acc, item) => acc + Number(item.price) * item.quantity, 0
+	);
 
 	return (
 		<div className='w-full bg-white flex justify-center items-center flex-col lg:px-10 lg:py-10 py-5 px-5'>
 			<div className='flex flex-col justify-center items-center'>
-				<h2 className='font-normal font-playfair lg:text-[42px] text-[20px] '>Shopping Cart</h2>
+				<h2 className='font-normal font-poppins lg:text-[42px] text-[20px] '>Shopping Cart</h2>
 				<div className='flex justify-center items-center gap-2'>
-					<h5 className='font-300 font-playfair lg:text-[15px] '>Home</h5>
+					<h5 className='font-300 font-poppins lg:text-[15px] '>Home</h5>
 					<img src="/asset/SVG.png" alt="" />
-					<h4 className='font-300 font-playfair lg:text-[16px] '>Your Shopping Cart</h4>
+					<h4 className='font-300 font-poppins lg:text-[16px] '>Your Shopping Cart</h4>
 				</div>
 			</div>
+
 			<div className="w-full">
 				<h2 className="lg:text-[22px] font-normal mb-4">Your Cart</h2>
 				<div className="grid grid-cols-1 border-y-[2px] py-5 border-[#00000063] md:grid-cols-3 gap-4">
-					{items.map((item) => (
-						<div key={item.id} className="flex gap-5 justify-start items-start  p-4 rounded-md">
-							<img src={item.image} alt={item.name} className="w-[168px] object-cover" />
-							<div className="w-[50%] flex-col flex justify-start items-start">
-								<p className="font-semibold text-[22px] mb-2">{item.name}</p>
-								<p className="text-sm text-[22px] mb-2 text-[#8A8A8A]">Color: {item.color}</p>
-								<p className="font-semibold mb-2">${item.price.toFixed(2)}</p>
-								<div className="flex items-start justify-start mt-2 space-x-2">
-									<button className="px-2 border">-</button>
-									<span>{item.quantity.toString().padStart(2, '0')}</span>
-									<button className="px-2 border">+</button>
+					{cartItems.length === 0 ? (
+						<p>Your cart is empty.</p>
+					) : (
+						cartItems.map((item, index) => (
+							<div key={index} className="flex gap-5 justify-start items-start  p-4 rounded-md">
+								<img src={item.image} alt={item.name} className="w-[168px] object-cover" />
+								<div className="w-[50%] flex-col flex justify-start items-start">
+									<p className="font-semibold text-[22px] mb-2">{item.name}</p>
+									<p className="text-sm text-[22px] mb-2 text-[#8A8A8A]">Color: {item.color}</p>
+									<p className="font-semibold mb-2">${item.price.toFixed(2)}</p>
+									<div className="flex items-start justify-start mt-2 space-x-2">
+										<button onClick={() => handleQuantityChange(item, -1)} className="px-2 border">-</button>
+										<span>{item.quantity.toString().padStart(2, '0')}</span>
+										<button onClick={() => handleQuantityChange(item, 1)} className="px-2 border">+</button>
+									</div>
+									<button onClick={() => handleRemove(item)} className="text-sm mb-2 text-[22px] text-gray-500 mt-1 underline">Remove</button>
 								</div>
-
-								<button className="text-sm mb-2 text-[22px] text-gray-500 mt-1 underline">Remove</button>
 							</div>
-						</div>
-					))}
+						))
+					)}
 				</div>
 
 				{/* Order Summary */}
@@ -90,9 +86,10 @@ const CartBucket = () => {
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	)
 }
 
-export default CartBucket
+export default CartBucket;

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { RiArrowDownSLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
+
 
 export default function Checkout() {
   const [mounted, setMounted] = useState(false);
@@ -23,12 +25,17 @@ export default function Checkout() {
     setMounted(true);
   }, []);
 
-  const formatPrice = (amount) => {
-    if (!mounted) {
-      return `Rs. ${amount}`;
-    }
-    return `Rs. ${amount.toLocaleString('en-IN')}`;
-  };
+const { cartItems } = useSelector((state) => state.cart);
+
+const subtotal = cartItems.reduce(
+  (sum, item) => sum + item.price * item.quantity,
+  0
+);
+
+const formatPrice = (amount) => {
+  if (!mounted) return `Rs. ${amount}`;
+  return `Rs. ${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -254,26 +261,29 @@ export default function Checkout() {
           <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 h-fit">
             {/* Product Section */}
             <div className="border-b border-gray-200 pb-6 mb-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-[24px] font-semibold text-gray-900">Product</h3>
-                <h3 className="text-[24px] font-semibold text-gray-900">Subtotal</h3>
-              </div>
-              
-              <div className="flex justify-between items-center text-[16px] text-gray-600 mb-4">
-                <span>Asgaard sofa × 1</span>
-                <span suppressHydrationWarning={true}>{formatPrice(250000)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center text-gray-900 mb-2">
-                <span>Subtotal</span>
-                <span suppressHydrationWarning={true}>{formatPrice(250000)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center text-[24px] font-bold">
-                <span>Total</span>
-                <span className="text-[#B88E2F]" suppressHydrationWarning={true}>{formatPrice(250000)}</span>
-              </div>
-            </div>
+  <div className="flex justify-between items-center mb-4">
+    <h3 className="text-[24px] font-semibold text-gray-900">Product</h3>
+    <h3 className="text-[24px] font-semibold text-gray-900">Subtotal</h3>
+  </div>
+
+  {cartItems.map((item, index) => (
+    <div key={`${item.product}-${index}`} className="flex justify-between items-center text-[16px] text-gray-600 mb-4">
+      <span>{item.name} × {item.quantity}</span>
+      <span suppressHydrationWarning={true}>{formatPrice(item.price * item.quantity)}</span>
+    </div>
+  ))}
+
+  <div className="flex justify-between items-center text-gray-900 mb-2">
+    <span>Subtotal</span>
+    <span suppressHydrationWarning={true}>{formatPrice(subtotal)}</span>
+  </div>
+
+  <div className="flex justify-between items-center text-[24px] font-bold">
+    <span>Total</span>
+    <span className="text-[#B88E2F]" suppressHydrationWarning={true}>{formatPrice(subtotal)}</span>
+  </div>
+</div>
+
 
             {/* Payment Methods */}
             <div className="space-y-4 mb-8">
