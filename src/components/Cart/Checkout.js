@@ -47,6 +47,31 @@ export default function Checkout() {
   };
 
   const handlePlaceOrder = () => {
+    const {
+      firstName,
+      lastName,
+      address,
+      city,
+      state,
+      pincode,
+      phone,
+      email,
+    } = formData;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !address ||
+      !city ||
+      !state ||
+      !pincode ||
+      !phone ||
+      !email
+    ) {
+      alert("Please fill all the details");
+      return;
+    }
+
     dispatch(
       placeOrder(
         {
