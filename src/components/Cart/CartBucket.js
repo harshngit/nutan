@@ -62,19 +62,19 @@ const CartBucket = () => {
 				<div className=' flex justify-end items-end'>
 					<div className="mt-8 lg:w-[40%] w-full">
 						<div className=" mt-6 md:mt-0">
-							<div className="flex justify-between mb-2">
+							{/* <div className="flex justify-between mb-2">
 								<span className="font-300 text-gray-700 text-[18px]">Discount</span>
 								<span className="text-gray-700 underline">Add</span>
-							</div>
+							</div> */}
 							<div className=" border-t-2">
-								<div className="flex justify-between mb-2">
+								{/* <div className="flex justify-between mb-2">
 									<span className="font-300 lg:text-[22px] text-[18px]">Order Value</span>
 									<span className="text-black lg:text-[22px] text-[18px]">Rs. 2,999.00</span>
 								</div>
 								<div className="flex justify-between mb-2">
 									<span className="font-300 lg:text-[22px] text-[18px]">Estimated Delivery Fee</span>
 									<span className="text-black lg:text-[22px] text-[18px]">Free</span>
-								</div>
+								</div> */}
 								<div className="flex justify-between font-semibold lg:text-[32px] text-[25px]">
 									<span>Total</span>
 									<span>${total.toFixed(2)}</span>

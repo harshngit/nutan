@@ -1,362 +1,244 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { RiArrowDownSLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
 
+import React, { useState, useEffect } from "react";
+import { RiArrowDownSLine } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
+import { placeOrder } from "@/actions/orderAction";
+import { useRouter } from "next/navigation";
 
 export default function Checkout() {
   const [mounted, setMounted] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { cartItems } = useSelector((state) => state.cart);
+  const { userProfile } = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    companyName: '',
-    country: 'Sri Lanka',
-    streetAddress: '',
-    townCity: '',
-    province: 'Western Province',
-    zipCode: '',
-    phone: '',
-    email: '',
-    additionalInfo: '',
-    paymentMethod: 'directBankTransfer'
+    firstName: "",
+    lastName: "",
+    country: "India",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+    phone: "",
+    email: "",
+    paymentMethod: "cashOnDelivery",
   });
+
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-const { cartItems } = useSelector((state) => state.cart);
-
-const subtotal = cartItems.reduce(
-  (sum, item) => sum + item.price * item.quantity,
-  0
-);
-
-const formatPrice = (amount) => {
-  if (!mounted) return `Rs. ${amount}`;
-  return `Rs. ${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-};
+  const formatPrice = (amount) => {
+    if (!mounted) return `Rs. ${amount}`;
+    return `Rs. ${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Order placed:', formData);
-    alert('Order placed successfully!');
+  const handlePlaceOrder = () => {
+    dispatch(
+      placeOrder(
+        {
+          ...formData,
+          name: `${formData.firstName} ${formData.lastName}`,
+        },
+        cartItems,
+        userProfile,
+        totalAmount,
+        router
+      )
+    )
+      .then(() => {
+        alert("Order placed successfully!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Billing Details Section */}
+          {/* Billing Details */}
           <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
             <h2 className="text-[36px] font-semibold text-gray-900 mb-8">Billing details</h2>
-            
             <div className="space-y-6">
-              {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-[16px] font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
+                  <label className="block text-[16px] mb-2">First Name</label>
                   <input
-                   suppressHydrationWarning={true}
                     type="text"
-                    id="firstName"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-[16px] font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
+                  <label className="block text-[16px] mb-2">Last Name</label>
                   <input
-                   suppressHydrationWarning={true}
                     type="text"
-                    id="lastName"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md"
                     required
                   />
                 </div>
               </div>
 
-              {/* Company Name */}
               <div>
-                <label htmlFor="companyName" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Company Name (Optional)
-                </label>
-                <input
-                 suppressHydrationWarning={true}
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
-                />
-              </div>
-
-              {/* Country/Region */}
-              <div>
-                <label htmlFor="country" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Country / Region
-                </label>
+                <label className="block text-[16px] mb-2">Country / Region</label>
                 <div className="relative">
                   <select
-                    id="country"
                     name="country"
                     value={formData.country}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors appearance-none bg-white pr-10"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md appearance-none bg-white pr-10"
                     required
                   >
-                    <option value="Sri Lanka">Sri Lanka</option>
                     <option value="India">India</option>
-                    <option value="Bangladesh">Bangladesh</option>
-                    <option value="Pakistan">Pakistan</option>
+                    <option value="USA">USA</option>
                   </select>
                   <RiArrowDownSLine className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
                 </div>
               </div>
 
-              {/* Street Address */}
               <div>
-                <label htmlFor="streetAddress" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Street address
-                </label>
+                <label className="block text-[16px] mb-2">Address</label>
                 <input
-                 suppressHydrationWarning={true}
                   type="text"
-                  id="streetAddress"
-                  name="streetAddress"
-                  value={formData.streetAddress}
+                  name="address"
+                  value={formData.address}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
                   required
                 />
               </div>
 
-              {/* Town/City */}
               <div>
-                <label htmlFor="townCity" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Town / City
-                </label>
+                <label className="block text-[16px] mb-2">City</label>
                 <input
-                 suppressHydrationWarning={true}
                   type="text"
-                  id="townCity"
-                  name="townCity"
-                  value={formData.townCity}
+                  name="city"
+                  value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
                   required
                 />
               </div>
 
-              {/* Province */}
               <div>
-                <label htmlFor="province" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Province
-                </label>
-                <div className="relative">
-                  <select
-                    id="province"
-                    name="province"
-                    value={formData.province}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors appearance-none bg-white pr-10"
-                    required
-                  >
-                    <option value="Western Province">Western Province</option>
-                    <option value="Central Province">Central Province</option>
-                    <option value="Southern Province">Southern Province</option>
-                    <option value="Northern Province">Northern Province</option>
-                    <option value="Eastern Province">Eastern Province</option>
-                  </select>
-                  <RiArrowDownSLine className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
-                </div>
-              </div>
-
-              {/* ZIP Code */}
-              <div>
-                <label htmlFor="zipCode" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  ZIP code
-                </label>
+                <label className="block text-[16px] mb-2">State</label>
                 <input
-                 suppressHydrationWarning={true}
                   type="text"
-                  id="zipCode"
-                  name="zipCode"
-                  value={formData.zipCode}
+                  name="state"
+                  value={formData.state}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
                   required
                 />
               </div>
 
-              {/* Phone */}
               <div>
-                <label htmlFor="phone" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Phone
-                </label>
+                <label className="block text-[16px] mb-2">Pincode</label>
                 <input
-                 suppressHydrationWarning={true}
+                  type="text"
+                  name="pincode"
+                  value={formData.pincode}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-[16px] mb-2">Phone</label>
+                <input
                   type="tel"
-                  id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
                   required
                 />
               </div>
 
-              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-[16px] font-medium text-gray-700 mb-2">
-                  Email address
-                </label>
+                <label className="block text-[16px] mb-2">Email</label>
                 <input
-                 suppressHydrationWarning={true}
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md"
                   required
-                />
-              </div>
-
-              {/* Additional Information */}
-              <div>
-                <textarea
-                 suppressHydrationWarning={true}
-                  name="additionalInfo"
-                  value={formData.additionalInfo}
-                  onChange={handleInputChange}
-                  placeholder="Additional information"
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2  transition-colors resize-none"
                 />
               </div>
             </div>
           </div>
 
-          {/* Order Summary Section */}
+          {/* Order Summary */}
           <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 h-fit">
-            {/* Product Section */}
-            <div className="border-b border-gray-200 pb-6 mb-6">
-  <div className="flex justify-between items-center mb-4">
-    <h3 className="text-[24px] font-semibold text-gray-900">Product</h3>
-    <h3 className="text-[24px] font-semibold text-gray-900">Subtotal</h3>
-  </div>
+            <div className="border-b pb-6 mb-6">
+              <h3 className="text-[24px] font-semibold mb-4">Product</h3>
+              {cartItems.map((item, index) => (
+                <div key={`${item.product}-${index}`} className="flex justify-between mb-4 text-gray-700">
+                  <span>{item.name} × {item.quantity}</span>
+                  <span>{formatPrice(item.price * item.quantity)}</span>
+                </div>
+              ))}
+              <div className="flex justify-between font-medium mb-2">
+                <span>Subtotal</span>
+                <span>{formatPrice(totalAmount)}</span>
+              </div>
+              <div className="flex justify-between text-xl font-bold">
+                <span>Total</span>
+                <span className="text-[#B88E2F]">{formatPrice(totalAmount)}</span>
+              </div>
+            </div>
 
-  {cartItems.map((item, index) => (
-    <div key={`${item.product}-${index}`} className="flex justify-between items-center text-[16px] text-gray-600 mb-4">
-      <span>{item.name} × {item.quantity}</span>
-      <span suppressHydrationWarning={true}>{formatPrice(item.price * item.quantity)}</span>
-    </div>
-  ))}
-
-  <div className="flex justify-between items-center text-gray-900 mb-2">
-    <span>Subtotal</span>
-    <span suppressHydrationWarning={true}>{formatPrice(subtotal)}</span>
-  </div>
-
-  <div className="flex justify-between items-center text-[24px] font-bold">
-    <span>Total</span>
-    <span className="text-[#B88E2F]" suppressHydrationWarning={true}>{formatPrice(subtotal)}</span>
-  </div>
-</div>
-
-
-            {/* Payment Methods */}
             <div className="space-y-4 mb-8">
               <div className="flex items-start space-x-3">
                 <input
-                 suppressHydrationWarning={true}
                   type="radio"
-                  id="directBankTransfer"
                   name="paymentMethod"
                   value="directBankTransfer"
-                  checked={formData.paymentMethod === 'directBankTransfer'}
+                  checked={formData.paymentMethod === "directBankTransfer"}
                   onChange={handleInputChange}
-                  className="mt-1 h-4 w-4  border-gray-300"
                 />
-                <div>
-                  <label htmlFor="directBankTransfer" className="font-medium text-gray-900">
-                    Direct Bank Transfer
-                  </label>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                  </p>
-                </div>
+                <label className="text-gray-700">Direct Bank Transfer</label>
               </div>
-
-              <div className="flex items-center space-x-3">
+              <div className="flex items-start space-x-3">
                 <input
-                 suppressHydrationWarning={true}
                   type="radio"
-                  id="directBankTransfer2"
-                  name="paymentMethod"
-                  value="directBankTransfer2"
-                  checked={formData.paymentMethod === 'directBankTransfer2'}
-                  onChange={handleInputChange}
-                  className="h-4 w-4  border-gray-300"
-                />
-                <label htmlFor="directBankTransfer2" className="text-gray-700">
-                  Direct Bank Transfer
-                </label>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <input
-                 suppressHydrationWarning={true}
-                  type="radio"
-                  id="cashOnDelivery"
                   name="paymentMethod"
                   value="cashOnDelivery"
-                  checked={formData.paymentMethod === 'cashOnDelivery'}
+                  checked={formData.paymentMethod === "cashOnDelivery"}
                   onChange={handleInputChange}
-                  className="h-4 w-4  border-gray-300"
                 />
-                <label htmlFor="cashOnDelivery" className="text-gray-700">
-                  Cash On Delivery
-                </label>
+                <label className="text-gray-700">Cash On Delivery</label>
               </div>
             </div>
 
-            {/* Privacy Policy */}
-            <div className="text-sm text-gray-600 mb-6">
-              Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our{' '}
-              <a href="#" className="text-blue-600 hover:underline">
-                privacy policy
-              </a>
-              .
-            </div>
-
-            {/* Place Order Button */}
             <button
-              type="submit"
-              onClick={handleSubmit}
-              className="w-full bg-white border-2 border-gray-900 text-gray-900 py-3 px-6 rounded-md font-medium hover:bg-gray-900 hover:text-white transition-colors duration-200"
+              onClick={handlePlaceOrder}
+              className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800"
             >
-              Place order
+              Place Order
             </button>
           </div>
         </div>
