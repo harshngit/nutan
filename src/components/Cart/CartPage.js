@@ -76,7 +76,14 @@ export default function CartPage() {
                           <h3 className="text-sm md:text-base font-medium text-gray-900 truncate">
                             {item.name}
                           </h3>
-                          <p className="text-xs text-gray-500">Size: {item.size} | Color: {item.color}</p>
+                          <p className="text-xs text-gray-500 flex items-center gap-1">
+                            Size: {item.size} | Color:
+                            <span
+                              className="w-4 h-4 inline-block rounded-full border"
+                              style={{ backgroundColor: item.color }}
+                            ></span>
+                          </p>
+
                         </div>
                       </div>
 

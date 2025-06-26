@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const Login = () => {
     const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [showPassword, setShowPassword] = useState(false)
 	const dispatch = useDispatch();
 	const router = useRouter();
 
@@ -53,6 +54,8 @@ const Login = () => {
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
+					showPassword={showPassword}
+					setShowPassword={setShowPassword}
                     // showPassword={showPassword}
                     // setShowPassword={setShowPassword}
                 />

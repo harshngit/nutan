@@ -139,7 +139,8 @@ const handleAddToCart = () => {
 
         {/* Color */}
         <div className="text-lg lg:py-4 font-semibold mb-2">
-          Color: <span className="font-normal ml-2">{selectedColor}</span>
+          Color: 
+          {/* <span className="font-normal ml-2">{selectedColor}</span> */}
         </div>
         <div className="flex gap-4">
           {colors.map((color) => (

@@ -190,6 +190,12 @@ export default function Navbar() {
             {/* Account Dropdown */}
             <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>
               <img src="/asset/Navbar/account.png" className="w-[28px] cursor-pointer" alt="Account" />
+              <div className="flex justify-start flex-col items-start gap-1 px-4 py-2">
+              {/* <p className="font-thin lg:text-[10px] text-[10px]">HI,</p> */}
+              <h2 className="font-normal lg:text-[10px] text-[10px]">
+                {userProfile?.email}
+              </h2>
+            </div>
             {openAccountDropdown && (
   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
     {isAuthenticated ? (

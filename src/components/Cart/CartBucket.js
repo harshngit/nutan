@@ -6,6 +6,16 @@ import { updateCartQuantity, removeCartItem } from '@/actions/cartAction';
 const CartBucket = () => {
 	const dispatch = useDispatch();
 	const { cartItems } = useSelector(state => state.cart);
+	const userState = useSelector((state) => state.user);
+
+	const {
+		error,
+		loading,
+		isAuthenticated,
+		users,
+		userProfile,
+	} = userState || {};
+	console.log(users)
 
 	const handleRemove = (item) => {
 		dispatch(removeCartItem(item.product, item.size, item.color));
@@ -79,9 +89,16 @@ const CartBucket = () => {
 									<span>Total</span>
 									<span>${total.toFixed(2)}</span>
 								</div>
-								<button className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
-									Checkout
-								</button>
+								{isAuthenticated ? (<Link href={"/checkout"}>
+									<button className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
+										Checkout
+									</button>
+								</Link>) : (<Link href={"/login"}>
+									<button className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
+										Login
+									</button>
+								</Link>)}
+								
 							</div>
 						</div>
 					</div>

@@ -4,7 +4,7 @@ import RegisterForm from '@/components/Register/RegisterForm'
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { auth, db } from '../firebase.config';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
 const Register = () => {
@@ -21,6 +21,14 @@ const Register = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(async (userCredential) => {
 				const user = userCredential.user;
+
+				// Update display name
+				await updateProfile(user, {
+					displayName: name,
+					phoneNumber: contact,
+				});
+
+				
 				await setDoc(doc(db, "users", user.uid), {
 					name,
 					email,

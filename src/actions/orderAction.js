@@ -5,6 +5,13 @@ import {
 	CLEAR_ORDER,
 } from "@/constants/orderConstant";
 
+import {
+	FETCH_ORDER_START,
+	FETCH_ORDER_SUCCESS,
+	FETCH_ORDER_FAIL,
+} from "@/constants/orderConstant";
+
+
 
 import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import { REMOVE_CART } from "@/constants/cartConstant";
@@ -32,6 +39,7 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 				p_qty: item.quantity,
 				p_size: item.size,
 				p_color: item.color,
+				p_img: item.image,
 			})),
 			dropoff_location: {
 				address: formData.address,
@@ -54,7 +62,25 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 		dispatch({ type: PLACE_ORDER_SUCCESS, payload });
 		dispatch({ type: REMOVE_CART }); // clear cart
 		router.push("/");
+		router.push("/orderConfirmation");
 	} catch (error) {
 		dispatch({ type: PLACE_ORDER_FAIL, payload: error.message });
+	}
+};
+
+export const fetchOrderDetails = (orderID) => async (dispatch) => {
+	dispatch({ type: FETCH_ORDER_START });
+
+	try {
+		const orderRef = doc(db, "Order", orderID);
+		const orderSnap = await getDoc(orderRef);
+
+		if (orderSnap.exists()) {
+			dispatch({ type: FETCH_ORDER_SUCCESS, payload: orderSnap.data() });
+		} else {
+			dispatch({ type: FETCH_ORDER_FAIL, payload: "Order not found" });
+		}
+	} catch (error) {
+		dispatch({ type: FETCH_ORDER_FAIL, payload: error.message });
 	}
 };
