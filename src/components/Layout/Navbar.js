@@ -5,7 +5,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/actions/authActions";
-import CartSidebar from "../Cart/CartSidebar";  // Assuming you already have this component
+import CartSidebar from "../Cart/CartSidebar"; 
+import { FaUserCheck } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+
+ // Assuming you already have this component
 
 const navItems = [
   { label: "Home", href: "/", children: []},
@@ -188,53 +192,59 @@ export default function Navbar() {
 
           <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
             {/* Account Dropdown */}
-            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>
-              <img src="/asset/Navbar/account.png" className="w-[28px] cursor-pointer" alt="Account" />
-              <div className="flex justify-start flex-col items-start gap-1 px-4 py-2">
-              {/* <p className="font-thin lg:text-[10px] text-[10px]">HI,</p> */}
-              <h2 className="font-normal lg:text-[10px] text-[10px]">
-                {userProfile?.email}
-              </h2>
-            </div>
+            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>              
+              {isAuthenticated ? ( 
+                <FaUserCheck className="text-[22px] cursor-pointer" alt="Account" />
+              ) : (
+                <FaUserCircle className="text-[22px] cursor-pointer" alt="Account" />
+                
+              )}
             {openAccountDropdown && (
-  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-    {isAuthenticated ? (
-      <>
-        <Link href="/account">
-          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
-            My Account
-          </div>
-        </Link>
-        <div
-          className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg cursor-pointer"
-          onClick={handleLogout}
-        >
-          Logout
-        </div>
-      </>
-    ) : (
-      <>
-        <Link href="/login">
-          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
-            Login
-          </div>
-        </Link>
-        <Link href="/register">
-          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100">
-            Register
-          </div>
-        </Link>
-        <Link href="/account">
-          <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg">
-            My Account
-          </div>
-        </Link>
-      </>
-    )}
-  </div>
-)}
-
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              {isAuthenticated ? (
+                <>
+                <div className="flex justify-start flex-col items-start gap-1 px-4 py-2">
+                          <p className="font-medium lg:text-[10px] text-[10px]">HI,</p>
+                          <h2 className="font-normal lg:text-[10px] text-[10px]">
+                            {userProfile?.email}
+                          </h2>
+                        </div>
+                  <Link href="/account">
+                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
+                      My Account
+                    </div>
+                  </Link>
+                  <div
+                    className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </div>
+                </>
+                
+              ) : (
+                <>
+                  <Link href="/login">
+                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
+                      Login
+                    </div>
+                  </Link>
+                  <Link href="/register">
+                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100">
+                      Register
+                    </div>
+                  </Link>
+                  <Link href="/account">
+                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg">
+                      My Account
+                    </div>
+                  </Link>
+                </>
+              )}
             </div>
+            )}
+
+          </div>
 
             {/* Search with Dropdown */}
             <div className="relative" ref={dropdownRef}>
