@@ -10,6 +10,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 
 export default function CartPage() {
   const { cartItems } = useSelector((state) => state.cart);
+  const isAuthenticated = useSelector((state) => state.user?.isAuthenticated);
   const dispatch = useDispatch();
   const [mounted, setMounted] = useState(false);
 
@@ -103,7 +104,9 @@ export default function CartPage() {
                         >
                           <FiMinus />
                         </button>
-                        <span>{item.quantity}</span>
+                        <span>
+                          {item.quantity}
+                        </span>
                         <button
                           onClick={() => handleQuantityChange(item, item.quantity + 1)}
                           className="p-1 border rounded hover:bg-gray-100"
@@ -163,10 +166,17 @@ export default function CartPage() {
                 </div>
               </div>
 
+              {/* Checkout/Login Button */}
               <div className="flex justify-center mt-6">
-                <Link href="/checkout" className="w-[80%] flex items-center justify-center bg-[#F9F1E7] hover:bg-[#F9F1E7] text-black text-[20px] font-medium py-3 px-6 rounded-[15px] border border-black transition-colors duration-200 focus:outline-none">
-                  Check Out
-                </Link>
+                {isAuthenticated ? (
+                  <Link href="/checkout" className="w-[80%] flex items-center justify-center bg-[#F9F1E7] hover:bg-[#F9F1E7] text-black text-[20px] font-medium py-3 px-6 rounded-[15px] border border-black transition-colors duration-200 focus:outline-none">
+                    Check Out
+                  </Link>
+                ) : (
+                  <Link href="/login" className="w-[100%] flex items-center justify-center bg-[#F9F1E7] hover:bg-[#F9F1E7] text-black text-[20px] font-medium py-3 px-6 rounded-[15px] border border-black transition-colors duration-200 focus:outline-none">
+                    Login to Checkout
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -21,9 +21,6 @@ const OrderConfirmation = ({ orderID }) => {
 	if (error) return <p className="text-red-500">Error: {error}</p>;
 	return (
 		<>
-			<div className='flex justify-center items-center'>
-				<img className='w-[50px]' src="/asset/Navbar/logo.png" alt="" />
-			</div>
 			<div className='bg-gray-400 flex justify-center items-center h-screen'>
 				<div className="min-h-[80%] rounded-md w-[90%] font-playfair bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
 					{/* Left Side */}
