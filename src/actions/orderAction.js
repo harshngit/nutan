@@ -61,7 +61,7 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 
 		dispatch({ type: PLACE_ORDER_SUCCESS, payload });
 		dispatch({ type: REMOVE_CART }); // clear cart
-		router.push("/");
+		// router.push("/");
 		router.push("/orderConfirmation");
 	} catch (error) {
 		dispatch({ type: PLACE_ORDER_FAIL, payload: error.message });
