@@ -1,17 +1,17 @@
 'use client'
-import OrderConfirmation from '@/components/Cart/OrderConfirmation'
+import OrderConfirmationpage from '@/components/Cart/OrderConfirmationpage'
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
 
 import React from 'react'
 
-const OrderConfirmationpage = () => {
+const OrderConfirmation = () => {
 	return (
 		<div className=' font-poppins'>
 			<Navbar />
 			<section className="relative pt-[60px] ">
 				{/* Adjust padding to avoid navbar overlap */}
-				<OrderConfirmation />
+				<OrderConfirmationpage />
 			</section>
 			<section className="relative">
 				<Footer />
@@ -20,4 +20,4 @@ const OrderConfirmationpage = () => {
 	)
 }
 
-export default OrderConfirmationpage
+export default OrderConfirmation

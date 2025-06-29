@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const OrderConfirmation = ({ orderID }) => {
+const OrderConfirmationpage = ({ orderID }) => {
 	const dispatch = useDispatch();
 	const { orderDetails, loading, error } = useSelector((state) => state.order);
 
@@ -116,4 +116,4 @@ const OrderConfirmation = ({ orderID }) => {
 	);
 };
 
-export default OrderConfirmation;
+export default OrderConfirmationpage;
