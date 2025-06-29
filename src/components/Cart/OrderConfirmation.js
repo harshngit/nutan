@@ -1,133 +1,119 @@
-import React from 'react';
+"use client"
 
-export default function OrderConfirmation() {
-  return (
-    <div className="min-h-screen bg-stone-200 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column */}
-            <div>
-              <h1 className="text-4xl font-bold text-gray-800 mb-6 leading-tight">
-                Thank you for your<br />purchase!
-              </h1>
-              
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Your order will be processed within 24 hours during working days. We will 
-                notify you by email once your order has been shipped.
-              </p>
-              
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Billing address</h2>
-                
-                <div className="space-y-3">
-                  <div className="flex">
-                    <span className="text-gray-600 w-20">Name</span>
-                    <span className="text-gray-800 font-medium">Jane Smith</span>
-                  </div>
-                  
-                  <div className="flex">
-                    <span className="text-gray-600 w-20">Address</span>
-                    <div className="text-gray-800">
-                      <div>456 Oak St #3b, San Francisco,</div>
-                      <div>CA 94102, United States</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex">
-                    <span className="text-gray-600 w-20">Phone</span>
-                    <span className="text-gray-800">+1 (415) 555-1234</span>
-                  </div>
-                  
-                  <div className="flex">
-                    <span className="text-gray-600 w-20">Email</span>
-                    <span className="text-gray-800">jane.smith@email.com</span>
-                  </div>
-                </div>
-              </div>
-              
-              <button className="bg-red-400 hover:bg-red-500 text-white font-medium px-8 py-3 rounded-full transition-colors">
-                Track Your Order
-              </button>
-            </div>
-            
-            {/* Right Column */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-6">Order Summary</h2>
-              
-              <div className="flex justify-between text-sm text-gray-600 mb-6">
-                <div>
-                  <div className="mb-1">Date</div>
-                  <div className="font-medium text-gray-800">02 May 2023</div>
-                </div>
-                <div>
-                  <div className="mb-1">Order Number</div>
-                  <div className="font-medium text-gray-800">024-125478956</div>
-                </div>
-                <div>
-                  <div className="mb-1">Payment Method</div>
-                  <div className="font-medium text-gray-800">Mastercard</div>
-                </div>
-              </div>
-              
-              {/* Product Items */}
-              <div className="space-y-4 mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-red-400 rounded"></div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-medium text-gray-800">All In One Chocolate Combo</h3>
-                    <p className="text-sm text-gray-500">Pack: Medium</p>
-                    <p className="text-sm text-gray-500">Qty: 1</p>
-                  </div>
-                  <div className="font-semibold text-gray-800">$50.00</div>
-                </div>
-                
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-purple-400 rounded"></div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-medium text-gray-800">Desire Of Hearts</h3>
-                    <p className="text-sm text-gray-500">Pack: Large</p>
-                    <p className="text-sm text-gray-500">Qty: 1</p>
-                  </div>
-                  <div className="font-semibold text-gray-800">$50.00</div>
-                </div>
-              </div>
-              
-              {/* Order Summary */}
-              <div className="border-t pt-4 space-y-2">
-                <div className="flex justify-between text-gray-600">
-                  <span>Sub Total</span>
-                  <span>$100.00</span>
-                </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Shipping</span>
-                  <span>$2.00</span>
-                </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Tax</span>
-                  <span>$5.00</span>
-                </div>
-                <div className="border-t pt-2 flex justify-between text-lg font-semibold text-gray-800">
-                  <span>Order Total</span>
-                  <span>$107.00</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Bottom right watermark */}
-      <div className="fixed bottom-4 right-4 text-gray-400 text-sm font-light">
-        <div className="text-right">
-          <div className="text-xs">UI</div>
-          <div className="text-xs">DESIGNED</div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { fetchOrderDetails } from '@/actions/orderAction';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+const OrderConfirmation = ({ orderID }) => {
+	const dispatch = useDispatch();
+	const { orderDetails, loading, error } = useSelector((state) => state.order);
+
+	useEffect(() => {
+		if (orderID) {
+			dispatch(fetchOrderDetails(orderID));
+		}
+	}, [orderID]);
+
+	console.log(orderDetails)
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p className="text-red-500">Error: {error}</p>;
+	return (
+		<>
+			<div className='bg-gray-400 flex justify-center items-center h-screen'>
+				<div className="min-h-[80%] rounded-md w-[90%] font-playfair bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
+					{/* Left Side */}
+					<div className="flex-1 max-w-lg">
+						<h2 className="text-3xl font-bold text-black mb-4">Thank you for your purchase!</h2>
+						<p className="text-gray-600 mb-8">
+							Your order will be processed within 24 hours during working days. We will notify you by email once your order has been shipped.
+						</p>
+
+						<div className="mb-8">
+							<h3 className="font-bold text-lg mb-2">Billing address</h3>
+							<div className="text-sm text-gray-700 space-y-2">
+								<p><strong className='pr-1'>Name:</strong> {orderDetails?.customerName}</p>
+								<p><strong className='pr-1'>Address:</strong>{orderDetails?.dropoff_location?.address
+								},{orderDetails?.dropoff_location?.city
+									},{orderDetails?.dropoff_location?.region
+									},{orderDetails?.dropoff_location?.zip
+									}</p>
+								<p><strong className='pr-1'>Phone:</strong>{orderDetails?.dropoff_location?.phone
+								}</p>
+								<p><strong className='pr-1'>Email:</strong>
+                                    {orderDetails?.email || 
+                                    orderDetails?.customer?.email || 
+                                    orderDetails?.customerEmail || 
+                                    orderDetails?.user?.email || 
+                                    'Not provided'}
+                                    </p>
+							</div>
+						</div>
+
+						<Link href={"/"}>
+							<button className="bg-[#000] text-white px-6 py-2 rounded font-semibold">
+								Home
+							</button>
+						</Link>
+					</div>
+
+					{/* Right Side */}
+					<div className="flex-1 max-w-xl bg-gray-100 rounded-xl shadow-md p-6 relative">
+						<div className="border-b pb-4 mb-4">
+							<h3 className="text-xl font-bold mb-3">Order Summary</h3>
+							<div className="flex justify-between text-sm text-gray-700">
+								<span><strong>Date</strong><br />02 May 2023</span>
+								<span><strong>Order Number</strong><br />{orderDetails?.OrderID}</span>
+								<span><strong>Payment Method</strong><br />COD</span>
+							</div>
+						</div>
+
+						{/* Items */}
+						{orderDetails?.dimensions.map((item, index) => (
+							<div key={index} className="space-y-4">
+								<div className="flex items-center justify-between">
+									<div className="flex gap-4">
+										<img
+											src={item.p_img}
+											alt="All In One Chocolate Combo"
+											className="w-16 h-16 rounded object-cover"
+										/>
+										<div>
+											<p className="font-bold">{item?.p_name}</p>
+											<div className="flex items-center gap-2 text-sm text-gray-600">
+												<span>Color:</span>
+												<div
+													className="w-4 h-4 rounded-full border"
+													style={{ backgroundColor: item?.p_color }}
+												></div>
+											</div>
+											<p className="text-sm text-gray-600">Qty: {item?.p_qty}</p>
+										</div>
+									</div>
+									<p className="font-semibold">${item?.p_price}</p>
+								</div>
+							</div>
+						))}
+
+						{/* Totals */}
+						{orderDetails?.invoices.map((item, index) => (
+							<div className="border-t mt-6 pt-4 space-y-2 text-sm text-gray-700">
+								<div className="flex justify-between">
+									<span>Sub Total</span>
+									<span>${item?.n_value}</span>
+								</div>
+								<div className="flex justify-between font-bold text-lg mt-2">
+									<span>Order Total</span>
+									<span>${item?.n_value}</span>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</>
+	);
+};
+
+export default OrderConfirmation;

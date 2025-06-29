@@ -65,7 +65,7 @@ const Shop = () => {
   }
 
 	return (
-		<div className=' font-playfair'>
+		<div className=' font-poppins'>
 			<NavbarTwo />
 			<section className="relative lg:pt-[90px] pt-[50px]">
 				{/* Adjust padding to avoid navbar overlap */}

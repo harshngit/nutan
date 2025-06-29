@@ -10,7 +10,7 @@ import React from 'react'
 
 const Cart = () => {
     return (
-        <div className=' font-playfair'>
+        <div className=' font-poppins'>
             <Navbar />
             <section className="relative pt-[130px] ">
                 {/* Adjust padding to avoid navbar overlap */}

@@ -1,3 +1,4 @@
+'use client'
 import CartBucket from '@/components/Cart/CartBucket'
 import CartPage from '@/components/Cart/CartPage'
 import Checkout from '@/components/Cart/Checkout'

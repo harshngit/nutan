@@ -53,7 +53,7 @@ const Register = () => {
 			></div>
 
 			{/* Foreground Content */}
-			<div className="relative w-[100%] z-10">
+			<div className="relative w-[100%] z-10 font-poppins">
 				<RegisterForm 
 					name={name} setName={setName}
 					email={email} setEmail={setEmail}

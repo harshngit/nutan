@@ -6,7 +6,7 @@ import React from 'react'
 
 const Wishlist = () => {
 	return (
-		<div className=' font-playfair'>
+		<div className=' font-poppins'>
 			<Navbar />
 			<section className="relative pt-[130px] pb-[50px]">
 				{/* Adjust padding to avoid navbar overlap */}
