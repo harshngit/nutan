@@ -3,12 +3,17 @@ import {
 	PLACE_ORDER_SUCCESS,
 	PLACE_ORDER_FAIL,
 	CLEAR_ORDER,
+} from "@/constants/orderConstant";
+
+import {
 	FETCH_ORDER_START,
 	FETCH_ORDER_SUCCESS,
 	FETCH_ORDER_FAIL,
 } from "@/constants/orderConstant";
 
-import { doc, setDoc, Timestamp, collection, getDoc } from "firebase/firestore";
+
+
+import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import { REMOVE_CART } from "@/constants/cartConstant";
 import { db } from "@/app/firebase.config";
 
@@ -20,13 +25,14 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 
 		const payload = {
 			OrderID: orderID,
-			createdAt: Timestamp.now().toMillis(), // Convert to milliseconds
+			createdAt: Timestamp.now(),
 			uid: userProfile?.uid || "",
-			customerName: `${formData.firstName} ${formData.lastName}`.trim(),
-			email: userProfile?.email || formData.email || "",
+			customerName: userProfile?.name || "",
+			email: userProfile?.email || "",
 			phone: formData.phone || "",
 			status: "unfulfilled",
 			orderStatus: "New",
+			customerName: `${formData.firstName} ${formData.lastName}`.trim(),
 			dimensions: cartItems.map((item) => ({
 				p_name: item.name,
 				p_price: item.price,
@@ -55,7 +61,8 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 
 		dispatch({ type: PLACE_ORDER_SUCCESS, payload });
 		dispatch({ type: REMOVE_CART }); // clear cart
-		router.push(`/orderConfirmation?orderID=${orderID}`);
+		router.push("/");
+		router.push("/orderConfirmation");
 	} catch (error) {
 		dispatch({ type: PLACE_ORDER_FAIL, payload: error.message });
 	}
@@ -69,14 +76,7 @@ export const fetchOrderDetails = (orderID) => async (dispatch) => {
 		const orderSnap = await getDoc(orderRef);
 
 		if (orderSnap.exists()) {
-			const orderData = orderSnap.data();
-
-			// Convert Timestamp to milliseconds if present
-			if (orderData.createdAt?.toMillis) {
-				orderData.createdAt = orderData.createdAt.toMillis();
-			}
-
-			dispatch({ type: FETCH_ORDER_SUCCESS, payload: orderData });
+			dispatch({ type: FETCH_ORDER_SUCCESS, payload: orderSnap.data() });
 		} else {
 			dispatch({ type: FETCH_ORDER_FAIL, payload: "Order not found" });
 		}
