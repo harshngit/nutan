@@ -13,7 +13,7 @@ import {
 
 
 
-import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
+import { doc, setDoc, Timestamp, collection, getDocs } from "firebase/firestore";
 import { REMOVE_CART } from "@/constants/cartConstant";
 import { db } from "@/app/firebase.config";
 
@@ -61,7 +61,6 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 
 		dispatch({ type: PLACE_ORDER_SUCCESS, payload });
 		dispatch({ type: REMOVE_CART }); // clear cart
-		// router.push("/");
 		router.push("/orderConfirmation");
 	} catch (error) {
 		dispatch({ type: PLACE_ORDER_FAIL, payload: error.message });
