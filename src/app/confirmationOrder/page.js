@@ -65,6 +65,9 @@ const ConfirmationOrder = ({ orderID }) => {
                             <div className="flex justify-between text-sm text-gray-700">
                                 <span><strong>Date</strong><br />02 May 2023</span>
                                 <span><strong>Order Number</strong><br />{orderDetails?.OrderID}</span>
+                                <span><strong>Coupon Code</strong><br />{orderDetails?.coupon?.map((item) => (<>
+									{item?.couponCode}
+								</>))}</span>
                                 <span><strong>Payment Method</strong><br />COD</span>
                             </div>
                         </div>

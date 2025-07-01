@@ -4,6 +4,7 @@ import {
 	SAVE_SHIPPING_INFO,
 	REMOVE_CART,
 	UPDATE_CART_QUANTITY,
+	APPLY_COUPON,
 } from "@/constants/cartConstant";
 
 // ✅ Load from localStorage initially (only on client)
@@ -77,6 +78,12 @@ export const cartReducer = (state = initialState, action) => {
 				cartItems: updatedItems,
 			};
 		}
+
+		case APPLY_COUPON:
+			return {
+				...state,
+				cartItems: action.payload,
+			};
 
 		case REMOVE_CART:
 			if (isBrowser) {

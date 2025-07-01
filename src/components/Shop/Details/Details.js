@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { FiMinus, FiPlus , FiStar } from 'react-icons/fi'
 import { GoStarFill } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 
 const Details = ({ productDetails }) => {
@@ -15,14 +16,8 @@ const Details = ({ productDetails }) => {
 const userState = useSelector((state) => state.user);
 const { cartItems } = useSelector((state) => state.cart);
 
-const {
-  error,
-  loading,
-  isAuthenticated,
-  users,
-  userProfile,
-} = userState || {};
-
+const {error, loading, isAuthenticated, users,} = userState || {};
+const { userProfile } = useSelector((state) => state.user) || {};
 
   // Extract unique sizes and colors
 const sizes = [...new Set(productDetails?.variation?.map(v => v.size) || [])];
@@ -39,40 +34,45 @@ useEffect(() => {
 
 // Pre-select size & color on load
 useEffect(() => {
-  if (sizes.length > 0) setSelectedSize(sizes[0]);
-  if (colors.length > 0) setSelectedColor(colors[0]);
+  if (sizes.length > 0 && !selectedSize) setSelectedSize(sizes[0]);
+  if (colors.length > 0 && !selectedColor) setSelectedColor(colors[0]);
 }, [productDetails]);
 
 const handleAddToCart = () => {
-  if (!selectedSize || !selectedColor) {
-    return alert("Please select size and color");
-  }
+		if (!selectedSize || !selectedColor) {
+			toast.error("Please select size and color");
+		}
 
-  const itemExists = cartItems?.some(
-    (item) =>
-      item.product === (productDetails._id || productDetails.id) &&
-      item.size === selectedSize &&
-      item.color === selectedColor
-  );
+		const itemExists = cartItems?.some(
+			(item) =>
+				item.product === (productDetails._id || productDetails.id) &&
+				item.size === selectedSize &&
+				item.color === selectedColor
+		);
 
-  if (itemExists) {
-    alert("This item is already in your cart.");
-    return;
-  }
+		if (itemExists) {
+			toast.success("This item is already in your cart.");
+			return;
+		}
 
-  const cartItem = {
-    user: userProfile,
-    product: productDetails._id || productDetails.id,
-    name: productDetails.productName,
-     price: Number(productDetails.productPrice),
-    image: productDetails.productImages?.[0],
-    size: selectedSize,
-    quantity: quantity,
-    color: selectedColor,
-  };
+		const cartItem = {
+			user: userProfile,
+			product: productDetails._id || productDetails.id,
+			name: productDetails.productName,
+			price: productDetails.productPrice,
+			image: productDetails.productImages?.[0],
+			size: selectedSize,
+			quantity: 1,
+			color: selectedColor,
+      couponId: "",
+			couponCode: "",
+			discountAmount: "",
+			couponAmountDetails: "",
+		};
 
-  dispatch(addToCart(cartItem));
-};
+		dispatch(addToCart(cartItem));
+    toast.success("Item added to cart.");
+	};
 
 
 
@@ -177,12 +177,12 @@ const handleAddToCart = () => {
           </div>
 
           {/* Add to Cart Button */}
-          <button
+          <div
             onClick={handleAddToCart}
             className="flex-1 text-[20px] px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
           >
             Add To Cart
-          </button>
+          </div>
 
           {/* Compare Button */}
           <button

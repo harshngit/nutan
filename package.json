@@ -25,6 +25,7 @@
     "react-icons": "^5.5.0",
     "react-lazy-load-image-component": "^1.6.2",
     "react-redux": "^9.2.0",
+    "react-toastify": "^11.0.5",
     "swiper": "^11.2.6",
     "yet-another-react-lightbox": "^3.21.7"
   },

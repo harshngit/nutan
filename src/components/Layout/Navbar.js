@@ -134,17 +134,18 @@ export default function Navbar() {
   <li><Link href="/Contact">Contact</Link></li>
 
   {isAuthenticated ? (
-    <>
-      <li><Link href="/account">My Account</Link></li>
-      <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
-    </>
-  ) : (
-    <>
-      <li><Link href="/login">Login</Link></li>
-      <li><Link href="/register">Register</Link></li>
-      <li><Link href="/account">My Account</Link></li>
-    </>
-  )}
+  <>
+    <li><Link href="/viewProfile">My Account</Link></li>
+    <li><Link href="/myorder">My Order</Link></li>
+    <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
+  </>
+) : (
+  <>
+    <li><Link href="/login">Login</Link></li>
+    <li><Link href="/register">Register</Link></li>
+  </>
+)}
+
 </ul>
 
 
@@ -193,58 +194,52 @@ export default function Navbar() {
           <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
             {/* Account Dropdown */}
             <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>              
-              {isAuthenticated ? ( 
-                <FaUserCheck className="text-[22px] cursor-pointer" alt="Account" />
-              ) : (
-                <FaUserCircle className="text-[22px] cursor-pointer" alt="Account" />
-                
-              )}
-            {openAccountDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-              {isAuthenticated ? (
-                <>
-                <div className="flex justify-start flex-col items-start gap-1 px-4 py-2">
-                          <p className="font-medium lg:text-[10px] text-[10px]">HI,</p>
-                          <h2 className="font-normal lg:text-[10px] text-[10px]">
-                            {userProfile?.email}
-                          </h2>
-                        </div>
-                  <Link href="/account">
-                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
-                      My Account
-                    </div>
-                  </Link>
-                  <div
-                    className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg cursor-pointer"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </div>
-                </>
-                
-              ) : (
-                <>
-                  <Link href="/login">
-                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100 first:rounded-t-lg">
-                      Login
-                    </div>
-                  </Link>
-                  <Link href="/register">
-                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 border-b border-gray-100">
-                      Register
-                    </div>
-                  </Link>
-                  <Link href="/account">
-                    <div className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 last:rounded-b-lg">
-                      My Account
-                    </div>
-                  </Link>
-                </>
-              )}
-            </div>
-            )}
+  <div className="cursor-pointer relative text-black flex items-center gap-1">
+    {isAuthenticated ? (
+      <>
+        <FaUserCheck className="text-[18px]" />
+        <span className="text-sm font-medium">My Profile</span>
+      </>
+    ) : (
+      <>
+        <FaUserCircle className="text-[18px]" />
+        <span className="text-sm font-medium">Login</span>
+      </>
+    )}
+  </div>
 
+  {openAccountDropdown && (
+    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      {isAuthenticated ? (
+        <>
+          <div className="px-4 py-2 text-xs text-gray-500">Hi, {userProfile?.displayName}</div>
+          <Link href="/viewProfile">
+            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Account</div>
+          </Link>
+          <Link href={'/orders'} >
+                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</li>
+              </Link>
+          <div
+            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
           </div>
+        </>
+      ) : (
+        <>
+          <Link href="/login">
+            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Login</div>
+          </Link>
+          <Link href="/register">
+            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Register</div>
+          </Link>
+        </>
+      )}
+    </div>
+  )}
+</div>
+
 
             {/* Search with Dropdown */}
             <div className="relative" ref={dropdownRef}>

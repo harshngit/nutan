@@ -17,7 +17,7 @@ import { doc, setDoc, Timestamp, collection, getDocs } from "firebase/firestore"
 import { REMOVE_CART } from "@/constants/cartConstant";
 import { db } from "@/app/firebase.config";
 
-export const placeOrder = (formData, cartItems, userProfile, totalAmount, router) => async (dispatch) => {
+export const placeOrder = (formData, cartItems, userProfile, finalAmount, router) => async (dispatch) => {
 	dispatch({ type: PLACE_ORDER_START });
 	try {
 		const orderID = `${Date.now().toString().slice(2, 11)}`;
@@ -41,6 +41,10 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 				p_color: item.color,
 				p_img: item.image,
 			})),
+			coupon: cartItems.map((item) => ({
+				couponCode: item?.couponCode,
+				couponId: item?.couponId
+			})),
 			dropoff_location: {
 				address: formData.address,
 				city: formData.city,
@@ -52,7 +56,7 @@ export const placeOrder = (formData, cartItems, userProfile, totalAmount, router
 				{
 					ident: orderID,
 					ewaybill: "",
-					n_value: totalAmount,
+					n_value: finalAmount,
 				},
 			],
 		};
