@@ -42,6 +42,7 @@ const Cart = () => {
 				{/* Adjust padding to avoid navbar overlap */}
 				<BreadcrumbHero />
 			</section>
+			
 			<section className="relative ">
 				{/* Adjust padding to avoid navbar overlap */}
 				<CartPage />
@@ -49,9 +50,9 @@ const Cart = () => {
 			<section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
 				<ProductBadage />
 			</section>
-			<section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
+			{/* <section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
 				<TrendingNow recommendedProducts={recommendedProducts} />
-			</section>
+			</section> */}
 			<section className="relative">
 				<Footer />
 			</section>

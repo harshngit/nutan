@@ -107,7 +107,7 @@ const CartBucket = () => {
 								<div className="w-[50%] flex-col flex justify-start items-start">
 									<p className="font-semibold text-[22px] mb-2">{item.name}</p>
 									<p className="text-sm text-[22px] mb-2 text-[#8A8A8A]">Color: {item.color}</p>
-									<p className="font-semibold mb-2">${item.price.toFixed(2)}</p>
+									<p className="font-semibold mb-2">${Number(item.price).toFixed(2)}</p>
 									<div className="flex items-start justify-start mt-2 space-x-2">
 										<button onClick={() => handleQuantityChange(item, -1)} className="px-2 border">-</button>
 										<span>{item.quantity.toString().padStart(2, '0')}</span>

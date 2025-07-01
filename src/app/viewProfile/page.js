@@ -5,7 +5,7 @@ import React from 'react'
 
 const ViewProfile = () => {
 	return (
-		<div className=' font-playfair'>
+		<div className=' font-poppins'>
 			<Navbar />
 			<section className="relative pt-[130px] pb-[50px]">
 				<ProfilePage />

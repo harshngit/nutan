@@ -1,5 +1,5 @@
 'use client'
-import { addToCart } from "@/actions/cartAction";
+import { addToCart, updateCartQuantity } from "@/actions/cartAction";
 import React, { useState, useEffect } from 'react'
 import { FiMinus, FiPlus , FiStar } from 'react-icons/fi'
 import { GoStarFill } from "react-icons/go";
@@ -39,40 +39,40 @@ useEffect(() => {
 }, [productDetails]);
 
 const handleAddToCart = () => {
-		if (!selectedSize || !selectedColor) {
-			toast.error("Please select size and color");
-		}
+  if (!selectedSize || !selectedColor) {
+    toast.error("Please select size and color");
+    return;
+  }
 
-		const itemExists = cartItems?.some(
-			(item) =>
-				item.product === (productDetails._id || productDetails.id) &&
-				item.size === selectedSize &&
-				item.color === selectedColor
-		);
+  const existingItem = cartItems.find(
+    (item) =>
+      item.product === (productDetails._id || productDetails.id) &&
+      item.size === selectedSize &&
+      item.color === selectedColor
+  );
 
-		if (itemExists) {
-			toast.success("This item is already in your cart.");
-			return;
-		}
-
-		const cartItem = {
-			user: userProfile,
-			product: productDetails._id || productDetails.id,
-			name: productDetails.productName,
-			price: productDetails.productPrice,
-			image: productDetails.productImages?.[0],
-			size: selectedSize,
-			quantity: 1,
-			color: selectedColor,
+  if (existingItem) {
+    dispatch(updateCartQuantity(existingItem.product, existingItem.size, existingItem.color, existingItem.quantity + quantity));
+    toast.success("Updated quantity in your cart.");
+  } else {
+    const cartItem = {
+      user: userProfile,
+      product: productDetails._id || productDetails.id,
+      name: productDetails.productName,
+      price: productDetails.productPrice,
+      image: productDetails.productImages?.[0],
+      size: selectedSize,
+      quantity,
+      color: selectedColor,
       couponId: "",
-			couponCode: "",
-			discountAmount: "",
-			couponAmountDetails: "",
-		};
-
-		dispatch(addToCart(cartItem));
+      couponCode: "",
+      discountAmount: "",
+      couponAmountDetails: "",
+    };
+    dispatch(addToCart(cartItem));
     toast.success("Item added to cart.");
-	};
+  }
+};
 
 
 
