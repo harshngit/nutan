@@ -22,7 +22,7 @@ const ConfirmationOrder = ({ orderID }) => {
   return (
    <>
             <div className='bg-gray-400 flex justify-center items-center h-screen'>
-                <div className="min-h-[80%] rounded-md w-[90%] font-playfair bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
+                <div className="min-h-[80%] rounded-md w-[90%] font-poppins bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
                     {/* Left Side */}
                     <div className="flex-1 max-w-lg">
                         <h2 className="text-3xl font-bold text-black mb-4">Thank you for your purchase!</h2>

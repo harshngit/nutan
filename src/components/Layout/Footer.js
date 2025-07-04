@@ -34,12 +34,12 @@ const Footer = () => {
         //     </div>
         // </div>
         <>
-            <footer className="bg-[#fff] border-t-[1px] border-[#ccc] text-black px-14 w-full py-14 overflow-hidden">
+            <footer className="bg-[#fff]  text-black px-14 w-full py-10 overflow-hidden">
                 <div className='grid lg:grid-cols-4 grid-cols-1'>
 
                     {/* Column 1 */}
                     <div className="flex justify-start gap-5 items-start flex-col">
-                        <h4 className='lg:text-[24px] font-bold'>Funiro.</h4>
+                        <h4 className='lg:text-[24px] font-bold'>Nutan.</h4>
                         <p className='lg:text-[16px] text-[#9F9F9F] w-[60%] font-light'>400 University Drive Suite 200 Coral Gables,
                             FL 33134 USA</p>
                     </div>
@@ -48,14 +48,17 @@ const Footer = () => {
                     <div className='flex justify-start gap-5 items-start flex-col'>
                         <h4 className='lg:text-[12px] font-normal text-[#9F9F9F] uppercase'>Links</h4>
                         <div className="flex flex-col justify-start gap-5 font-normal">
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/" className='text-black text-[16px]'>
                                 Home
                             </Link>
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/shop" className='text-black text-[16px]'>
                                 Shop
                             </Link>
                             <Link href="" className='text-black text-[16px]'>
                                 About
+                            </Link>
+                            <Link href="/blog" className='text-black text-[16px]'>
+                                blog
                             </Link>
                             <Link href="" className='text-black text-[16px]'>
                                 Contact
@@ -82,15 +85,15 @@ const Footer = () => {
                     <div className="flex items-start flex-col gap-[30px] ">
                         <h4 className='lg:text-[12px] text-[10px] text-[#9F9F9F] font-normal'>Newsletter</h4>
                         <div className='flex justify-center items-center gap-[20px]'>
-                            <input type="text" placeholder='Enter your email address' className='px-1 py-1 bg-transparent border-[1px] border-b-black w-full' />
-                            <button className='px-1 py-1 w-[40%] border-[1px] border-b-black text-black bg-white'>Subscribe</button>
+                            <input type="text" placeholder='Enter your email address' className='px-1 py-1 bg-transparent border-b-[1px] border-b-black w-full' />
+                            <button className='px-1 py-1 w-[40%] border-b-[1px] border-b-black text-black bg-white'>Subscribe</button>
                         </div>
                     </div>
                     {/* Vertical Text on Right */}
 
                 </div>
                 <div className='border-t-[1px] border-[#ccc] pt-10 mt-10 flex justify-start items-end'>
-                    <h3 className='text-[#000]'>2023 furino. All rights reverved</h3>
+                    <h3 className='text-[#000]'>2025 Nutan. All rights reverved</h3>
                 </div>
             </footer>
         </>

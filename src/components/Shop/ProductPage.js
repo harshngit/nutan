@@ -4,18 +4,27 @@ import { FiShare2, FiRefreshCw, FiHeart } from "react-icons/fi"
 import LargeProductData from '@/data/LargeProductData'
 import Link from 'next/link'
 
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, updateCartQuantity } from "@/actions/cartAction";
+import { toast } from "react-toastify";
+
+
 const ProductPage = ({ products = [], loading }) => {
   const formatPrice = (price) => `Rp ${price?.toLocaleString("id-ID") || '0'}`
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cart);
+  const { userProfile } = useSelector((state) => state.user) || {};
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 8
+  const totalPages = 3 // Calculate based on your actual data length
+  
+  
 
   if (loading) return (
     <div className="bg-white w-full lg:h-auto h-auto pt-10">
       <div className="p-8 text-center">Loading products...</div>
     </div>
   )
-
-    const [currentPage, setCurrentPage] = useState(1)
-  const productsPerPage = 8
-  const totalPages = 3 // Calculate based on your actual data length
 
   
   const handlePageChange = (page) => {
@@ -28,6 +37,40 @@ const ProductPage = ({ products = [], loading }) => {
       setCurrentPage(currentPage + 1)
     }
 }
+
+
+
+const handleAddToCart = (product) => {
+  const productId = product._id || product.id;
+
+  // Optional: If your grid products don't have size/color, skip this check.
+  const existingItem = cartItems.find(
+    (item) => item.product === productId
+  );
+
+  if (existingItem) {
+    dispatch(updateCartQuantity(existingItem.product, existingItem.size, existingItem.color, existingItem.quantity + 1));
+    toast.success("Updated quantity in your cart.");
+  } else {
+    const cartItem = {
+      user: userProfile,
+      product: productId,
+      name: product.productName,
+      price: product.productPrice,
+      image: product.productImages?.[0],
+      size: "", // or default size if applicable
+      quantity: 1,
+      color: "", // or default color if applicable
+      couponId: "",
+      couponCode: "",
+      discountAmount: "",
+      couponAmountDetails: "",
+    };
+    dispatch(addToCart(cartItem));
+    toast.success("Item added to cart.");
+  }
+};
+
 
    
 
@@ -72,28 +115,35 @@ const ProductPage = ({ products = [], loading }) => {
 
                             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {/* Add to Cart Button */}
-                                <button className="bg-white text-[#B88E2F] px-12 py-3 font-semibold text-base mb-6 hover:bg-gray-50 transition-colors">
-                                Add to cart
+                                <button 
+                                  onClick={(e) => {
+                                    e.preventDefault(); // Prevent link navigation on button click
+                                    handleAddToCart(product);
+                                  }} 
+                                  className="bg-white text-[#B88E2F] px-12 py-3 font-semibold text-base mb-6 hover:bg-gray-50 transition-colors"
+                                >
+                                  Add to cart
                                 </button>
+
 
                                 {/* Action Buttons Row */}
                                 <div className="flex items-center gap-6 text-white">
                                     {/* Share */}
                                     <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
                                         <FiShare2 className="w-4 h-4" />
-                                        <span>Share</span>
+                                        <p>Share</p>
                                     </button>
 
                                     {/* Compare */}
-                                    <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
+                                    <Link href={"/productcomparison"} className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
                                         <FiRefreshCw className="w-4 h-4" />
-                                        <span>Compare</span>
-                                    </button>
+                                        <p>Compare</p>
+                                    </Link>
 
                                     {/* Like */}
                                     <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
                                         <FiHeart className="w-4 h-4" />
-                                        <span>Like</span>
+                                        <p>Like</p>
                                     </button>
                                 </div>
                             </div>
@@ -101,15 +151,12 @@ const ProductPage = ({ products = [], loading }) => {
                             <div className="p-2 bg-[#F4F5F7]">
                                 
                                <h3 className="font-semibold text-lg">{product.productName}</h3>
-                              
-                                <p className="text-gray-500 text-sm mt-1 line-clamp-2">
-								{(product?.productDescription || '').replace(/<[^>]+>/g, '')}
-								
-				</p>
-                                <p className="text-base font-semibold text-black">
+                                <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+								                    {(product?.productDescription || '').replace(/<[^>]+>/g, '')}</p>
+                                <p className="text-base font-semibold mt-2 text-black">
                                      {formatPrice(product.productPrice)}
                                     {product.originalPrice && (
-                                    <p className="text-gray-400 line-through text-sm ml-2">
+                                    <p className="text-gray-400 line-through text-sm mt-2">
                                       {formatPrice(product.originalPrice)}
                                     </p>
                                   )}

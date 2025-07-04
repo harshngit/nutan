@@ -21,45 +21,10 @@ const OrderConfirmationpage = ({ orderID }) => {
 	if (error) return <p className="text-red-500">Error: {error}</p>;
 	return (
 		<>
-			<div className='bg-gray-400 flex justify-center items-center h-screen'>
-				<div className="min-h-[80%] rounded-md w-[90%] font-playfair bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
-					{/* Left Side */}
-					<div className="flex-1 max-w-lg">
-						<h2 className="text-3xl font-bold text-black mb-4">Thank you for your purchase!</h2>
-						<p className="text-gray-600 mb-8">
-							Your order will be processed within 24 hours during working days. We will notify you by email once your order has been shipped.
-						</p>
-
-						<div className="mb-8">
-							<h3 className="font-bold text-lg mb-2">Billing address</h3>
-							<div className="text-sm text-gray-700 space-y-2">
-								<p><strong className='pr-1'>Name:</strong> {orderDetails?.customerName}</p>
-								<p><strong className='pr-1'>Address:</strong>{orderDetails?.dropoff_location?.address
-								},{orderDetails?.dropoff_location?.city
-									},{orderDetails?.dropoff_location?.region
-									},{orderDetails?.dropoff_location?.zip
-									}</p>
-								<p><strong className='pr-1'>Phone:</strong>{orderDetails?.dropoff_location?.phone
-								}</p>
-								<p><strong className='pr-1'>Email:</strong>
-                                    {orderDetails?.email || 
-                                    orderDetails?.customer?.email || 
-                                    orderDetails?.customerEmail || 
-                                    orderDetails?.user?.email || 
-                                    'Not provided'}
-                                    </p>
-							</div>
-						</div>
-
-						<Link href={"/"}>
-							<button className="bg-[#000] text-white px-6 py-2 rounded font-semibold">
-								Home
-							</button>
-						</Link>
-					</div>
-
+			<div className='bg-[#F9F1E7] flex justify-center items-center h-screen'>
+				<div className="min-h-[70%] rounded-lg w-[90%] font-poppins bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
 					{/* Right Side */}
-					<div className="flex-1 max-w-xl bg-gray-100 rounded-xl shadow-md p-6 relative">
+					<div className="flex-1 max-w-xl bg-[#F9F1E7] rounded-xl shadow-md p-6 relative">
 						<div className="border-b pb-4 mb-4">
 							<h3 className="text-xl font-bold mb-3">Order Summary</h3>
 							<div className="flex justify-between text-sm text-gray-700">
@@ -110,6 +75,42 @@ const OrderConfirmationpage = ({ orderID }) => {
 							</div>
 						))}
 					</div>
+					
+					{/* Left Side */}
+					<div className="flex-1 max-w-lg">
+						<h2 className="text-3xl font-bold text-black mb-4">Thank you for your purchase!</h2>
+						<p className="text-gray-600 mb-8">
+							Your order will be processed within 24 hours during working days. We will notify you by email once your order has been shipped.
+						</p>
+
+						<div className="mb-8">
+							<h3 className="font-bold text-lg mb-2">Billing address</h3>
+							<div className="text-sm text-gray-700 space-y-2">
+								<p><strong className='pr-1'>Name:</strong> {orderDetails?.customerName}</p>
+								<p><strong className='pr-1'>Address:</strong>{orderDetails?.dropoff_location?.address
+								},{orderDetails?.dropoff_location?.city
+									},{orderDetails?.dropoff_location?.region
+									},{orderDetails?.dropoff_location?.zip
+									}</p>
+								<p><strong className='pr-1'>Phone:</strong>{orderDetails?.dropoff_location?.phone
+								}</p>
+								<p><strong className='pr-1'>Email:</strong>
+                                    {orderDetails?.email || 
+                                    orderDetails?.customer?.email || 
+                                    orderDetails?.customerEmail || 
+                                    orderDetails?.user?.email || 
+                                    'Not provided'}
+                                    </p>
+							</div>
+						</div>
+
+						<Link href={"/"}>
+							<button className="bg-[#000] text-white px-6 py-2 rounded font-semibold">
+								Home
+							</button>
+						</Link>
+					</div>
+
 				</div>
 			</div>
 		</>

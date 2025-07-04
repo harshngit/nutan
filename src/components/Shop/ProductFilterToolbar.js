@@ -11,7 +11,7 @@ export default function ProductFilterToolbar() {
           {/* Filter Button */}
           <div className="flex items-center gap-2 px-3 py-2 text-gray-700 cursor-pointer hover:text-gray-900 hover:bg-stone-200 rounded-md transition-colors">
             <img src="/asset/Shop/system-filtering.png" alt="Filter" className="w-5 h-5" />
-            <span className="text-sm font-medium">Filter</span>
+            <div className="text-sm font-medium">Filter</div>
           </div>
 
 
@@ -44,10 +44,12 @@ export default function ProductFilterToolbar() {
 
           {/* Sort Dropdown */}
           <div className="flex items-center gap-2">
-            <span className="text-[20px] text-gray-700 font-medium">Sort by</span>
-            <div className="flex items-center gap-1 px-2 py-1 text-gray-600 bg-white hover:text-gray-900 hover:bg-stone-200  cursor-pointer transition-colors">
-              <span className="text-[20px]">Default</span>
-              <IoChevronDown className="w-3 h-3" />
+            <span className="text-[20px]  text-gray-700 font-medium">Sort by</span>
+            <div className="flex items-center justify-start gap-1 px-2 text-gray-600 bg-white hover:text-gray-900 hover:bg-stone-200  cursor-pointer transition-colors">
+              <span className="text-[20px] py-2 pl-3 ">Default</span>
+              <div className="pr-[40px] pl-2">
+                 <IoChevronDown className="w-3 h-3" />
+              </div>
             </div>
           </div>
         </div>

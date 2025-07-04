@@ -69,12 +69,12 @@ const RelatedProductpg = () => {
                 <div className="flex items-center gap-6 text-white">
                   <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
                     <FiShare2 className="w-4 h-4" />
-                    <span>Share</span>
+                    <p>Share</p>
                   </button>
 
                   <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
                     <FiRefreshCw className="w-4 h-4" />
-                    <span>Compare</span>
+                    <p>Compare</p>
                   </button>
 
                   <button
@@ -82,7 +82,7 @@ const RelatedProductpg = () => {
                     className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors"
                   >
                     <FiHeart className={`w-4 h-4 ${likedItems[product.id] ? "text-red-500" : ""}`} />
-                    <span>{likedItems[product.id] ? "Liked" : "Like"}</span>
+                    <p>{likedItems[product.id] ? "Liked" : "Like"}</p>
                   </button>
                 </div>
               </div>

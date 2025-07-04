@@ -74,7 +74,6 @@ const LoginForm = ({ email, setEmail, password, setPassword, handleLogin, showPa
                             {/* Login Button */}
                             <button type="button" onClick={handleLogin}
                                 className='mt-6 w-full bg-primary hover:bg-primary/90 transition-all duration-200 ease-linear px-5 py-3 rounded-lg text-white font-medium'
-
                             >
                                 Login
                             </button>

@@ -136,7 +136,7 @@ export default function CartPage() {
 
                       <div className="col-span-2 md:col-span-2 flex justify-center gap-2">
                         <button onClick={() => handleQuantityChange(item, item.quantity - 1)} disabled={item.quantity <= 1} className="p-1 border rounded hover:bg-gray-100"><FiMinus /></button>
-                        <span>{item.quantity}</span>
+                        <div>{item.quantity}</div>
                         <button onClick={() => handleQuantityChange(item, item.quantity + 1)} className="p-1 border rounded hover:bg-gray-100"><FiPlus /></button>
                       </div>
 

@@ -82,7 +82,7 @@ const handleAddToCart = () => {
     console.log("Added to compare:", productDetails.id)
   }
 
-  const formatPrice = (price) => `Rp ${price?.toLocaleString("id-ID") || '0'}`
+  const formatPrice = (price) => `Rs ${price?.toLocaleString("id-ID") || '0'}`
 
   
 
@@ -110,18 +110,19 @@ const handleAddToCart = () => {
         <p className='px-4 font-400 text-[13px] text-[#9F9F9F] border-l-2'>Customer Review</p>
       </div>
 
-      <div className='flex justify-start items-center w-full'>
+      {/* <div className='flex justify-start items-center w-full'>
         <p className='font-400 text-[18px] text-[#666666]'>{productDetails.description}</p>
-      </div>
+      </div> */}
 
       <div className="w-full">
         {/* Size */}
         <div className="flex justify-between items-center mb-4">
-          <div className="text-lg font-semibold">
-            Size: <span className="font-normal ml-2">{selectedSize}</span>
+          <div className="text-lg text-[#9F9F9F] font-semibold">
+            Size
+            {/* <span className="font-normal ml-2">{selectedSize}</span> */}
           </div>
         </div>
-        <div className="flex gap-4 mb-6">
+        <div className="flex gap-4 ">
           {sizes.map((size) => (
             <button
               key={size}
@@ -138,8 +139,8 @@ const handleAddToCart = () => {
         </div>
 
         {/* Color */}
-        <div className="text-lg lg:py-4 font-semibold mb-2">
-          Color: 
+        <div className="text-lg lg:py-4 text-[#9F9F9F] font-semibold">
+          Color
           {/* <span className="font-normal ml-2">{selectedColor}</span> */}
         </div>
         <div className="flex gap-4">
@@ -167,7 +168,7 @@ const handleAddToCart = () => {
             >
               <FiMinus className="w-4 h-4" />
             </button>
-            <span className="px-6 py-3 text-center min-w-[60px] font-medium text-[20px]">{quantity}</span>
+            <div className="px-6 py-3 text-center min-w-[60px] font-medium text-[20px]">{quantity}</div>
             <button
               onClick={() => handleQuantityChange("increase")}
               className="p-3 hover:bg-gray-50 transition-colors"
@@ -179,7 +180,7 @@ const handleAddToCart = () => {
           {/* Add to Cart Button */}
           <div
             onClick={handleAddToCart}
-            className="flex-1 text-[20px] px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50 transition-colors"
+            className="flex-1 text-[20px] px-10 py-3 border border-black rounded-lg text-black font-medium hover:bg-gray-50  cursor-pointer transition-colors"
           >
             Add To Cart
           </div>

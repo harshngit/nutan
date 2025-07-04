@@ -88,7 +88,7 @@ const Shop = () => {
           onPageChange={setCurrentPage}
         />
 			</section>
-			<section className="relative pt-[0px] pb-[46px]">
+			<section className="relative pt-[0px] pb-[20px]">
 				{/* Adjust padding to avoid navbar overlap */}
 				<ProductBadage />
 			</section>

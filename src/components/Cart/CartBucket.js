@@ -110,7 +110,7 @@ const CartBucket = () => {
 									<p className="font-semibold mb-2">${Number(item.price).toFixed(2)}</p>
 									<div className="flex items-start justify-start mt-2 space-x-2">
 										<button onClick={() => handleQuantityChange(item, -1)} className="px-2 border">-</button>
-										<span>{item.quantity.toString().padStart(2, '0')}</span>
+										<div>{item.quantity.toString().padStart(2, '0')}</div>
 										<button onClick={() => handleQuantityChange(item, 1)} className="px-2 border">+</button>
 									</div>
 									<button onClick={() => handleRemove(item)} className="text-sm mb-2 text-[22px] text-gray-500 mt-1 underline">Remove</button>
