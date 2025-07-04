@@ -1,26 +1,10 @@
 import React, { useState } from "react";
 import { FiShare2, FiRefreshCw, FiHeart } from "react-icons/fi";
-import RelatedProduct from "@/data/RelatedProduct";
 import Link from "next/link";
 
-const RelatedProductpg = () => {
-  const formatPrice = (price) => `Rp ${price.toLocaleString("id-ID")}`;
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [likedItems, setLikedItems] = useState({}); // Track liked state by product ID
-
-  const productsPerPage = 8;
-  const totalPages = 3;
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+const RelatedProductpg = ({ products = [] }) => {
+  const formatPrice = (price) => `Rp ${price?.toLocaleString("id-ID") || '0'}`;
+  const [likedItems, setLikedItems] = useState({});
 
   const handleToggle = (productId) => {
     setLikedItems((prev) => ({
@@ -39,14 +23,26 @@ const RelatedProductpg = () => {
 
       <div className="px-8 lg:px-[90px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-[32px]">
-          {RelatedProduct.map((product, index) => (
-            <div
-              key={product.id}
-              className="relative lg:w-[285px] group border overflow-hidden"
+          {products.map((product) => (
+            <Link href={`/shop/${product.id}`}>
+            <div key={product.id} className="relative lg:w-[285px]  group border overflow-hidden"
             >
+              <div className="relative h-[250px]">
               <Link href={`/shop/${product.id}`}>
-                <img src={product.image} alt={product.name} className="w-full" />
+                <img
+                  src={product.productImages?.[0] || "/default-product.jpg"}
+                  alt={product.productName}
+                  className="w-full h-full object-cover "
+                />
               </Link>
+              {product.productImages?.[1] && (
+                <img
+                  src={product.productImages[1]}
+                  alt={`${product.productName} hover`}
+                  className="w-full h-full hidden lg:block object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              )}
+            </div>
 
               {product.discount && (
                 <span className="absolute w-12 h-12 flex justify-center items-center rounded-full top-2 left-2 bg-[#E97171] text-white text-[16px] px-2 py-2">
@@ -72,26 +68,26 @@ const RelatedProductpg = () => {
                     <p>Share</p>
                   </button>
 
-                  <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
-                    <FiRefreshCw className="w-4 h-4" />
-                    <p>Compare</p>
-                  </button>
+                  {/* Compare */}
+                    <Link href={"/productcomparison"} className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
+                        <FiRefreshCw className="w-4 h-4" />
+                        <p>Compare</p>
+                    </Link>
 
-                  <button
-                    onClick={() => handleToggle(product.id)}
-                    className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors"
-                  >
-                    <FiHeart className={`w-4 h-4 ${likedItems[product.id] ? "text-red-500" : ""}`} />
-                    <p>{likedItems[product.id] ? "Liked" : "Like"}</p>
+                  <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-300 transition-colors">
+                      <FiHeart className="w-4 h-4" />
+                      <p>Like</p>
                   </button>
                 </div>
               </div>
 
               <div className="p-2 bg-[#F4F5F7]">
-                <h3 className="font-semibold text-lg">{product.name}</h3>
-                <p className="text-sm text-gray-500">{product.description}</p>
+                <h3 className="font-semibold text-lg">{product.productName}</h3>
+                <p className="text-sm text-gray-500">
+                  {(product.productDescription || "").replace(/<[^>]+>/g, "")}
+                </p>
                 <p className="text-base font-semibold text-black">
-                  {formatPrice(product.price)}
+                  {formatPrice(product.productPrice)}
                   {product.originalPrice && (
                     <span className="text-gray-400 line-through text-sm ml-2">
                       {formatPrice(product.originalPrice)}
@@ -100,13 +96,8 @@ const RelatedProductpg = () => {
                 </p>
               </div>
             </div>
+            </Link>
           ))}
-        </div>
-
-        <div className="mt-[44px] flex justify-center">
-          <button className="border border-[#B88E2F] text-[#B88E2F] px-[70px] py-[12px] text-[16px] hover:text-black transition">
-            Show More
-          </button>
         </div>
       </div>
     </div>
