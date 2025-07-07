@@ -128,10 +128,12 @@ export default function Navbar() {
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
       <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-black uppercase font-medium !text-sm tracking-wide">
-  <li><Link href="/">Home</Link></li>
-  <li><Link href="/shop">Shop</Link></li>
-  <li><Link href="">About</Link></li>
-  <li><Link href="/Contact">Contact</Link></li>
+  <li><Link href="/">Bags</Link></li>
+  <li><Link href="/shop">Giftsets</Link></li>
+  <li><Link href="">Drinkware</Link></li>
+  <li><Link href="/Contact">Technology</Link></li>
+  <li><Link href="/Contact">Office</Link></li>
+  <li><Link href="/Contact">Stationary</Link></li>
 
   {isAuthenticated ? (
   <>

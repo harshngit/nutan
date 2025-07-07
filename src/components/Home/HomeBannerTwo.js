@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/slider/banner1.webp"
+import Banner from "../../../public/asset/slider/banner2.webp"
 
-export default function SimpleBanner() {
+export default function HomeBannerTwo() {
   return (
     <div className="relative h-[800px] w-full">
       <Image

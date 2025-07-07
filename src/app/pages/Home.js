@@ -16,6 +16,10 @@ import HeroSection from '@/components/Home/HeroSection.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
+import ShopByCategory from '@/components/Home/ShopByCategory.js'
+import SimpleBanner from '@/components/Home/HomeBanner.js'
+import TechEssentials from '@/components/Home/TechEssentials.js'
+import HomeBannerTwo from '@/components/Home/HomeBannerTwo.js'
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
@@ -59,22 +63,44 @@ const Home = () => {
       <section className="relative pt-[0px]">
         <HeroSection />
       </section>
+
+      <section className="relative overflow-hidden">
+        <ShopByCategory  />
+      </section>
       
-      <section className="relative overflow-hidden lg:pt-[750px] xl:pt-[750px] pb-[100px] pt-[650px]">
+      {/* <section className="relative overflow-hidden ">
         <AboutHome />
+      </section> */}
+
+      <section className="relative overflow-hidden">
+        <SimpleBanner />
       </section>
 
       <section className="relative overflow-hidden">
         <Deal products={featuredProducts} loading={loading} />
       </section>
 
-      <section className='relative overflow-hidden'>
-        <Photosection />
-      </section>
+
+      
 
       <section className='relative overflow-hidden'>
-        <ProductsHome />
+        <TechEssentials />
       </section>
+
+
+      <section className='relative overflow-hidden'>
+        <HomeBannerTwo />
+      </section>
+
+
+
+      {/* <section className='relative overflow-hidden'>
+        <Photosection />
+      </section> */}
+
+      {/* <section className='relative overflow-hidden'>
+        <ProductsHome />
+      </section> */}
 
       <section className='relative overflow-hidden'>
         <ServiceFeatures />
