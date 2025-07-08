@@ -9,30 +9,29 @@ import { Autoplay } from "swiper/modules"
 // Import Swiper styles
 import "swiper/css"
 import Link from "next/link"
+import img1 from "../../../public/asset/browse/collection1.webp"
+import img2 from "../../../public/asset/browse/collection2.webp"
+import img3 from "../../../public/asset/browse/collection3.webp"
+import img4 from "../../../public/asset/browse/collection4.webp"
+import img5 from "../../../public/asset/browse/collection5.webp"
+import img6 from "../../../public/asset/browse/collection6.webp"
+import img7 from "../../../public/asset/browse/collection7.webp"
+import img8 from "../../../public/asset/browse/collection8.webp"
+import img10 from "../../../public/asset/browse/collection10.webp"
 
 const TechData = [
   {
     id: "Office Supplies",
-    title: "OFFICE SUPPLIES",
+    title: "WRIGHTING",
     href: "/shop",
-    images: [
-      "/asset/browse/1.png",
-      "/asset/browse/2.png",
-      "/asset/browse/3.png",
-      
-    ],
+    images: [ img3],
     hasScrollUp: false,
   },
   {
     id: "Print",
-    title: "PRINTS",
+    title: "SUSTAINABLE",
     href: "/shop",
-    images: [
-      "/asset/browse/2.png",
-      "/asset/browse/3.png",
-      "/asset/browse/1.png",
-      
-    ],
+    images: [img7    ],
     hasScrollUp: true,
   },
   
@@ -109,7 +108,7 @@ export default function TechEssentials() {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Tech Essentials</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Office Essentials</h2>
         </div>
 
         {/* Cards Grid */}

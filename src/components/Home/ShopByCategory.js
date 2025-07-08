@@ -9,42 +9,36 @@ import { Autoplay } from "swiper/modules"
 // Import Swiper styles
 import "swiper/css"
 import Link from "next/link"
+import img1 from "../../../public/asset/browse/collection1.webp"
+import img2 from "../../../public/asset/browse/collection2.webp"
+import img3 from "../../../public/asset/browse/collection3.webp"
+import img4 from "../../../public/asset/browse/collection4.webp"
+import img5 from "../../../public/asset/browse/collection5.webp"
+import img6 from "../../../public/asset/browse/collection6.webp"
+import img7 from "../../../public/asset/browse/collection7.webp"
+import img8 from "../../../public/asset/browse/collection8.webp"
+import img10 from "../../../public/asset/browse/collection10.webp"
 
 const categoriesData = [
   {
     id: "Office Supplies",
-    title: "OFFICE SUPPLIES",
+    title: "TECHNOLOGY",
     href: "/shop",
-    images: [
-      "/asset/browse/1.png",
-      "/asset/browse/2.png",
-      "/asset/browse/3.png",
-      
-    ],
+    images: [img10,],
     hasScrollUp: false,
   },
   {
     id: "Print",
-    title: "PRINTS",
+    title: "OFFICE SUPPLIES",
     href: "/shop",
-    images: [
-      "/asset/browse/2.png",
-      "/asset/browse/3.png",
-      "/asset/browse/1.png",
-      
-    ],
+    images: [img1],
     hasScrollUp: true,
   },
   {
     id: "Bedroom",
-    title: "BEDROOM",
+    title: "GIFTS",
     href: "/shop",
-    images: [
-      "/asset/browse/3.png",
-      "/asset/browse/1.png",
-      "/asset/browse/2.png",
-      
-    ],
+    images: [ img8   ],
     hasScrollUp: false,
   },
 ]
@@ -66,10 +60,10 @@ function CategoryCard({ category }) {
         <Swiper
           modules={[Autoplay]}
           loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: true,
+          // }}
           className="h-full w-full"
         >
           {category.images.map((image, index) => (

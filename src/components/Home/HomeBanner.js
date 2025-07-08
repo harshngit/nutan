@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/slider/banner1.webp"
+import Banner from "../../../public/asset/slider/nutan-banner.webp"
 
 export default function SimpleBanner() {
   return (

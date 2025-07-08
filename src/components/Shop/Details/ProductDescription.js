@@ -72,6 +72,42 @@ export default function ProductDescriptionTabs({ productDetails }) {
                   <p className="text-gray-600">{additionalInfo.batteryLife}</p>
                 </div>
               )}
+              {additionalInfo.color && (
+    <div>
+      <p className="font-medium">Color</p>
+      <p className="text-gray-600">{additionalInfo.color}</p>
+    </div>
+  )}
+  {additionalInfo.care && (
+    <div>
+      <p className="font-medium">Care Instructions</p>
+      <p className="text-gray-600">{additionalInfo.care}</p>
+    </div>
+  )}
+  {additionalInfo.countryOfOrigin && (
+    <div>
+      <p className="font-medium">Country of Origin</p>
+      <p className="text-gray-600">{additionalInfo.countryOfOrigin}</p>
+    </div>
+  )}
+  {additionalInfo.manufacturer && (
+    <div>
+      <p className="font-medium">Manufacturer</p>
+      <p className="text-gray-600">{additionalInfo.manufacturer}</p>
+    </div>
+  )}
+  {additionalInfo.packageContent && (
+    <div>
+      <p className="font-medium">Package Content</p>
+      <p className="text-gray-600">{additionalInfo.packageContent}</p>
+    </div>
+  )}
+  {additionalInfo.note && (
+    <div>
+      <p className="font-medium">Note</p>
+      <p className="text-gray-600">{additionalInfo.note}</p>
+    </div>
+  )}
             </div>
           ) : (
             <p className="text-gray-600">No additional information available.</p>
