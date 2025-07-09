@@ -5,7 +5,6 @@ import React, { Suspense, useEffect, useState } from 'react'
 import Head from 'next/head.js'
 import '../../components/Home/Home.css'
 import { ThemeProvider } from "@material-tailwind/react";
-import AboutHome from '@/components/Home/AboutHome.js'
 import Deal from '@/components/Home/Deal.js'
 import ProductsHome from '@/components/Home/ProductsHome.js'
 import CTA from '@/components/Home/CTA.js'
@@ -60,7 +59,7 @@ const Home = () => {
     <div className='relative'>
       {/* <ThemeProvider> */}
       <NavbarTwo />
-      <section className="relative pt-[0px]">
+      <section className="relative pt-[40px]">
         <HeroSection />
       </section>
 
