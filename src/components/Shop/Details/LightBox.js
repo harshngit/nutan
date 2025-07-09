@@ -12,7 +12,7 @@ const LightBox = ({ productDetails }) => {
   const images = productDetails?.productImages || [];
 
   return (
-    <div className="flex flex-col-reverse md:flex-row gap-8 items-start w-full">
+    <div className=" flex flex-col-reverse md:flex-row gap-8 items-start w-full">
       
       <div className="w-full relative">
 
@@ -26,7 +26,7 @@ const LightBox = ({ productDetails }) => {
         >
           {images.map((img, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-[400px] md:h-[600px]">
+              <div className="relative w-full">
                 <img
                   src={img}
                   alt={`Image ${index + 1}`}
@@ -40,14 +40,14 @@ const LightBox = ({ productDetails }) => {
         {/* Navigation Buttons */}
         <button
           onClick={() => swiperRef?.slidePrev()}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2  p-2   z-10"
+          className=" text-gray-600 absolute left-2 top-1/2 transform -translate-y-1/2  p-2   z-10"
         >
           <FiChevronLeft size={30} />
         </button>
 
         <button
           onClick={() => swiperRef?.slideNext()}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2  p-2s z-10"
+          className="text-gray-600 absolute right-2 top-1/2 transform -translate-y-1/2  p-2s z-10"
         >
           <FiChevronRight size={30} />
         </button>

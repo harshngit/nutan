@@ -8,6 +8,8 @@ import RelatedProductpg from '@/components/Shop/Details/RelatedProductpg';
 import { useEffect, useState } from 'react';
 import { doc, onSnapshot, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '@/app/firebase.config';
+import RecentlyViewedSlider from '@/components/Shop/Details/RecentlyView';
+import SnapOnBanner from '@/components/Shop/Details/ProductBanner';
 
 export default function ProductDetailPage({ params }) {
   const [productDetails, setProductDetails] = useState(null);
@@ -67,14 +69,22 @@ export default function ProductDetailPage({ params }) {
   return (
     <div className="font-poppins">
       <Navbar />
-      <section className="relative lg:pt-[90px] pt-[50px] pb-[50px]">
+      <section className="relative lg:pt-[90px] pt-[50px] pb-[50px] lg:pb-0">
         <ProductDetail productDetails={productDetails} />
       </section>
-      <section className="relative pb-[50px] border-b-2">
-        <ProductDescriptionTabs productDetails={productDetails} />
+
+      <section className="">
+        <SnapOnBanner />
       </section>
-      <section className="relative pb-[50px]">
+
+      {/* <section className="relative pb-[50px] border-b-2">
+        <ProductDescriptionTabs productDetails={productDetails} />
+      </section> */}
+      {/* <section className="relative pb-[50px]">
         <RelatedProductpg products={recommendedProducts} />
+      </section> */}
+      <section className="relative pb-[50px]">
+        <RecentlyViewedSlider products={recommendedProducts}  />
       </section>
       <Footer />
     </div>

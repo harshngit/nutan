@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/slider/banner2.webp"
+import Banner from "../../../public/asset/slider/banner6.png"
 
 export default function HomeBannerTwo() {
   return (

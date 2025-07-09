@@ -18,20 +18,22 @@ import img6 from "../../../public/asset/browse/collection6.webp"
 import img7 from "../../../public/asset/browse/collection7.webp"
 import img8 from "../../../public/asset/browse/collection8.webp"
 import img10 from "../../../public/asset/browse/collection10.webp"
+import img11 from "../../../public/asset/browse/collection11.png"
+import img12 from "../../../public/asset/browse/collection12.png"
 
 const TechData = [
   {
     id: "Office Supplies",
-    title: "WRIGHTING",
+    title: "POWER BANK",
     href: "/shop",
-    images: [ img3],
+    images: [ img11],
     hasScrollUp: false,
   },
   {
     id: "Print",
-    title: "SUSTAINABLE",
+    title: "OTHERS",
     href: "/shop",
-    images: [img7    ],
+    images: [img12    ],
     hasScrollUp: true,
   },
   
@@ -108,7 +110,7 @@ export default function TechEssentials() {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Office Essentials</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Other Essentials</h2>
         </div>
 
         {/* Cards Grid */}

@@ -8,14 +8,18 @@ import { logout } from "@/actions/authActions";
 import CartSidebar from "../Cart/CartSidebar"; 
 import { FaUserCheck } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
+import { BsPerson } from "react-icons/bs";
+
 
  // Assuming you already have this component
 
 const navItems = [
-  { label: "Home", href: "/", children: []},
-  { label: "Shop", href: "/shop"},
-  { label: "About", href: "" },
-  { label: "Contact", href: "/Contact"},
+  { label: "BAG", href: "/", children: []},
+  { label: "GIFTSETS", href: "/"},
+  { label: "DRINKWARE", href: "/" },
+  { label: "TECHNOLOGY", href: "/"},
+  { label: "OFFICE", href: "/"},
+  { label: "STATIONARY", href: "/"},
 ];
 
 // const accountItems = [
@@ -180,12 +184,12 @@ export default function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-screen z-[9999]">
       <div className="w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]">
-        <div className="w-full lg:pt-[30px] lg:pl-[30px] lg:pb-[20px] flex">
-          <Link href="/" className="lg:w-[33%] w-[90%] lg:flex lg:justify-start justify-center items-center">
+        <div className="w-full lg:pt-[30px] lg:px-[30px] lg:pb-[20px] flex">
+          <Link href="/" className="lg:w-[20%] w-[90%] lg:flex lg:justify-start justify-center items-center">
             <img className="lg:w-[100px] w-[50px]" src="/asset/Navbar/nutan.png" alt="logo" />
           </Link>
 
-          <div className="hidden lg:w-[33%] lg:flex justify-start items-center">
+          <div className="hidden lg:w-[60%] lg:flex justify-start items-center">
             {navList}
           </div>
 
@@ -193,19 +197,19 @@ export default function Navbar() {
             <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
           </div>
 
-          <div className="lg:flex hidden lg:w-[30%] w-[33.33%] gap-8 justify-center items-center">
+          <div className="lg:flex hidden lg:w-[20%] w-[33.33%] gap-8 justify-end items-center">
             {/* Account Dropdown */}
             <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>              
   <div className="cursor-pointer relative text-black flex items-center gap-1">
     {isAuthenticated ? (
       <>
-        <FaUserCheck className="text-[18px]" />
-        <span className="text-sm font-medium">My Profile</span>
+        <BsPerson className="text-[30px]" />
+        {/* <span className="text-sm font-medium">My Profile</span> */}
       </>
     ) : (
       <>
-        <FaUserCircle className="text-[18px]" />
-        <span className="text-sm font-medium">Login</span>
+        <BsPerson className="text-[30px]" />
+        {/* <span className="text-sm font-medium">Login</span> */}
       </>
     )}
   </div>
