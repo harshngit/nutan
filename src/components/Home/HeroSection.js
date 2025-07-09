@@ -6,9 +6,12 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 const images = [
-  '/asset/Home/bgimg.jpg',
-  '/asset/Home/bgimg.jpg',
-  '/asset/Home/bgimg.jpg',
+  '/asset/Home/banner1.png',
+  '/asset/Home/banner5.png',
+  '/asset/Home/banner2.png',
+  '/asset/Home/banner4.png',
+  // '/asset/Home/bgimg.jpg',
+  // '/asset/Home/bgimg.jpg',
 ];
 
 const HeroSection = () => {
