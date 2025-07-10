@@ -5,7 +5,7 @@ import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAfXMTL7VGr6RbWDPSvOdQXB_-RUCZS16s",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API,
   authDomain: "nutandev-f7518.firebaseapp.com",
   projectId: "nutandev-f7518",
   storageBucket: "nutandev-f7518.firebasestorage.app",
