@@ -8,11 +8,13 @@ import ImageAccordion from '@/components/Shop/ImageAccordion'
 import ProductBadage from '@/components/Shop/ProductBadage'
 import ProductFilterToolbar from '@/components/Shop/ProductFilterToolbar'
 import ProductPage from '@/components/Shop/ProductPage'
-import ProductGrid from '@/components/Shop/ProductsGrid'
+import ProductGrid from '@/components/Shop/BackpackGrid.js'
 import NavbarTwo from '../../components/Layout/Navbar.js'
 import React, { useState, useEffect } from 'react'
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
+import BackpackGrid from '@/components/Shop/BackpackGrid.js'
+import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -71,13 +73,13 @@ const Shop = () => {
 				{/* Adjust padding to avoid navbar overlap */}
 				<BannerBreadcrumb />
 			</section>
-			<section className="relative pt-[0px] pb-[46px]">
-				{/* Adjust padding to avoid navbar overlap */}
+			{/* <section className="relative pt-[0px] pb-[46px]">
+				
 				<ProductFilterToolbar 
           onFilterChange={handleFilterChange}
           totalProducts={filteredProducts.length}
         />
-			</section>
+			</section> */}
 			<section className="relative pt-[0px] pb-[46px]">
 				{/* Adjust padding to avoid navbar overlap */}
 				<ProductPage 
@@ -87,13 +89,21 @@ const Shop = () => {
           totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
-			</section>
+			</section>'
+      
+      
 			<section className="relative pt-[0px] pb-[20px]">
-				{/* Adjust padding to avoid navbar overlap */}
-				<ProductBadage />
+				
+				<BackpackGrid />
 			</section>
 
+			{/* <section className="relative pt-[0px] pb-[20px]">
+				<ProductBadage />
+			</section> */}
 
+      <section className='relative overflow-hidden'>
+        <ServiceFeatures />
+      </section>
 
 			<section className="relative">
 				{/* <BannerCta /> */}

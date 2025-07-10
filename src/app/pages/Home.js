@@ -19,6 +19,7 @@ import ShopByCategory from '@/components/Home/ShopByCategory.js'
 import SimpleBanner from '@/components/Home/HomeBanner.js'
 import TechEssentials from '@/components/Home/TechEssentials.js'
 import HomeBannerTwo from '@/components/Home/HomeBannerTwo.js'
+import HomeSlider from '@/components/Home/HomeSlider.js'
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
@@ -59,9 +60,14 @@ const Home = () => {
     <div className='relative'>
       {/* <ThemeProvider> */}
       <NavbarTwo />
-      <section className="relative pt-[40px]">
-        <HeroSection />
+      
+      <section className="relative pt-[60px]">
+        <HomeSlider  />
       </section>
+
+      {/* <section className="relative pt-[40px]">
+        <HeroSection />
+      </section> */}
 
       <section className="relative overflow-hidden">
         <ShopByCategory  />

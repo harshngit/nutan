@@ -2,7 +2,7 @@ import BannerFH from '@/components/Forhim/BannerFH'
 import ProductGridFH from '@/components/Forhim/ProductGridFH'
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
-import ProductGrid from '@/components/Shop/ProductsGrid'
+import ProductGrid from '@/components/Shop/BackpackGrid'
 import React from 'react'
 
 const ForHim = () => {

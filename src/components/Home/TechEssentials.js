@@ -69,7 +69,7 @@ function TechCard({ category }) {
                   src={image || "/placeholder.svg"}
                   alt={`${category.title} ${index + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
                 />
                 {/* Dark overlay for better text readability */}
                 <div className="absolute inset-0 bg-black/30" />

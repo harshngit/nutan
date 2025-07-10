@@ -54,7 +54,7 @@ function CategoryCard({ category }) {
   // }
 
   return (
-    <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group">
+    <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group ">
       {/* Image Swiper - Lower z-index */}
       <div className="absolute inset-0 z-0 ">
         <Swiper
@@ -73,7 +73,7 @@ function CategoryCard({ category }) {
                   src={image || "/placeholder.svg"}
                   alt={`${category.title} ${index + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
                 />
                 {/* Dark overlay for better text readability */}
                 <div className="absolute inset-0 bg-black/30" />

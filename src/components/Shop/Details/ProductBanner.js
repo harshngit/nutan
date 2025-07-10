@@ -5,7 +5,7 @@ import React from 'react';
 import img1 from "../../../../public/asset/browse/collection1.webp";
 import img2 from "../../../../public/asset/browse/collection2.webp";
 
-const SnapOnBanner = () => {
+const SnapOnBanner = ({productDetails}) => {
   return (
     <section className="w-full bg-white ">
       {/* Original Section */}
@@ -23,7 +23,7 @@ const SnapOnBanner = () => {
         {/* Image Content */}
         <div className="flex justify-center lg:justify-end lg:w-1/2">
           <Image
-            src={img1}
+          src={productDetails?.productImages[1]}
             alt="SnapOn Sleeve Variants"
             width={800}
             height={600}
@@ -38,7 +38,7 @@ const SnapOnBanner = () => {
         {/* Image Content */}
         <div className="flex justify-center lg:justify-start lg:w-1/2 ">
           <Image
-            src={img2}
+            src={productDetails?.productImages[0]}
             alt="Steel Bottle"
             width={800}
             height={600}

@@ -7,16 +7,16 @@ import 'swiper/css';
 
 const images = [
   '/asset/Home/banner1.png',
-  '/asset/Home/banner5.png',
+  '/asset/Home/banner3.png',
   '/asset/Home/banner2.png',
-  '/asset/Home/banner4.png',
+  '/asset/Slider/banner4.png',
   // '/asset/Home/bgimg.jpg',
   // '/asset/Home/bgimg.jpg',
 ];
 
 const HeroSection = () => {
   return (
-    <div className="relative h-screen z-0 overflow-hidden">
+    <div className="relative mt-16 lg:h-[800px] z-0 overflow-hidden">
 
       {/* Background Image Slider */}
       <Swiper
@@ -31,7 +31,7 @@ const HeroSection = () => {
         {images.map((img, idx) => (
           <SwiperSlide key={idx}>
             <div
-              className="w-full h-screen bg-cover bg-center"
+              className="w-full h-full bg-cover bg-no-repeat bg-center"
               style={{ backgroundImage: `url(${img})` }}
             ></div>
           </SwiperSlide>
@@ -39,7 +39,7 @@ const HeroSection = () => {
       </Swiper>
 
       {/* Center Constant Content */}
-      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center px-5 z-10">
+      {/* <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center px-5 z-10">
         <div className="flex flex-col justify-center gap-5 items-center text-center max-w-[90%] lg:max-w-[30%]">
           <h2 className="font-bold text-[#B88E2F] text-[20px] lg:text-[52px]">
             Discover Our New Collection
@@ -51,7 +51,7 @@ const HeroSection = () => {
             BUY NOW
           </button>
         </div>
-      </div>
+      </div> */}
 
     </div>
   );

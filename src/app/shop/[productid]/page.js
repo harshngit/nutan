@@ -74,7 +74,7 @@ export default function ProductDetailPage({ params }) {
       </section>
 
       <section className="">
-        <SnapOnBanner />
+        <SnapOnBanner productDetails={productDetails} />
       </section>
 
       {/* <section className="relative pb-[50px] border-b-2">

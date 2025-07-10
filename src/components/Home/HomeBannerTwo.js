@@ -1,16 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/slider/banner6.png"
+import Banner from "../../../public/asset/slider/banner6.png";
 
 export default function HomeBannerTwo() {
   return (
-    <div className="relative h-[800px] w-full">
+    <div className="relative w-full h-[50vh] md:h-[80vh]">
       <Image
         src={Banner}
-        alt="Browse"
-    fill
-    className="object-cover"
+        alt="Banner image"
+        fill
+        className="object-cover"
+        priority
+        sizes="100vw"
       />
     </div>
   );
