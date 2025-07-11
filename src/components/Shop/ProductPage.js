@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import { useState } from "react"
 import { FiShare2, FiRefreshCw, FiHeart } from "react-icons/fi"
