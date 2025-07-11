@@ -14,12 +14,12 @@ import { BsPerson } from "react-icons/bs";
  // Assuming you already have this component
 
 const navItems = [
-  { label: "BAG", href: "/", children: []},
-  { label: "GIFTSETS", href: "/"},
-  { label: "DRINKWARE", href: "/" },
-  { label: "TECHNOLOGY", href: "/"},
-  { label: "OFFICE", href: "/"},
-  { label: "STATIONARY", href: "/"},
+  { label: "BAG", href: "/bag", children: []},
+  { label: "GIFTSETS", href: "/giftsets"},
+  { label: "DRINKWARE", href: "/drinkware" },
+  { label: "TECHNOLOGY", href: "/technology"},
+  { label: "OFFICE", href: "/office"},
+  { label: "STATIONARY", href: "/stationary"},
 ];
 
 // const accountItems = [
@@ -132,8 +132,8 @@ export default function Navbar() {
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
       <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-black uppercase font-medium !text-sm tracking-wide">
-  <li><Link href="/">Bags</Link></li>
-  <li><Link href="/shop">Giftsets</Link></li>
+  <li><Link href="/bag">Bags</Link></li>
+  <li><Link href="/giftsets">Giftsets</Link></li>
   <li><Link href="">Drinkware</Link></li>
   <li><Link href="/Contact">Technology</Link></li>
   <li><Link href="/Contact">Office</Link></li>
@@ -193,26 +193,53 @@ export default function Navbar() {
             {navList}
           </div>
 
-          <div className="lg:hidden lf:w-[33.33%] flex justify-start items-center" onClick={() => setOpenDrawer(true)}>
-            <img src="/asset/Home/menu.png" className="w-[38px]" alt="Menu" />
+          <div className="lg:hidden w-[100%] flex justify-end items-center">
+            
+
+            {/* Right side icons */}
+            <div className="flex items-center gap-4 pr-2">
+              {/* BsPerson (Account Icon) */}
+              <Link href={isAuthenticated ? "/viewProfile" : "/login"}>
+                <BsPerson className="text-[26px] text-black" />
+              </Link>
+
+              {/* Cart */}
+              <button
+                onClick={() => setIsCartOpen(true)}
+                className="relative text-black transition-colors duration-200"
+              >
+                <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[26px] h-[26px] object-contain" />
+                {cartItems.length > 0 && (
+                  <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </div>
+                )}
+              </button>
+
+              {/* Hamburger Menu */}
+            <div onClick={() => setOpenDrawer(true)} className="p-2">
+              <img src="/asset/Home/menu.png" className="w-[34px]" alt="Menu" />
+            </div>
+            </div>
           </div>
+
 
           <div className="lg:flex hidden lg:w-[20%] w-[33.33%] gap-8 justify-end items-center">
             {/* Account Dropdown */}
             <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>              
-  <div className="cursor-pointer relative text-black flex items-center gap-1">
-    {isAuthenticated ? (
-      <>
-        <BsPerson className="text-[30px]" />
-        {/* <span className="text-sm font-medium">My Profile</span> */}
-      </>
-    ) : (
-      <>
-        <BsPerson className="text-[30px]" />
-        {/* <span className="text-sm font-medium">Login</span> */}
-      </>
-    )}
-  </div>
+              <div className="cursor-pointer relative text-black flex items-center gap-1">
+                {isAuthenticated ? (
+                  <>
+                    <BsPerson className="text-[30px]" />
+                    {/* <span className="text-sm font-medium">My Profile</span> */}
+                  </>
+                ) : (
+                  <>
+                    <BsPerson className="text-[30px]" />
+                    {/* <span className="text-sm font-medium">Login</span> */}
+                  </>
+                )}
+              </div>
 
   {openAccountDropdown && (
     <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
@@ -223,7 +250,7 @@ export default function Navbar() {
             <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Account</div>
           </Link>
           <Link href={'/orders'} >
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</li>
+                <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</div>
               </Link>
           <div
             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"

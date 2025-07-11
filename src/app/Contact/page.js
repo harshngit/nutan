@@ -9,7 +9,7 @@ import ImageAccordion from '@/components/Shop/ImageAccordion'
 import ProductBadage from '@/components/Shop/ProductBadage'
 import ProductFilterToolbar from '@/components/Shop/ProductFilterToolbar'
 import ProductPage from '@/components/Shop/ProductPage'
-import ProductGrid from '@/components/Shop/BackpackGrid'
+import ProductGrid from '@/components/Productpage/BackpackGrid'
 import React from 'react'
 
 const Contact = () => {

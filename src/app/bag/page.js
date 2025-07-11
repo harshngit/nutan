@@ -3,12 +3,7 @@ import CTA from '@/components/Home/CTA'
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
 import BannerBreadcrumb from '@/components/Shop/BannerBreadcrumb'
-import BannerCta from '@/components/Shop/BannerCta'
-import ImageAccordion from '@/components/Shop/ImageAccordion'
-import ProductBadage from '@/components/Shop/ProductBadage'
-import ProductFilterToolbar from '@/components/Shop/ProductFilterToolbar'
-import ProductPage from '@/components/Shop/ProductPage'
-import ProductGrid from '@/components/Productpage/BackpackGrid.js'
+
 import NavbarTwo from '../../components/Layout/Navbar.js'
 import React, { useState, useEffect } from 'react'
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'
@@ -16,7 +11,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 
-const Shop = () => {
+const Bag = () => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -73,13 +68,7 @@ const Shop = () => {
 			
 				<BannerBreadcrumb />
 			</section> */}
-			{/* <section className="relative pt-[0px] pb-[46px]">
-				
-				<ProductFilterToolbar 
-          onFilterChange={handleFilterChange}
-          totalProducts={filteredProducts.length}
-        />
-			</section> */}
+			
 			{/* <section className="relative pt-[0px] pb-[46px]">
 			
 				<ProductPage 
@@ -117,4 +106,4 @@ const Shop = () => {
 	)
 }
 
-export default Shop
+export default Bag

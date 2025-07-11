@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { FiFilter } from "react-icons/fi"; 
+import ProductCard from "@/components/ProductCart";
 
 
 const backpacks = [
@@ -46,7 +47,7 @@ const backpacks = [
     isRecycled: true,
   },
   {
-    id: 1,
+    id: 5,
     title: "Beige Pedal Daypack",
     image: "/asset/products/1.png",
     price: 1699,
@@ -55,7 +56,7 @@ const backpacks = [
     isRecycled: false,
   },
   {
-    id: 2,
+    id: 6,
     title: "Black Wing Backpack",
         image: "/asset/products/1.png",
 
@@ -65,7 +66,7 @@ const backpacks = [
     isRecycled: false,
   },
   {
-    id: 3,
+    id: 7,
     title: "Pivot Lunar Daypack - Seagrass",
         image: "/asset/products/1.png",
 
@@ -75,7 +76,7 @@ const backpacks = [
     isRecycled: true,
   },
   {
-    id: 4,
+    id: 8,
     title: "Pivot Lunar Daypack - Sand",
         image: "/asset/products/1.png",
 
@@ -86,7 +87,7 @@ const backpacks = [
   },
 ];
 
-export default function BackpackGrid() {
+export default function GiftsGrid() {
   const [wishlist, setWishlist] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -194,48 +195,14 @@ export default function BackpackGrid() {
 
         {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-          {backpacks.map((item) => {
-            const isLiked = wishlist.includes(item.id);
-            return (
-              <div
-                key={item.id}
-                className="relative bg-white    cursor-pointer"
-              >
-                
-
-                <div
-                  className="absolute top-2 right-4 z-10 cursor-pointer"
-                  onClick={() => toggleWishlist(item.id)}
-                >
-                  {isLiked ? (
-                    <FaHeart className="text-red-600 text-lg transition" />
-                  ) : (
-                    <FiHeart className="text-gray-600 text-lg hover:text-red-600 transition" />
-                  )}
-                </div>
-
-                <div className="aspect-square relative">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    layout="fill"
-                    objectFit="contain"
-                  />
-                </div>
-
-                <div className="mt-2 px-2 pb-2">
-                  <p className="text-sm">{item.title}</p>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <span className="font-semibold">₹{item.price}</span>
-                    <span className="line-through text-gray-400 text-sm">
-                      ₹{item.original}
-                    </span>
-                  </div>
-                  
-                </div>
-              </div>
-            );
-          })}
+          {backpacks.map((item) => (
+                      <ProductCard
+                        key={item.id}
+                        item={item}
+                        isLiked={wishlist.includes(item.id)}
+                        toggleWishlist={toggleWishlist}
+                      />
+                    ))}
         </div>
       </div>
     </div>
