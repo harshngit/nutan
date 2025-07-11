@@ -80,7 +80,7 @@ const Shop = () => {
           totalProducts={filteredProducts.length}
         />
 			</section> */}
-			{/* <section className="relative pt-[0px] pb-[46px]">
+			<section className="relative pt-[0px] pb-[46px]">
 			
 				<ProductPage 
           products={visibleProducts} 
@@ -89,7 +89,7 @@ const Shop = () => {
           totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
-			</section> */}
+			</section>
       
       
 			<section className="relative pt-[120px] pb-[20px]">

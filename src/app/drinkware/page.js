@@ -14,54 +14,46 @@ import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
 
 const Drinkware = () => {
-  const [products, setProducts] = useState([])
+  const [product, setProduct] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
-  const ITEMS_PER_PAGE = 8
+  
 
-  const fetchProducts = async () => {
+const fetchProduct = async () => {
     try {
-      const productsRef = collection(db, "Product")
+      const productRef = collection(db, "Product");
       const q = query(
-        productsRef,
-        where("productStatus", "==", "Published"),
-        orderBy("createdAtDate", "desc")
-      )
-      const querySnapshot = await getDocs(q)
-      
-      const productsData = []
+  productRef,
+  where("productStatus", "==", "Published"),
+  // where("productCategory", "==", "giftsets"), // ✅ category value must match DB
+  orderBy("createdAtDate", "desc")
+);
+      const querySnapshot = await getDocs(q);
+
+      const products = [];
       querySnapshot.forEach((doc) => {
-        productsData.push({ id: doc.id, ...doc.data() })
-      })
-      
-      setProducts(productsData)
-      setFilteredProducts(productsData)
-      setLoading(false)
+        products.push({ id: doc.id, ...doc.data() });
+      });
+
+      return products;
     } catch (error) {
-      console.error("Error fetching products:", error)
-      setLoading(false)
+      console.error("Error fetching products:", error);
+      return [];
     }
-  }
+  };
+
+  console.log(product)
+
+
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    const getProducts = async () => {
+      const latestProducts = await fetchProduct();
+      setProduct(latestProducts);
+    };
+    getProducts();
+  }, []);
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE)
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const visibleProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
-
-  const handleFilterChange = (newFilters) => {
-    // Implement your filter logic here
-    const filtered = products.filter(product => {
-      // Add your filter conditions
-      return true
-    })
-    setFilteredProducts(filtered)
-    setCurrentPage(1)
-  }
 
     return (
         <div className=' font-poppins'>
@@ -74,18 +66,17 @@ const Drinkware = () => {
             {/* <section className="relative pt-[0px] pb-[46px]">
             
                 <ProductPage 
-          products={visibleProducts} 
-          loading={loading}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+                  products={visibleProducts} 
+                  loading={loading}
+                  
+                
+                />
             </section> */}
       
       
             <section className="relative pt-[120px] pb-[20px]">
                 
-                <DrinkwareGrid />
+                <DrinkwareGrid product={product} />
             </section>
 
             {/* <section className="relative pt-[0px] pb-[20px]">

@@ -154,19 +154,19 @@ export default function Navbar() {
 
 </ul>
 
-
-      <div className="flex gap-8 justify-start items-center">
-        {/* Search - Mobile */}
+      {/* Search - Mobile */} {/* Wishlist - Mobile */} {/* Cart - Mobile */}
+      {/* <div className="flex gap-8 justify-start items-center">
+        
         <Link href="">
           <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
         </Link>
 
-        {/* Wishlist - Mobile */}
+        
         <Link href="/wishlist">
           <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
         </Link>
 
-        {/* Cart - Mobile */}
+        
         <Link href="/cart">
           <div className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer">
             <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
@@ -177,7 +177,7 @@ export default function Navbar() {
           )}
           </div>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 
