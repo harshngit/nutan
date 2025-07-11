@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import Link from "next/link"; // ✅ Import Link
+import Link from "next/link";
 
 export default function ProductCard({ item, isLiked, toggleWishlist }) {
   return (
     <Link href={`/shop/${item.id}`} passHref>
-      <div className="relative bg-white cursor-pointer">
+      <div className="relative bg-white cursor-pointer group">
         {/* Wishlist Icon */}
         <div
           className="absolute top-2 right-4 z-10 cursor-pointer"
           onClick={(e) => {
-            e.preventDefault(); // ✅ Prevent redirect on heart click
+            e.preventDefault(); // Prevent redirect on heart click
             toggleWishlist(item.id);
           }}
         >
@@ -22,13 +22,14 @@ export default function ProductCard({ item, isLiked, toggleWishlist }) {
           )}
         </div>
 
-        {/* Product Image */}
-        <div className="aspect-square relative">
+        {/* Image wrapper with zoom effect */}
+        <div className="aspect-square relative overflow-hidden">
           <Image
             src={item.image}
             alt={item.title}
             layout="fill"
             objectFit="contain"
+            className="transition-transform duration-300 ease-in-out group-hover:scale-110"
           />
         </div>
 

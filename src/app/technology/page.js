@@ -26,7 +26,7 @@ const fetchProduct = async () => {
       const q = query(
   productRef,
   where("productStatus", "==", "Published"),
-  // where("productCategory", "==", "giftsets"), // ✅ category value must match DB
+  where("productCategory", "==", "technology"), // ✅ category value must match DB
   orderBy("createdAtDate", "desc")
 );
       const querySnapshot = await getDocs(q);

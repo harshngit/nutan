@@ -12,9 +12,9 @@ import BackpackGrid from '@/components/Productpage/BackpackGrid.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
-import OfficeGrid from '@/components/Productpage/OfficeGrid.js'
+import AllProductGrid from '@/components/Productpage/AllProductGrid.js'
 
-const Office = () => {
+const AllProducts = () => {
   const [product, setProduct] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -26,7 +26,7 @@ const fetchProduct = async () => {
       const q = query(
   productRef,
   where("productStatus", "==", "Published"),
-  where("productCategory", "==", "office"), // ✅ category value must match DB
+//   where("productCategory", "==", "bag"), // ✅ category value must match DB
   orderBy("createdAtDate", "desc")
 );
       const querySnapshot = await getDocs(q);
@@ -77,7 +77,7 @@ const fetchProduct = async () => {
       
             <section className="relative pt-[120px] pb-[20px]">
                 
-                <OfficeGrid product={product} />
+                <AllProductGrid product={product} />
             </section>
 
             {/* <section className="relative pt-[0px] pb-[20px]">
@@ -100,4 +100,4 @@ const fetchProduct = async () => {
     )
 }
 
-export default Office
+export default AllProducts
