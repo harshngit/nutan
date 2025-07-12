@@ -20,41 +20,83 @@ import SimpleBanner from '@/components/Home/HomeBanner.js'
 import TechEssentials from '@/components/Home/TechEssentials.js'
 import HomeBannerTwo from '@/components/Home/HomeBannerTwo.js'
 import HomeSlider from '@/components/Home/HomeSlider.js'
+import NewArrivalsSlider from '@/components/Productpage/HomeSlider.js'
+import TrendingSlider from '@/components/Productpage/TrendingSlider.js'
 
 const Home = () => {
-  const [featuredProducts, setFeaturedProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  const fetchFeaturedProducts = async () => {
-    try {
-      const productsRef = collection(db, "Product")
-      const q = query(
-        productsRef,
-        where("productStatus", "==", "Published"),
-       
-        orderBy("createdAtDate", "desc"),
-        limit(4)
-      );
-      const querySnapshot = await getDocs(q)
-      
-      const products = []
-      querySnapshot.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() })
-      });
-      
-      setFeaturedProducts(products)
-      setLoading(false)
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchFeaturedProducts()
+    const [product, setProduct] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+    
   
-  }, [])
-  console.log(featuredProducts)
+  const fetchProduct = async () => {
+      try {
+        const productRef = collection(db, "Product");
+        const q = query(
+    productRef,
+    where("productStatus", "==", "Published"),
+    // where("productCategory", "==", "giftsets"), // ✅ category value must match DB
+    orderBy("createdAtDate", "desc")
+  );
+        const querySnapshot = await getDocs(q);
+  
+        const products = [];
+        querySnapshot.forEach((doc) => {
+          products.push({ id: doc.id, ...doc.data() });
+        });
+  
+        return products;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        return [];
+      }
+    };
+  
+    console.log(product)
+  
+  
+  
+    useEffect(() => {
+      const getProducts = async () => {
+        const latestProducts = await fetchProduct();
+        setProduct(latestProducts);
+      };
+      getProducts();
+    }, []);
+  
+  
+  // const [featuredProducts, setFeaturedProducts] = useState([])
+  
+  // const fetchFeaturedProducts = async () => {
+  //   try {
+  //     const productsRef = collection(db, "Product")
+  //     const q = query(
+  //       productsRef,
+  //       where("productStatus", "==", "Published"),
+       
+  //       orderBy("createdAtDate", "desc"),
+  //       // limit(4)
+  //     );
+  //     const querySnapshot = await getDocs(q)
+      
+  //     const products = []
+  //     querySnapshot.forEach((doc) => {
+  //       products.push({ id: doc.id, ...doc.data() })
+  //     });
+      
+  //     setFeaturedProducts(products)
+  //     setLoading(false)
+  //   } catch (error) {
+  //     console.error("Error fetching products:", error);
+  //     setLoading(false)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchFeaturedProducts()
+  
+  // }, [])
+  // console.log(featuredProducts)
 
   return (
     <div className='relative'>
@@ -81,8 +123,12 @@ const Home = () => {
         <SimpleBanner />
       </section>
 
-      <section className="relative overflow-hidden">
+      {/* <section className="relative overflow-hidden">
         <Deal products={featuredProducts} loading={loading} />
+      </section> */}
+
+      <section className="relative overflow-hidden">
+        <NewArrivalsSlider product={product} loading={loading} />
       </section>
 
 
@@ -97,6 +143,9 @@ const Home = () => {
         <HomeBannerTwo />
       </section>
 
+      <section className="relative overflow-hidden">
+        <TrendingSlider product={product} loading={loading} />
+      </section>
 
 
       {/* <section className='relative overflow-hidden'>

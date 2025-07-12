@@ -8,12 +8,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const images = [
-  '/asset/Home/banner1.png',
-  '/asset/Home/banner3.png',
-  '/asset/Home/banner2.png',
-  '/asset/Slider/banner4.png',
-  // '/asset/Home/bgimg.jpg',
-  // '/asset/Home/bgimg.jpg',
+  '/asset/Home/nutan-banner3.png',
+  '/asset/Home/nutan-banner4.png',
+  '/asset/Home/nutan-banner2.png',
+  '/asset/Home/nutan-banner1.png',
 ];
 
 const HomeSlider = () => {
