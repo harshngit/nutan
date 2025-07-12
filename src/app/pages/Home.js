@@ -20,7 +20,7 @@ import SimpleBanner from '@/components/Home/HomeBanner.js'
 import TechEssentials from '@/components/Home/TechEssentials.js'
 import HomeBannerTwo from '@/components/Home/HomeBannerTwo.js'
 import HomeSlider from '@/components/Home/HomeSlider.js'
-import NewArrivalsSlider from '@/components/Productpage/HomeSlider.js'
+import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider.js'
 import TrendingSlider from '@/components/Productpage/TrendingSlider.js'
 
 const Home = () => {
@@ -103,7 +103,7 @@ const Home = () => {
       {/* <ThemeProvider> */}
       <NavbarTwo />
       
-      <section className="relative pt-[60px]">
+      <section className="relative pt-[70px]">
         <HomeSlider  />
       </section>
 

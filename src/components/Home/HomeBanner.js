@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/Home/banner4.png"
+import Banner from "../../../public/asset/Home/home-banner.png"
 
 export default function SimpleBanner() {
   return (
