@@ -37,9 +37,9 @@ export default function ProductCard({ item, isLiked, toggleWishlist }) {
         <div className="mt-2 px-2 pb-2">
           <p className="text-sm">{item.title}</p>
           <div className="flex items-center space-x-2 mt-1">
-            <span className="font-semibold">ADE {item.price}</span>
+            <span className="font-semibold">AED {item.price}</span>
             <span className="line-through text-gray-400 text-sm">
-              ADE {item.original}
+              AED {item.original}
             </span>
           </div>
         </div>
