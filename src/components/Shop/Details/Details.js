@@ -67,7 +67,7 @@ const Details = ({ productDetails }) => {
     }
   }
 
-  const formatPrice = (price) => `ADE ${price?.toLocaleString('en-IN') || '0'} `
+  const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `
 
   return (
     <div className=" w-full px-8 py-8 mx-auto font-sans text-[#111]">
