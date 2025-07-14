@@ -15,9 +15,9 @@ const SnapOnBanner = ({productDetails}) => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
             {productDetails.bannerTitleOne}
           </h2>
-          <p className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
+          <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
             {productDetails.bannerDescOne}
-          </p>
+          </div>
         </div>
 
         {/* Image Content */}
@@ -52,9 +52,9 @@ const SnapOnBanner = ({productDetails}) => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
            {productDetails.bannerTitleTwo}
           </h2>
-          <p className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
+          <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
             {productDetails.bannerDescTwo}          
-          </p>
+          </div>
         </div>
       </div>
     </section>

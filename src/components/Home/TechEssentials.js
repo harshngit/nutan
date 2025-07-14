@@ -106,7 +106,7 @@ function TechCard({ category }) {
 
 export default function TechEssentials() {
   return (
-    <section className="py-12 md:py-16 lg:py-20 font-poppins bg-white">
+    <section className="pb-12 md:pb-16 lg:pb-18 font-poppins bg-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-8 md:mb-12">

@@ -67,7 +67,7 @@ const Details = ({ productDetails }) => {
     }
   }
 
-  const formatPrice = (price) => `₹${price?.toLocaleString('en-IN') || '0'}`
+  const formatPrice = (price) => `${price?.toLocaleString('en-IN') || '0'} ADE`
 
   return (
     <div className=" w-full px-8 py-8 mx-auto font-sans text-[#111]">
@@ -78,7 +78,7 @@ const Details = ({ productDetails }) => {
       <div className="flex items-center gap-3 mb-2">
         <span className="text-lg font-bold text-[#111]">{formatPrice(productDetails?.productPrice)}</span>
         <span className="text-gray-400 line-through text-base">{formatPrice(productDetails?.originalPrice)}</span>
-        <span className="text-gray-400 text-sm">MRP Inclusive of all taxes</span>
+        {/* <span className="text-gray-400 text-sm">MRP Inclusive of all taxes</span> */}
       </div>
 
       <div className="flex items-center gap-2 text-green-600 text-sm mb-6">

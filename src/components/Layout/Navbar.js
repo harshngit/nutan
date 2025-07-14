@@ -99,7 +99,7 @@ export default function Navbar() {
   };
 
   const navList = (
-    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-3 text-white uppercase font-[poppins] font-semibold !text-sm tracking-wide">
+    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-0 text-white uppercase font-[poppins] font-semibold !text-sm tracking-wide">
       {navItems.map((item, idx) => {
         const hasChildren = item.children && item.children.length > 0;
         const isParentActive = isActive(item.href) || item.children?.some((child) => isActive(child.href));
@@ -107,7 +107,7 @@ export default function Navbar() {
         return (
           <li key={idx} className="relative">
             <div onMouseEnter={() => handleMouseEnter(item.label)} onMouseLeave={handleMouseLeave}>
-              <Link href={item.href} className={`group px-6 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"}`}>
+              <Link href={item.href} className={`group px-5 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"}`}>
                 {item.label}
               </Link>
 

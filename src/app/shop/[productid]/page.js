@@ -10,6 +10,7 @@ import { doc, onSnapshot, collection, query, where, orderBy, getDocs } from 'fir
 import { db } from '@/app/firebase.config';
 import RecentlyViewedSlider from '@/components/Shop/Details/RecentlyView';
 import SnapOnBanner from '@/components/Shop/Details/ProductBanner';
+import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider';
 
 export default function ProductDetailPage({ params }) {
   const [productDetails, setProductDetails] = useState(null);
@@ -83,9 +84,14 @@ export default function ProductDetailPage({ params }) {
       {/* <section className="relative pb-[50px]">
         <RelatedProductpg products={recommendedProducts} />
       </section> */}
-      <section className="relative pb-[50px]">
+
+       <section className="relative overflow-hidden">
+              <NewArrivalsSlider product={recommendedProducts} loading={loading} />
+            </section>
+
+      {/* <section className="relative pb-[50px]">
         <RecentlyViewedSlider products={recommendedProducts}  />
-      </section>
+      </section> */}
       <Footer />
     </div>
   );

@@ -12,7 +12,7 @@ export default function ProductCard({ item, isLiked, toggleWishlist }) {
           className="absolute top-2 right-4 z-10 cursor-pointer"
           onClick={(e) => {
             e.preventDefault(); // Prevent redirect on heart click
-            toggleWishlist(item.id);
+            toggleWishlist(item);
           }}
         >
           {isLiked ? (
@@ -37,9 +37,9 @@ export default function ProductCard({ item, isLiked, toggleWishlist }) {
         <div className="mt-2 px-2 pb-2">
           <p className="text-sm">{item.title}</p>
           <div className="flex items-center space-x-2 mt-1">
-            <span className="font-semibold">₹{item.price}</span>
+            <span className="font-semibold">{item.price} ADE</span>
             <span className="line-through text-gray-400 text-sm">
-              ₹{item.original}
+             {item.original} ADE
             </span>
           </div>
         </div>
