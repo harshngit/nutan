@@ -171,8 +171,8 @@ export default function Navbar() {
     <div className="fixed top-0 left-0 w-screen z-[9999]">
       <div className="w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]">
         <div className="w-full lg:pt-[30px] lg:px-[30px] lg:pb-[20px] flex">
-          <Link href="/" className="lg:w-[20%] w-[90%] lg:flex lg:justify-start justify-center items-center">
-            <img className="lg:w-[100px] w-[50px]" src="/asset/Navbar/nutan.png" alt="logo" />
+          <Link href="/" className="lg:w-[20%] w-[60%] flex lg:flex lg:justify-start justify-start items-center">
+            <img className="lg:w-[100px] w-[80px]" src="/asset/Navbar/nutan.png" alt="logo" />
           </Link>
 
           <div className="hidden lg:w-[60%] lg:flex justify-start items-center">

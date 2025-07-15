@@ -26,7 +26,7 @@ export default function TrendingSlider({ product = [] }) {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl md:text-[32px] font-bold uppercase">Trending Products</h2>
         {/* Optional: View All Link */}
-        <Link href="/bags" className="text-[16px] underline">View All</Link>
+        <Link href="/allproduct" className="text-[16px] underline">View All</Link>
       </div>
 
       <div className="relative">

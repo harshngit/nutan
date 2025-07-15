@@ -22,7 +22,7 @@ const HomeSlider = () => {
         slidesPerView={1}
         loop
         autoplay={{
-          delay: 4000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{ clickable: true }}
