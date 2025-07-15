@@ -16,7 +16,7 @@ const images = [
 
 const HomeSlider = () => {
   return (
-    <div className="w-full md:mt-6 relative">
+    <div className="w-full md:mt-1 relative">
       <Swiper
         spaceBetween={0}
         slidesPerView={1}

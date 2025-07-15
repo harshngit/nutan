@@ -6,12 +6,11 @@ import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/actions/authActions";
 import CartSidebar from "../Cart/CartSidebar"; 
-import { FaUserCheck } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
 import { BsPerson } from "react-icons/bs";
 
-
- // Assuming you already have this component
+// Firebase
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "@/app/firebase.config";
 
 const navItems = [
   { label: "BAG", href: "/bag", children: []},
@@ -22,23 +21,19 @@ const navItems = [
   { label: "STATIONARY", href: "/stationary"},
 ];
 
-// const accountItems = [
-//   { label: "Login", href: "/login" },
-//   { label: "Register", href: "/register" },
-//   { label: "My Account", href: "/account" },
-// ];
-
 export default function Navbar() {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
-   const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [openAccountDropdown, setOpenAccountDropdown] = useState(false);
   const [openDropdownSearch, setOpenDropdownSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [product, setProduct] = useState([]);
 
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -57,7 +52,6 @@ export default function Navbar() {
   };
 
   const isActive = (href) => pathname === href;
-  console.log(isAuthenticated)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -74,6 +68,25 @@ export default function Navbar() {
       clearTimeout(timeoutRef.current);
       clearTimeout(accountTimeoutRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productRef = collection(db, "Product");
+        const q = query(productRef, where("productStatus", "==", "Published"));
+        const querySnapshot = await getDocs(q);
+        const products = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProduct(products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProduct();
   }, []);
 
   const handleMouseEnter = (label) => {
@@ -110,7 +123,6 @@ export default function Navbar() {
               <Link href={item.href} className={`group px-5 py-2 transition lg:text-[16px] block ${isParentActive ? "text-black" : "text-black"}`}>
                 {item.label}
               </Link>
-
               {hasChildren && openDropdown === item.label && (
                 <div className="absolute left-0 mt-1 z-20 shadow-lg w-48">
                   {item.children.map((child, i) => (
@@ -132,52 +144,26 @@ export default function Navbar() {
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
       <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-black uppercase font-semibold !text-sm tracking-wide">
-  <li><Link href="/bag">Bags</Link></li>
-  <li><Link href="/giftsets">Giftsets</Link></li>
-  <li><Link href="">Drinkware</Link></li>
-  <li><Link href="/Contact">Technology</Link></li>
-  <li><Link href="/Contact">Office</Link></li>
-  <li><Link href="/Contact">Stationary</Link></li>
+        <li><Link href="/bag">Bags</Link></li>
+        <li><Link href="/giftsets">Giftsets</Link></li>
+        <li><Link href="/drinkware">Drinkware</Link></li>
+        <li><Link href="/technology">Technology</Link></li>
+        <li><Link href="/office">Office</Link></li>
+        <li><Link href="/stationary">Stationary</Link></li>
 
-  {isAuthenticated ? (
-  <>
-    <li><Link href="/viewProfile">My Account</Link></li>
-    <li><Link href="/myorder">My Order</Link></li>
-    <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
-  </>
-) : (
-  <>
-    <li><Link href="/login">Login</Link></li>
-    <li><Link href="/register">Register</Link></li>
-  </>
-)}
-
-</ul>
-
-      {/* Search - Mobile */} {/* Wishlist - Mobile */} {/* Cart - Mobile */}
-      {/* <div className="flex gap-8 justify-start items-center">
-        
-        <Link href="">
-          <img src="/asset/Navbar/search.png" className="w-[28px]" alt="Search" />
-        </Link>
-
-        
-        <Link href="/wishlist">
-          <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
-        </Link>
-
-        
-        <Link href="/cart">
-          <div className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer">
-            <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
-            {cartItems.length > 0 && (
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {cartItems.length}
-            </span>
-          )}
-          </div>
-        </Link>
-      </div> */}
+        {isAuthenticated ? (
+          <>
+            <li><Link href="/viewProfile">My Account</Link></li>
+            <li><Link href="/myorder">My Order</Link></li>
+            <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
+          </>
+        ) : (
+          <>
+            <li><Link href="/login">Login</Link></li>
+            <li><Link href="/register">Register</Link></li>
+          </>
+        )}
+      </ul>
     </div>
   );
 
@@ -194,21 +180,89 @@ export default function Navbar() {
           </div>
 
           <div className="lg:hidden w-[100%] flex justify-end items-center">
-            
-
-            {/* Right side icons */}
             <div className="flex items-center gap-4 pr-2">
-              {/* BsPerson (Account Icon) */}
+              <div className="relative" ref={dropdownRef}>
+              <img src="/asset/Navbar/search.png" className="w-[20px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
+              {openDropdownSearch && (
+  <div className="fixed top-[4rem] left-0 w-full h-screen z-[9999] bg-white px-[20px] py-[20px]  overflow-auto">
+    {/* Search Header */}
+    <div className="flex justify-between items-center">
+      <label className="text-green-600 font-semibold text-sm uppercase tracking-wide">Search</label>
+      <RxCross1 className="text-xl cursor-pointer" onClick={() => setOpenDropdownSearch(false)} />
+    </div>
+
+    {/* Search Input */}
+    <input
+      type="text"
+      placeholder=""
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="mt-2 w-full border-0 border-b-[2px] border-green-600 text-black text-lg px-1 py-2 focus:outline-none"
+    />
+
+    {/* Trending Search */}
+    {/* {!searchQuery && (
+      <div className="mt-8">
+        <h3 className="text-black font-bold text-sm uppercase mb-4">Trending Search</h3>
+        <div className="flex flex-wrap gap-3">
+          {[
+            "Loop Powerbanks",
+            "Pop Adapter",
+            "Wireless Charger",
+            "Vault Tech Organiser",
+            "Apple Watch Straps",
+            "Wallets",
+            "Leatherite Cases",
+            "Phone Cases"
+          ].map((item, idx) => (
+            <button
+              key={idx}
+              className="border border-gray-400 text-sm px-3 py-1 rounded hover:bg-gray-100"
+              onClick={() => setSearchQuery(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+    )} */}
+
+    {/* Search Results */}
+    {searchQuery && (
+      <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
+        {product
+          .filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase()))
+          .map((item) => (
+            <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
+              <div className="flex gap-4 items-center p-3 hover:bg-gray-100 cursor-pointer rounded">
+                <img
+                  src={item.productImages?.[0] || "/placeholder.jpg"}
+                  alt={item.productName}
+                  className="w-12 h-12 object-cover rounded"
+                />
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500">{item.productCategory}</span>
+                  <span className="text-base font-medium text-gray-800">{item.productName}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        {product.filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+          <p className="text-sm text-gray-500">No matching products found</p>
+        )}
+      </div>
+    )}
+  </div>
+)}
+
+            </div>
+              
               <Link href={isAuthenticated ? "/viewProfile" : "/login"}>
                 <BsPerson className="text-[26px] text-black" />
               </Link>
 
-              {/* Cart */}
-              <button
-                onClick={() => setIsCartOpen(true)}
-                className="relative text-black transition-colors duration-200"
-              >
-                <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[26px] h-[26px] object-contain" />
+              <button onClick={() => setIsCartOpen(true)} className="relative text-black">
+                <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[26px] h-[26px]" />
                 {cartItems.length > 0 && (
                   <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartItems.length}
@@ -216,102 +270,133 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Hamburger Menu */}
-            <div onClick={() => setOpenDrawer(true)} className="p-2">
-              <img src="/asset/Home/menu.png" className="w-[34px]" alt="Menu" />
-            </div>
-            </div>
-          </div>
-
-
-          <div className="lg:flex hidden lg:w-[20%] w-[33.33%] gap-8 justify-end items-center">
-            {/* Account Dropdown */}
-            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>              
-              <div className="cursor-pointer relative text-black flex items-center gap-1">
-                {isAuthenticated ? (
-                  <>
-                    <BsPerson className="text-[30px]" />
-                    {/* <span className="text-sm font-medium">My Profile</span> */}
-                  </>
-                ) : (
-                  <>
-                    <BsPerson className="text-[30px]" />
-                    {/* <span className="text-sm font-medium">Login</span> */}
-                  </>
-                )}
+              <div onClick={() => setOpenDrawer(true)} className="p-2">
+                <img src="/asset/Home/menu.png" className="w-[34px]" alt="Menu" />
               </div>
-
-  {openAccountDropdown && (
-    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-      {isAuthenticated ? (
-        <>
-          <div className="px-4 py-2 text-xs text-gray-500">Hi, {userProfile?.displayName}</div>
-          <Link href="/viewProfile">
-            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Account</div>
-          </Link>
-          <Link href={'/orders'} >
-                <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</div>
-              </Link>
-          <div
-            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-            onClick={handleLogout}
-          >
-            Logout
+            </div>
           </div>
-        </>
-      ) : (
-        <>
-          <Link href="/login">
-            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Login</div>
-          </Link>
-          <Link href="/register">
-            <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Register</div>
-          </Link>
-        </>
-      )}
-    </div>
-  )}
-</div>
 
-
-            {/* Search with Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <img src="/asset/Navbar/search.png" className="w-[28px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
-              {openDropdownSearch && (
-                <div className="absolute right-0 mt-2 z-20 shadow-lg w-60 bg-white p-3 rounded border">
-                  <input type="text" placeholder="Type to search..." className="w-full px-3 py-2 border border-gray-300 rounded text-black text-sm focus:outline-none" />
+          <div className="lg:flex hidden lg:w-[20%] gap-6 justify-end items-center">
+            {/* Account Dropdown */}
+            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>
+              <div className="cursor-pointer text-black flex items-center gap-1">
+                <BsPerson className="text-[30px]" />
+              </div>
+              {openAccountDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                  {isAuthenticated ? (
+                    <>
+                      <div className="px-4 py-2 text-xs text-gray-500">Hi, {userProfile?.displayName}</div>
+                      <Link href="/viewProfile"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Account</div></Link>
+                      <Link href="/orders"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</div></Link>
+                      <div onClick={handleLogout} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</div>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Login</div></Link>
+                      <Link href="/register"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Register</div></Link>
+                    </>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Wishlist */}
+            {/* Search with Firebase Integration */}
+            <div className="relative" ref={dropdownRef}>
+              <img src="/asset/Navbar/search.png" className="w-[28px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
+              {openDropdownSearch && (
+  <div className="fixed top-[5rem] left-0 w-full h-screen z-[9999] bg-white px-[60px] py-[20px]  overflow-auto">
+    {/* Search Header */}
+    <div className="flex justify-between items-center">
+      <label className="text-green-600 font-semibold text-sm uppercase tracking-wide">Search</label>
+      <RxCross1 className="text-xl cursor-pointer" onClick={() => setOpenDropdownSearch(false)} />
+    </div>
+
+    {/* Search Input */}
+    <input
+      type="text"
+      placeholder=""
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="mt-2 w-full border-0 border-b-[2px] border-green-600 text-black text-lg px-1 py-2 focus:outline-none"
+    />
+
+    {/* Trending Search */}
+    {/* {!searchQuery && (
+      <div className="mt-8">
+        <h3 className="text-black font-bold text-sm uppercase mb-4">Trending Search</h3>
+        <div className="flex flex-wrap gap-3">
+          {[
+            "Loop Powerbanks",
+            "Pop Adapter",
+            "Wireless Charger",
+            "Vault Tech Organiser",
+            "Apple Watch Straps",
+            "Wallets",
+            "Leatherite Cases",
+            "Phone Cases"
+          ].map((item, idx) => (
+            <button
+              key={idx}
+              className="border border-gray-400 text-sm px-3 py-1 rounded hover:bg-gray-100"
+              onClick={() => setSearchQuery(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+    )} */}
+
+    {/* Search Results */}
+    {searchQuery && (
+      <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
+        {product
+          .filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase()))
+          .map((item) => (
+            <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
+              <div className="flex gap-4 items-center p-3 hover:bg-gray-100 cursor-pointer rounded">
+                <img
+                  src={item.productImages?.[0] || "/placeholder.jpg"}
+                  alt={item.productName}
+                  className="w-12 h-12 object-cover rounded"
+                />
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500">{item.productCategory}</span>
+                  <span className="text-base font-medium text-gray-800">{item.productName}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        {product.filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+          <p className="text-sm text-gray-500">No matching products found</p>
+        )}
+      </div>
+    )}
+  </div>
+)}
+
+            </div>
+
             <Link href="/wishlist">
               <img src="/asset/Navbar/heart.png" className="w-[28px]" alt="Wishlist" />
             </Link>
 
-            {/* Cart */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-1 text-gray-700 hover:text-gray-900 transition-colors duration-200"
-              aria-label="Open shopping cart"
-              suppressHydrationWarning={true}
-            >
-              <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px] object-contain" />
-              
+            <button onClick={() => setIsCartOpen(true)} className="relative">
+              <img src="/asset/Navbar/cart.png" alt="Cart" className="w-[28px] h-[28px]" />
               {cartItems.length > 0 && (
                 <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartItems.length}
                 </div>
               )}
             </button>
-
           </div>
 
           <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <div className={`fixed top-0 right-0 w-screen h-screen bg-[#FFFFFF] z-[9998] px-6 pt-6 transform transition-transform duration-300 ${openDrawer ? "translate-x-0" : "translate-x-full"}`}>
         <div className="flex justify-end items-center mb-4">
           <RxCross1 className="text-[20px] cursor-pointer" onClick={() => setOpenDrawer(false)} />

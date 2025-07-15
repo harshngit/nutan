@@ -1,19 +1,45 @@
+'use client';
+
 import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { toggleWishlistItem, loadWishlistFromStorage } from "@/actions/wishlistActions";
 
-export default function ProductCard({ item, isLiked, toggleWishlist }) {
+export default function ProductCard({ item }) {
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
+  const { userProfile } = useSelector((state) => state.user);
+  const userId = userProfile?.uid;
+
+  useEffect(() => {
+    dispatch(loadWishlistFromStorage());
+  }, [dispatch]);
+
+  const isLiked = wishlist?.[userId]?.some((p) => p.id === item.id);
+
+  const handleToggleWishlist = (e) => {
+    e.preventDefault(); // Prevent navigation when clicking heart
+
+    dispatch(toggleWishlistItem(userId, item));
+
+    if (!isLiked) {
+      toast.success('Product added to wishlist', { autoClose: 1500 });
+    } else {
+      toast.info('Product removed from wishlist', { autoClose: 1500 });
+    }
+  };
+
   return (
     <Link href={`/shop/${item.id}`} passHref>
       <div className="relative bg-white cursor-pointer group">
         {/* Wishlist Icon */}
         <div
           className="absolute top-2 right-4 z-10 cursor-pointer"
-          onClick={(e) => {
-            e.preventDefault(); // Prevent redirect on heart click
-            toggleWishlist(item.id);
-          }}
+          onClick={handleToggleWishlist}
         >
           {isLiked ? (
             <FaHeart className="text-red-600 text-lg transition" />
