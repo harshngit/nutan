@@ -16,7 +16,7 @@ const SnapOnBanner = ({productDetails}) => {
             {productDetails.bannerTitleOne}
           </h2>
           <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
-            {productDetails.bannerDescOne}
+            {productDetails.bannerDescOne.replace(/<[^>]*>/g, '')}
           </div>
         </div>
 
@@ -53,7 +53,7 @@ const SnapOnBanner = ({productDetails}) => {
            {productDetails.bannerTitleTwo}
           </h2>
           <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
-            {productDetails.bannerDescTwo}          
+            {productDetails.bannerDescTwo.replace(/<[^>]*>/g, '')}          
           </div>
         </div>
       </div>

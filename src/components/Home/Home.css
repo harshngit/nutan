@@ -1,0 +1,31 @@
+.swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal{
+    bottom: 20px !important;
+    right: 0rem !important;
+    left: -3rem !important;
+}
+
+.custom-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-bullet .progress {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background-color: white;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.custom-bullet.active {
+  width: 40px;
+   background-color: #bbb; 
+  border-radius: 10px;
+}
