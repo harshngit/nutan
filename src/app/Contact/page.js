@@ -11,6 +11,7 @@ import ProductFilterToolbar from '@/components/Shop/ProductFilterToolbar'
 import ProductPage from '@/components/Shop/ProductPage'
 import ProductGrid from '@/components/Productpage/BackpackGrid'
 import React from 'react'
+import ServiceFeatures from '@/components/Home/FeaturesSection'
 
 const Contact = () => {
     return (
@@ -26,11 +27,13 @@ const Contact = () => {
                 <ContactPage />
             </section>
 
-            <section className="relative pt-[0px] pb-[46px]">
-                {/* Adjust padding to avoid navbar overlap */}
+            {/* <section className="relative pt-[0px] pb-[46px]">
                 <ProductBadage />
-            </section>
+            </section> */}
            
+           <section className='relative overflow-hidden'>
+                   <ServiceFeatures />
+                 </section>
 
             <section className="relative">
                 <Footer />

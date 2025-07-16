@@ -208,7 +208,80 @@ const Details = ({ productDetails, setSelectedVariation }) => {
         </button>
       </div>
 
-      {/* Accordion section omitted for brevity */}
+{/* Expandable Sections */}
+      {['Product Details', 'Specifications', 'Delivery Time & Returns'].map((section, index) => (
+        <div key={index} className="border-b">
+          <button
+            onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
+            className="w-full flex justify-between items-center py-4 text-sm font-medium text-left"
+          >
+            <span>{section}</span>
+            <FiChevronDown
+              className={`transform transition-transform duration-300 ${activeDropdown === index ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          {activeDropdown === index && (
+            <div className="text-sm text-gray-700 pb-4 px-1 leading-relaxed">
+              {/* Product Details */}
+              {section === "Product Details" && (
+                <div>
+                  {productDetails?.productDescription ? (
+                    <p>{typeof productDetails.productDescription === "string"
+                      ? productDetails.productDescription.replace(/<[^>]+>/g, "")
+                      : "No description available."}</p>
+                  ) : <p>No product description available.</p>}
+                </div>
+              )}
+
+              {/* Specifications */}
+              {section === "Specifications" && (
+                <div className="space-y-3">
+                  {productDetails?.productDimension?.[0] ? (
+                    <>
+                      {productDetails.productDimension[0].color && <p><b>Colour:</b> {productDetails.productDimension[0].color}</p>}
+                      {productDetails.productDimension[0].materials && <p><b>Material:</b> {productDetails.productDimension[0].materials}</p>}
+                      {productDetails.productDimension[0].dimensions && <p><b>Dimensions:</b> {productDetails.productDimension[0].dimensions}</p>}
+                      {productDetails.productDimension[0].packageContent && <p><b>Package contents:</b> {productDetails.productDimension[0].packageContent}</p>}
+                      {productDetails.productDimension[0].care && <p><b>Care:</b> {productDetails.productDimension[0].care}</p>}
+                      {productDetails.productDimension[0].countryOfOrigin && <p><b>Country of origin:</b> {productDetails.productDimension[0].countryOfOrigin}</p>}
+                      {productDetails.productDimension[0].manufacturer && <p><b>Manufacturer:</b> {productDetails.productDimension[0].manufacturer}</p>}
+                      {productDetails.productDimension[0].note && <p><b>Note:</b> {productDetails.productDimension[0].note}</p>}
+                    </>
+                  ) : <p>No specifications available.</p>}
+                </div>
+              )}
+
+              {/* Delivery Time & Returns */}
+              {section === "Delivery Time & Returns" && (
+                <div className="space-y-4 text-sm text-black">
+                  <div>
+                    <p className="font-bold mb-2">DELIVERY</p>
+                    <p>Dispatch to courier in 24-48 hours</p>
+                    <p>Eligible for Cash on Delivery</p>
+                  </div>
+                  <div>
+                    <p className="font-bold mb-2">FREE SHIPPING</p>
+                    <p>Free shipping on orders above ₹999.</p>
+                    <p>A charge of ₹49 is applied to all orders of ₹999 and below.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold mb-2">CASH ON DELIVERY</p>
+                    <p>₹99 extra charges for all Cash On Delivery orders.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold mb-2">RETURNS</p>
+                    <p>Hassle-free returns for 30 Days. Please keep the product in its original condition.</p>
+                    <p>
+                      See our <a href="/shipping-policy" className="text-green-700 underline">Shipping Policy</a> and <a href="/return-policy" className="text-green-700 underline">Return & Exchange Policy</a>.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

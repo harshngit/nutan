@@ -10,6 +10,7 @@ import ProductBadage from '@/components/Shop/ProductBadage'
 import React, { useEffect, useState } from 'react'
 import { db } from '../firebase.config'
 import { orderBy, where } from 'firebase/firestore'
+import ServiceFeatures from '@/components/Home/FeaturesSection'
 
 const Cart = () => {
 	const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -47,9 +48,14 @@ const Cart = () => {
 				{/* Adjust padding to avoid navbar overlap */}
 				<CartPage />
 			</section>
-			<section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
+			{/* <section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
 				<ProductBadage />
-			</section>
+			</section> */}
+
+			<section className='relative overflow-hidden'>
+					<ServiceFeatures />
+				  </section>
+
 			{/* <section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">
 				<TrendingNow recommendedProducts={recommendedProducts} />
 			</section> */}
