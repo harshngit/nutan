@@ -29,12 +29,14 @@ const Details = ({ productDetails, setSelectedVariation }) => {
   const wishlist = useSelector(state => state.wishlist.wishlist);
   const userId = userProfile?.uid;
 
-  // Load wishlist from storage
+  const uniqueColors = [...new Set(variation.map(v => v.color))];
+
+  // Load wishlist
   useEffect(() => {
     dispatch(loadWishlistFromStorage());
   }, [dispatch]);
 
-  // Set default variation
+  // Set initial color, size
   useEffect(() => {
     if (variation.length > 0) {
       const first = variation[0];
@@ -45,7 +47,6 @@ const Details = ({ productDetails, setSelectedVariation }) => {
     }
   }, [variation]);
 
-  // Handle color change
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     const matched = variation.find(v => v.color.toLowerCase() === color.toLowerCase());
@@ -55,6 +56,16 @@ const Details = ({ productDetails, setSelectedVariation }) => {
       setSelectedVariation && setSelectedVariation(matched);
     }
   };
+
+  const getVariantQuantity = () => {
+    const match = variation.find(
+      v => v.color?.toLowerCase() === selectedColor?.toLowerCase() &&
+        (v.size || []).includes(selectedSize)
+    );
+    return match?.quantity ?? 0;
+  };
+
+  const isSoldOut = getVariantQuantity() <= 0;
 
   const handleQuantityChange = (action) => {
     setQuantity(prev => action === 'increase' ? prev + 1 : Math.max(1, prev - 1));
@@ -66,6 +77,11 @@ const Details = ({ productDetails, setSelectedVariation }) => {
       return;
     }
 
+    if (isSoldOut) {
+      toast.error("Selected variant is out of stock");
+      return;
+    }
+
     const existingItem = cartItems.find(
       item =>
         item.product === (productDetails._id || productDetails.id) &&
@@ -74,7 +90,12 @@ const Details = ({ productDetails, setSelectedVariation }) => {
     );
 
     if (existingItem) {
-      dispatch(updateCartQuantity(existingItem.product, existingItem.size, existingItem.color, existingItem.quantity + quantity));
+      dispatch(updateCartQuantity(
+        existingItem.product,
+        existingItem.size,
+        existingItem.color,
+        existingItem.quantity + quantity
+      ));
       toast.success('Updated quantity in your cart.');
     } else {
       const cartItem = {
@@ -85,6 +106,7 @@ const Details = ({ productDetails, setSelectedVariation }) => {
         image: productDetails.productImages?.[0],
         size: selectedSize,
         quantity,
+        totalQuantity: getVariantQuantity(),
         color: selectedColor,
         couponId: '',
         couponCode: '',
@@ -115,8 +137,6 @@ const Details = ({ productDetails, setSelectedVariation }) => {
 
   const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
-  const uniqueColors = [...new Set(variation.map(v => v.color))];
-
   return (
     <div className="w-full px-8 py-8 mx-auto font-sans text-[#111]">
       <h1 className="text-xl md:text-2xl font-medium leading-tight mb-2">
@@ -135,26 +155,50 @@ const Details = ({ productDetails, setSelectedVariation }) => {
         <span className="text-gray-500">(191 reviews)</span>
       </div>
 
-      {/* SIZE */}
+      {/* Stock Info */}
+      {!isSoldOut ? (
+        <p className="text-sm text-gray-600 mb-2">
+          Only <span className="font-bold">{getVariantQuantity()}</span> item(s) left in stock!
+        </p>
+      ) : (
+        <p className="text-sm text-red-600 mb-2 font-medium">
+          Selected variant is Sold Out
+        </p>
+      )}
+
+      {/* Size Selection */}
       <div className="mb-4">
         <p className="font-semibold text-sm text-[#111] mb-1">SIZE</p>
         <div className="flex flex-wrap gap-3">
-          {availableSizes.map((size, index) => (
-            <button
-              key={index}
-              onClick={() => setSelectedSize(size)}
-              className={`border rounded-md px-4 py-2 text-sm ${selectedSize === size
-                ? 'border-[#111] text-[#111] font-semibold'
-                : 'border-gray-300 text-gray-700 hover:border-[#111]'
-              }`}
-            >
-              {size}
-            </button>
-          ))}
+          {availableSizes.map((size, index) => {
+            const matched = variation.find(
+              v => v.color?.toLowerCase() === selectedColor?.toLowerCase() &&
+                (v.size || []).includes(size)
+            );
+            const qty = matched?.quantity ?? 0;
+            const soldOut = qty <= 0;
+
+            return (
+              <button
+                key={index}
+                onClick={() => !soldOut && setSelectedSize(size)}
+                disabled={soldOut}
+                className={`border rounded-md px-4 py-2 text-sm
+                  ${selectedSize === size
+                    ? 'border-[#111] text-[#111] font-semibold'
+                    : soldOut
+                      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                      : 'border-gray-300 text-gray-700 hover:border-[#111]'
+                  }`}
+              >
+                {size} {soldOut && "(Sold Out)"}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* COLOR */}
+      {/* Color Selection */}
       <div className="mb-6">
         <p className="font-semibold text-sm text-[#111] mb-1">COLOR</p>
         <div className="flex flex-wrap gap-5">
@@ -163,7 +207,7 @@ const Details = ({ productDetails, setSelectedVariation }) => {
               key={idx}
               onClick={() => handleColorSelect(color)}
               className={`w-7 h-7 rounded-full border-2 focus:outline-none transition 
-              ${selectedColor?.toLowerCase() === color.toLowerCase()
+                ${selectedColor?.toLowerCase() === color.toLowerCase()
                   ? 'border-[#111]'
                   : 'border-gray-300'}`}
               style={{ backgroundColor: color }}
@@ -173,7 +217,7 @@ const Details = ({ productDetails, setSelectedVariation }) => {
         </div>
       </div>
 
-      {/* Quantity + Add to Cart + Wishlist */}
+      {/* Quantity + Cart + Wishlist */}
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <div className="flex items-center border border-gray-300 rounded-lg">
           <button
@@ -192,12 +236,21 @@ const Details = ({ productDetails, setSelectedVariation }) => {
           </button>
         </div>
 
-        <button
-          onClick={handleAddToCart}
-          className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-3 px-4 rounded-md"
-        >
-          ADD TO CART
-        </button>
+        {isSoldOut ? (
+          <button
+            disabled
+            className="flex-1 bg-gray-300 text-gray-700 cursor-not-allowed text-sm font-semibold py-3 px-4 rounded-md"
+          >
+            OUT OF STOCK
+          </button>
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-3 px-4 rounded-md"
+          >
+            ADD TO CART
+          </button>
+        )}
 
         <button
           onClick={handleToggleWishlist}
@@ -208,7 +261,7 @@ const Details = ({ productDetails, setSelectedVariation }) => {
         </button>
       </div>
 
-{/* Expandable Sections */}
+      {/* Expandable Sections */}
       {['Product Details', 'Specifications', 'Delivery Time & Returns'].map((section, index) => (
         <div key={index} className="border-b">
           <button
@@ -223,59 +276,40 @@ const Details = ({ productDetails, setSelectedVariation }) => {
 
           {activeDropdown === index && (
             <div className="text-sm text-gray-700 pb-4 px-1 leading-relaxed">
-              {/* Product Details */}
               {section === "Product Details" && (
-                <div>
-                  {productDetails?.productDescription ? (
-                    <p>{typeof productDetails.productDescription === "string"
-                      ? productDetails.productDescription.replace(/<[^>]+>/g, "")
-                      : "No description available."}</p>
-                  ) : <p>No product description available.</p>}
-                </div>
+                <p>{productDetails?.productDescription?.replace(/<[^>]+>/g, "") || "No description available."}</p>
               )}
 
-              {/* Specifications */}
               {section === "Specifications" && (
                 <div className="space-y-3">
                   {productDetails?.productDimension?.[0] ? (
                     <>
-                      {productDetails.productDimension[0].color && <p><b>Colour:</b> {productDetails.productDimension[0].color}</p>}
-                      {productDetails.productDimension[0].materials && <p><b>Material:</b> {productDetails.productDimension[0].materials}</p>}
-                      {productDetails.productDimension[0].dimensions && <p><b>Dimensions:</b> {productDetails.productDimension[0].dimensions}</p>}
-                      {productDetails.productDimension[0].packageContent && <p><b>Package contents:</b> {productDetails.productDimension[0].packageContent}</p>}
-                      {productDetails.productDimension[0].care && <p><b>Care:</b> {productDetails.productDimension[0].care}</p>}
-                      {productDetails.productDimension[0].countryOfOrigin && <p><b>Country of origin:</b> {productDetails.productDimension[0].countryOfOrigin}</p>}
-                      {productDetails.productDimension[0].manufacturer && <p><b>Manufacturer:</b> {productDetails.productDimension[0].manufacturer}</p>}
-                      {productDetails.productDimension[0].note && <p><b>Note:</b> {productDetails.productDimension[0].note}</p>}
+                      {Object.entries(productDetails.productDimension[0]).map(([key, val]) => (
+                        val && <p key={key}><b>{key.replace(/([A-Z])/g, ' $1')}:</b> {val}</p>
+                      ))}
                     </>
                   ) : <p>No specifications available.</p>}
                 </div>
               )}
 
-              {/* Delivery Time & Returns */}
               {section === "Delivery Time & Returns" && (
                 <div className="space-y-4 text-sm text-black">
-                  <div>
-                    <p className="font-bold mb-2">DELIVERY</p>
-                    <p>Dispatch to courier in 24-48 hours</p>
-                    <p>Eligible for Cash on Delivery</p>
-                  </div>
-                  <div>
-                    <p className="font-bold mb-2">FREE SHIPPING</p>
-                    <p>Free shipping on orders above ₹999.</p>
-                    <p>A charge of ₹49 is applied to all orders of ₹999 and below.</p>
-                  </div>
-                  <div>
-                    <p className="font-bold mb-2">CASH ON DELIVERY</p>
-                    <p>₹99 extra charges for all Cash On Delivery orders.</p>
-                  </div>
-                  <div>
-                    <p className="font-bold mb-2">RETURNS</p>
-                    <p>Hassle-free returns for 30 Days. Please keep the product in its original condition.</p>
-                    <p>
-                      See our <a href="/shipping-policy" className="text-green-700 underline">Shipping Policy</a> and <a href="/return-policy" className="text-green-700 underline">Return & Exchange Policy</a>.
-                    </p>
-                  </div>
+                  <p className="font-bold">DELIVERY</p>
+                  <p>Dispatch to courier in 24-48 hours</p>
+                  <p>Eligible for Cash on Delivery</p>
+
+                  <p className="font-bold mt-4">FREE SHIPPING</p>
+                  <p>Free shipping on orders above ₹999.</p>
+                  <p>A charge of ₹49 is applied to all orders of ₹999 and below.</p>
+
+                  <p className="font-bold mt-4">CASH ON DELIVERY</p>
+                  <p>₹99 extra charges for all Cash On Delivery orders.</p>
+
+                  <p className="font-bold mt-4">RETURNS</p>
+                  <p>Hassle-free returns for 30 Days. Please keep the product in its original condition.</p>
+                  <p>
+                    See our <a href="/shipping-policy" className="text-green-700 underline">Shipping Policy</a> and <a href="/return-policy" className="text-green-700 underline">Return & Exchange Policy</a>.
+                  </p>
                 </div>
               )}
             </div>

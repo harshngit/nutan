@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Banner from "../../../public/asset/Home/home-banner2.png";
+import Banner from "../../../public/asset/Home/bottom-banner2.webp";
 
 export default function HomeBannerTwo() {
   return (
-    <div className="relative w-full h-[50vh] md:h-[85vh]">
+    <div className="relative w-full h-[30vh] md:h-[80vh]">
       <Image
         src={Banner}
         alt="Banner image"

@@ -25,14 +25,14 @@ const TechData = [
   {
     id: "Office Supplies",
     title: "POWER BANK",
-    href: "/shop",
+    href: "/technology",
     images: [ img11],
     hasScrollUp: false,
   },
   {
     id: "Print",
     title: "OTHERS",
-    href: "/shop",
+    href: "/technology",
     images: [img12    ],
     hasScrollUp: true,
   },
@@ -50,7 +50,8 @@ function TechCard({ category }) {
   // }
 
   return (
-    <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group">
+    <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group">
+      <Link href={category.href} passHref>
       {/* Image Swiper - Lower z-index */}
       <div className="absolute inset-0 z-0 ">
         <Swiper
@@ -91,15 +92,15 @@ function TechCard({ category }) {
             </h3>
 
             {/* Arrow Button on Bottom-Right */}
-            <Link href={category.href} passHref>
+            
               <button className="w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
                 <IoArrowForward className="w-5 h-5 text-gray-800" />
               </button>
-            </Link>
+          
             
           </div>
         </div>
-
+    </Link>
     </div>
   )
 }

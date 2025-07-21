@@ -55,7 +55,7 @@ const HomeSlider = () => {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-[40vh] md:h-[650px]">
+            <div className="relative w-full h-[30vh] md:h-[650px]">
               <Image
                 src={img}
                 fill

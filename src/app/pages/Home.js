@@ -91,9 +91,9 @@ const Home = () => {
         <HomeBannerTwo />
       </section>
 
-      <section className="relative overflow-hidden">
+      {/* <section className="relative overflow-hidden">
         <TrendingSlider product={trendingProducts} loading={loading} />
-      </section>
+      </section> */}
 
       <section className='relative overflow-hidden'>
         <ServiceFeatures />

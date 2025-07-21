@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/actions/authActions";
 import CartSidebar from "../Cart/CartSidebar"; 
 import { BsPerson } from "react-icons/bs";
+import { useCurrency } from "@/Context/CurrencyProvider";
+
 
 // Firebase
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -26,6 +28,8 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const { cartItems } = useSelector((state) => state.cart);
+  const { currency, setCurrency } = useCurrency();
+
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -41,6 +45,10 @@ export default function Navbar() {
 
   const userState = useSelector((state) => state.user);
   const { isAuthenticated, userProfile } = userState || {};
+
+  const handleCurrencyChange = (e) => {
+    setCurrency(e.target.value);
+  };
 
   const handleLogout = async () => {
     try {
@@ -390,6 +398,19 @@ export default function Navbar() {
                 </div>
               )}
             </button>
+
+            <div className="relative">
+              <select
+                value={currency}
+
+                onChange={handleCurrencyChange}
+                className="border border-gray-300 rounded px-2 py-1 text-sm text-black"
+              >
+                <option value="INR">INR ₹</option>
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+              </select>
+            </div>
           </div>
 
           <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

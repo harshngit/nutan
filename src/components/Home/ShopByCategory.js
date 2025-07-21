@@ -23,21 +23,21 @@ const categoriesData = [
   {
     id: "Office Supplies",
     title: "TECHNOLOGY",
-    href: "/shop",
+    href: "/technology",
     images: [img10,],
     hasScrollUp: false,
   },
   {
     id: "Print",
     title: "OFFICE SUPPLIES",
-    href: "/shop",
+    href: "/office",
     images: [img1],
     hasScrollUp: true,
   },
   {
     id: "Bedroom",
     title: "GIFTS",
-    href: "/shop",
+    href: "/giftsets",
     images: [ img8   ],
     hasScrollUp: false,
   },
@@ -54,7 +54,8 @@ function CategoryCard({ category }) {
   // }
 
   return (
-    <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group ">
+    <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group ">
+        <Link href={category.href} passHref>
       {/* Image Swiper - Lower z-index */}
       <div className="absolute inset-0 z-0 ">
         <Swiper
@@ -81,6 +82,7 @@ function CategoryCard({ category }) {
             </SwiperSlide>
           ))}
         </Swiper>
+       
       </div>
 
       {/* Content Overlay - Higher z-index */}
@@ -95,15 +97,15 @@ function CategoryCard({ category }) {
             </h3>
 
             {/* Arrow Button on Bottom-Right */}
-            <Link href={category.href} passHref>
+            
               <button className="w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
                 <IoArrowForward className="w-5 h-5 text-gray-800" />
               </button>
-            </Link>
+          
             
           </div>
         </div>
-
+    </Link>
     </div>
   )
 }

@@ -21,7 +21,7 @@ export default function NewArrivalsSlider({ product = [] }) {
   if (!product?.length) return null;
 
   return (
-    <section className="w-full px-8 py-12 bg-white">
+    <section className="w-full lg:px-8 px-4 py-12 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl sm:text-4xl font-bold uppercase">Our Bestsellers</h2>

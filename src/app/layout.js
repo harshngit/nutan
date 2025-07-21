@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { ReduxProvider } from "@/store/ReduxProvider";
 import LoadUser from "@/store/LoadUser";
+import { CurrencyProvider } from "@/Context/CurrencyProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -55,8 +56,10 @@ export default function RootLayout({ children }) {
      
        <body className={inter.className}>
         <ReduxProvider>
+          <CurrencyProvider>
           <LoadUser />
             {children}
+            </CurrencyProvider>
           </ReduxProvider>
         </body>
     </html>

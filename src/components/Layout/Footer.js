@@ -34,7 +34,7 @@ const Footer = () => {
         //     </div>
         // </div>
         <>
-            <footer className="bg-gray-200  text-black px-14 w-full py-10 overflow-hidden">
+            <footer className="bg-gray-200  text-black md:px-14 px-4 w-full md:py-10 py-4 overflow-hidden">
                 <div className='grid lg:grid-cols-4 grid-cols-1'>
 
                     {/* Column 1 */}

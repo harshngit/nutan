@@ -30,8 +30,8 @@ export default function ServiceFeatures() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[5rem]">
           {features.map((feature, index) => (
-            <div key={index} className="text-start">
-              <div className="flex justify-start mb-4">
+            <div key={index} className="md:text-start text-center ">
+              <div className="flex md:justify-start justify-center mb-4">
                 <div className="w-16 h-16  flex items-center justify-center">
                   <img src={feature.img} alt={feature.title} className="w-12 h-12 object-contain" />
                 </div>

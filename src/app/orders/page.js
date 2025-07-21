@@ -43,11 +43,12 @@ const Orders = () => {
 	console.log(order);
 
 	return (
-		<div className="font-playfair">
+		<div className="font-poppins">
 			<Navbar />
 			<section className="relative pt-[130px] pb-[50px]">
 				<Orderpage order={order} />
 			</section>
+			
 			<Footer />
 		</div>
 	);
