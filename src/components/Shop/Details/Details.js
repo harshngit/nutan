@@ -24,6 +24,11 @@ const Details = ({ productDetails, setSelectedVariation }) => {
   const [quantity, setQuantity] = useState(1);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  const [showNotifyPopup, setShowNotifyPopup] = useState(false);
+const [notifyForm, setNotifyForm] = useState({ name: '', email: '', phone: '' });
+const [submitting, setSubmitting] = useState(false);
+
+
   const { cartItems } = useSelector(state => state.cart);
   const { userProfile } = useSelector(state => state.user) || {};
   const wishlist = useSelector(state => state.wishlist.wishlist);
@@ -260,6 +265,84 @@ const Details = ({ productDetails, setSelectedVariation }) => {
           {isLiked ? 'Remove from Wishlist' : 'Add to Wishlist'}
         </button>
       </div>
+
+      {isSoldOut && (
+        <>
+          <button
+            onClick={() => setShowNotifyPopup(true)}
+            className="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-3 px-4 rounded-md"
+          >
+            Notify Me When Available
+          </button>
+
+          {showNotifyPopup && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+              <div className="bg-white rounded-xl p-6 w-full max-w-sm">
+                <h3 className="text-lg font-semibold mb-4">Get Notified</h3>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={notifyForm.name}
+                  onChange={e => setNotifyForm({ ...notifyForm, name: e.target.value })}
+                  className="w-full border px-4 py-2 rounded mb-3"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={notifyForm.email}
+                  onChange={e => setNotifyForm({ ...notifyForm, email: e.target.value })}
+                  className="w-full border px-4 py-2 rounded mb-3"
+                />
+                <input
+                  type="text"
+                  placeholder="Your Phone"
+                  value={notifyForm.phone}
+                  onChange={e => setNotifyForm({ ...notifyForm, phone: e.target.value })}
+                  className="w-full border px-4 py-2 rounded mb-3"
+                />
+                <div className="flex justify-end gap-8">
+                  <button
+                    onClick={() => setShowNotifyPopup(false)}
+                    className="text-gray-500 hover:underline"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={async () => {
+                      setSubmitting(true);
+                      try {
+                        const notifyData = {
+                          ...notifyForm,
+                          productId: productDetails?.id || '',
+                          productName: productDetails?.productName,
+                          selectedSize,
+                          selectedColor,
+                          timestamp: new Date(),
+                        };
+                        const { db } = await import('@/app/firebase.config');
+                        const { addDoc, collection } = await import('firebase/firestore');
+                        await addDoc(collection(db, 'BackInStockNotify'), notifyData);
+                        toast.success('You will be notified when this item is back in stock.');
+                        setShowNotifyPopup(false);
+                        setNotifyForm({ name: '', email: '' });
+                      } catch (error) {
+                        toast.error('Failed to save notification request.');
+                        console.error(error);
+                      }
+                      setSubmitting(false);
+                    }}
+                    disabled={!notifyForm.name || !notifyForm.email || submitting}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                  >
+                    {submitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+)}
+
 
       {/* Expandable Sections */}
       {['Product Details', 'Specifications', 'Delivery Time & Returns'].map((section, index) => (
