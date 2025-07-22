@@ -5,7 +5,7 @@ import Banner from "../../../public/asset/Home/home-banner.png"
 
 export default function SimpleBanner() {
   return (
-    <div className="relative w-full h-[25vh] md:h-[80vh]">
+    <div className="relative w-full h-[22vh] md:h-[80vh]">
       <Image
         src={Banner}
         alt="Banner image"

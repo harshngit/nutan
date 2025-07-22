@@ -54,7 +54,7 @@ function CategoryCard({ category }) {
   // }
 
   return (
-    <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group ">
+    <div className="relative h-[350px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group ">
         <Link href={category.href} passHref>
       {/* Image Swiper - Lower z-index */}
       <div className="absolute inset-0 z-0 ">
@@ -98,7 +98,7 @@ function CategoryCard({ category }) {
 
             {/* Arrow Button on Bottom-Right */}
             
-              <button className="w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
+              <button className="lg:w-12 w-8 lg:h-12 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
                 <IoArrowForward className="w-5 h-5 text-gray-800" />
               </button>
           

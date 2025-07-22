@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
 import { FaBoxOpen } from "react-icons/fa";
-import Link from "next/link"; // Import Link from Next.js
+import Link from "next/link"; 
 
 const Orderpage = () => {
   const [orders, setOrders] = useState([]);
@@ -112,7 +112,8 @@ const Orderpage = () => {
 
             <div className="flex gap-2">
               {/* Use Link to navigate and pass the orderId */}
-              <Link href={`/orders/order-details/${order.id}`}>
+              
+              <Link href={`/orders/${order?.OrderID}`}>
                 <button className="bg-gray-100 text-gray-800 text-sm px-4 py-2 rounded-md">
                   See Details
                 </button>
