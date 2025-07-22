@@ -15,6 +15,7 @@ import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
+import LoadingScreen from '@/components/Loader/LoaderScreen.js'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -65,6 +66,11 @@ const Shop = () => {
     setFilteredProducts(filtered)
     setCurrentPage(1)
   }
+
+  // Loading screen
+	if (loading) {
+		return <LoadingScreen />;
+	}
 
 	return (
 		<div className=' font-poppins'>

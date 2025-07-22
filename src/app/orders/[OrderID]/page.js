@@ -14,6 +14,7 @@ import { db } from '@/app/firebase.config';
 import Navbar from '@/components/Layout/Navbar';
 import Footer from '@/components/Layout/Footer';
 import OrderDetailsPage from '@/components/Orders/OrderDetailsPage';
+import LoadingScreen from '@/components/Loader/LoaderScreen';
 
 export default function OrderDetails({ params }) {
 	const id = params?.OrderID;
@@ -43,6 +44,12 @@ export default function OrderDetails({ params }) {
 
 		return () => unsubscribe();
 	}, [id]);
+
+  if (loading) {
+		return (
+			<LoadingScreen />
+		);
+	}
 
 	console.log(orderDetails)
 

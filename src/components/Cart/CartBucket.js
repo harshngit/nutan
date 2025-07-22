@@ -164,25 +164,20 @@ const CartBucket = () => {
 								<span>Total</span>
 								<span>${finalTotal.toFixed(2)}</span>
 							</div>
-							{isAuthenticated ? (
-								cartItems.length > 0 ? (
-									<button onClick={handleCheckout} className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
-										Checkout
-									</button>
-								) : (
-									<Link href="/shop">
-										<button className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
-											Shop
-										</button>
-									</Link>
-								)
+
+
+							{cartItems.length > 0 ? (
+								<button onClick={handleCheckout} className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
+									Checkout
+								</button>
 							) : (
-								<Link href="/login">
+								<Link href="/shop">
 									<button className="w-full mt-4 bg-black shadow-lg text-white py-2 hover:bg-gray-900">
-										Login
+										Shop
 									</button>
 								</Link>
 							)}
+
 						</div>
 					</div>
 				</div>

@@ -203,16 +203,11 @@ export default function CartPage() {
               )}
 
               <div className="flex justify-center">
-                {isAuthenticated ? (
-                  <button onClick={handleCheckout} className="w-full mt-4 bg-black text-white py-2 hover:bg-gray-900">
-                    Checkout
-                  </button>
-                ) : (
-                  <Link href="/login" className="w-full mt-4 bg-black text-white py-2 text-center">
-                    Login to Checkout
-                  </Link>
-                )}
+                <button onClick={handleCheckout} className="w-full mt-4 bg-black text-white py-2 hover:bg-gray-900">
+                  Checkout
+                </button>
               </div>
+
             </div>
           </div>
 

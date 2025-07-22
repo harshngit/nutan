@@ -7,6 +7,7 @@ import Footer from '@/components/Layout/Footer';
 import Navbar from '@/components/Layout/Navbar';
 import { useRouter } from 'next/navigation';
 import ReturnForm from '@/components/Return/ReturnForm';
+import LoadingScreen from '@/components/Loader/LoaderScreen';
 
 export default function ReturnPage({ params }) {
 
@@ -40,9 +41,9 @@ export default function ReturnPage({ params }) {
 
 
 	// Loading screen
-	// if (loading) {
-	// 	return <LoadingScreen />;
-	// }
+	if (loading) {
+		return <LoadingScreen />;
+	}
 
 	return (
 		<div className="font-poppins">

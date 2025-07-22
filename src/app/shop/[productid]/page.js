@@ -11,6 +11,7 @@ import { db } from '@/app/firebase.config';
 import RecentlyViewedSlider from '@/components/Shop/Details/RecentlyView';
 import SnapOnBanner from '@/components/Shop/Details/ProductBanner';
 import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider';
+import LoadingScreen from '@/components/Loader/LoaderScreen';
 
 export default function ProductDetailPage({ params }) {
   const [productDetails, setProductDetails] = useState(null);
@@ -64,7 +65,11 @@ export default function ProductDetailPage({ params }) {
     fetchRecommended();
   }, []);
 
-  if (loading) return <div className="text-center py-20">Loading...</div>;
+// Loading screen
+  if (loading) {
+    return <LoadingScreen />;
+  }  
+  
   if (!productDetails) return <div className="text-center py-20 text-red-600">Product not found</div>;
 
   return (

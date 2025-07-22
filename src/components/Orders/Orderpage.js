@@ -75,9 +75,15 @@ const Orderpage = () => {
                   </p>
                 </div>
               </div>
-              <span className="text-black font-medium text-sm bg-gray-100 px-3 py-1 rounded-full">
-                ✔ {order.orderStatus || "Pending"}
-              </span>
+              <span className={`font-medium text-sm px-3 py-1 rounded-full ${
+  order.status === "cancelled"
+    ? "bg-red-200 text-red-800"
+    : order.status === "delivered"
+    ? "bg-green-200 text-green-800"
+    : "bg-gray-200 text-gray-800"
+}`}>
+  {order.status === "cancelled" ? "Cancelled" : order.orderStatus || "Pending"}
+</span>
             </div>
 
             <div className="flex justify-start items-start gap-[5px] flex-col mb-2">

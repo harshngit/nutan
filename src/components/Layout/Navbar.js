@@ -175,6 +175,9 @@ export default function Navbar() {
     </div>
   );
 
+  console.log("Selected currency:", currency);
+
+
   return (
     <div className="fixed top-0 left-0 w-screen z-[9999]">
       <div className="w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]">
@@ -403,7 +406,7 @@ export default function Navbar() {
               <select
                 value={currency}
 
-                onChange={handleCurrencyChange}
+                onChange={(e) => setCurrency(e.target.value)}
                 className="border border-gray-300 rounded px-2 py-1 text-sm text-black"
               >
                 <option value="INR">INR ₹</option>
