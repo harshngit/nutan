@@ -27,6 +27,8 @@ const Details = ({ productDetails, setSelectedVariation }) => {
   const [showNotifyPopup, setShowNotifyPopup] = useState(false);
 const [notifyForm, setNotifyForm] = useState({ name: '', email: '', phone: '' });
 const [submitting, setSubmitting] = useState(false);
+const [notified, setNotified] = useState(false);
+
 
 
   const { cartItems } = useSelector(state => state.cart);
@@ -269,11 +271,19 @@ const [submitting, setSubmitting] = useState(false);
       {isSoldOut && (
         <>
           <button
-            onClick={() => setShowNotifyPopup(true)}
-            className="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-3 px-4 rounded-md"
+            onClick={() => {
+              if (!notified) setShowNotifyPopup(true);
+            }}
+            disabled={notified}
+            className={`flex-1 text-sm font-semibold py-3 px-4 rounded-md ${
+              notified
+                ? 'bg-green-600 text-white cursor-not-allowed'
+                : 'bg-green-500 hover:bg-green-600 text-white'
+            }`}
           >
-            Notify Me When Available
+            {notified ? 'Notified ✅' : 'Notify Me When Available'}
           </button>
+
 
           {showNotifyPopup && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
@@ -315,6 +325,7 @@ const [submitting, setSubmitting] = useState(false);
                           ...notifyForm,
                           productId: productDetails?.id || '',
                           productName: productDetails?.productName,
+                          productPrice: productDetails?.productPrice, // ✅ this line sends the price
                           selectedSize,
                           selectedColor,
                           timestamp: new Date(),
@@ -324,13 +335,16 @@ const [submitting, setSubmitting] = useState(false);
                         await addDoc(collection(db, 'BackInStockNotify'), notifyData);
                         toast.success('You will be notified when this item is back in stock.');
                         setShowNotifyPopup(false);
-                        setNotifyForm({ name: '', email: '' });
+                        setNotifyForm({ name: '', email: '', phone: '' });
+                        setNotified(true); // ✅ mark as notified
+
                       } catch (error) {
                         toast.error('Failed to save notification request.');
                         console.error(error);
                       }
                       setSubmitting(false);
                     }}
+
                     disabled={!notifyForm.name || !notifyForm.email || submitting}
                     className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                   >
