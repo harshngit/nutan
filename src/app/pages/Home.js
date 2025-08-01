@@ -67,7 +67,7 @@ const Home = () => {
     <div className='relative'>
       <NavbarTwo />
 
-      <section className="relative pt-[70px]">
+      <section className="relative pt-[0px]">
         <HomeSlider />
       </section>
 

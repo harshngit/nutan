@@ -4,6 +4,56 @@
     left: -3rem !important;
 }
 
+.swiper-button-next {
+  right: 2rem !important; 
+  left: auto !important; /* or adjust as needed */
+  background: #00000059;
+  color: #fff !important;
+  font-size: 8px !important;
+}
+
+.swiper-button-prev {
+  left: 1rem !important; 
+  right: auto !important; /* or adjust as needed */
+  background: #00000059;
+  color: #fff !important;
+  font-size: 8px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-button-next {
+    right: 1rem !important; 
+    left: auto !important; /* or adjust as needed */
+    background: #00000059;
+    color: #fff !important;
+    font-size: 2px !important;
+  }
+  
+  .swiper-button-prev {
+    left: 1rem !important; 
+    right: auto !important; /* or adjust as needed */
+    background: #00000059;
+    color: #fff !important;
+    font-size: 2px !important;
+  }
+
+  .swiper-button-next::after{
+    font-size: 6px !important;
+  }
+  .swiper-button-prev::after{
+    font-size: 6px !important;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  } 
+}
+
 .custom-bullet {
   width: 10px;
   height: 10px;
@@ -25,7 +75,7 @@
 }
 
 .custom-bullet.active {
-  width: 40px;
+  width: 50px;
    background-color: #bbb; 
   border-radius: 10px;
 }
