@@ -291,29 +291,22 @@ export default function Navbar() {
 
           <div className="lg:flex hidden lg:w-[20%] gap-6 justify-end items-center">
             {/* Account Dropdown */}
-            <div className="relative" onMouseEnter={handleAccountMouseEnter} onMouseLeave={handleAccountMouseLeave}>
-              <div className="cursor-pointer text-black flex items-center gap-1">
-                <img src="/asset/Navbar/Profile-account.png" className="w-[30px]" alt="Account" />
-                {/* <BsPerson className="text-[30px]" /> */}
-              </div>
-              {openAccountDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  {isAuthenticated ? (
-                    <>
-                      <div className="px-4 py-2 text-xs text-gray-500">Hi, {userProfile?.displayName}</div>
-                      <Link href="/viewProfile"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Account</div></Link>
-                      <Link href="/orders"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Order</div></Link>
-                      <div onClick={handleLogout} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</div>
-                    </>
-                  ) : (
-                    <>
-                      <Link href="/login"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Login</div></Link>
-                      <Link href="/register"><div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Register</div></Link>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
+           <Link
+      href="/myaccount"
+      className="cursor-pointer"
+    >
+      {isAuthenticated ? (
+        <BsPerson className="w-[30px] h-[30px] text-black" />
+      ) : (
+        <img
+          src="/asset/Navbar/Profile-account.png"
+          className="w-[30px] h-[30px]"
+          alt="Account"
+        />
+      )}
+    </Link>
+
+
 
             {/* Search with Firebase Integration */}
 <div className="relative" ref={dropdownRef}>

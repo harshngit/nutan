@@ -44,7 +44,7 @@ const Orders = () => {
 	return (
 		<div className="font-poppins">
 			<Navbar />
-			<section className="relative pt-[130px] pb-[50px]">
+			<section className="relative pt-[0px] pb-[50px]">
 				<Orderpage order={order} />
 			</section>
 			

@@ -7,7 +7,7 @@ const ViewProfile = () => {
 	return (
 		<div className=' font-poppins'>
 			<Navbar />
-			<section className="relative pt-[80px] pb-[50px]">
+			<section className="relative pt-[0px] pb-[50px]">
 				<ProfilePage />
 			</section>
 			<section className="relative">

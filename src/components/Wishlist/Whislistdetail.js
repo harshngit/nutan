@@ -20,10 +20,10 @@ const Whislistdetail = () => {
 
   return (
     <div>
-      {/* <div className="flex justify-start items-start flex-col lg:px-10 lg:py-10 px-5 py-5">
-        <h2 className="font-normal text-black lg:text-[24px] text-[15px]">Wishlist</h2>
-        <h5 className="font-400 text-black text-[16px]">These are the items you liked the most</h5>
-      </div> */}
+      <div className="flex justify-center items-center flex-col lg:px-10 lg:py-10 px-5 py-5">
+        <h2 className="font-semibold text-black lg:text-[32px] text-[15px]">Wishlist</h2>
+        {/* <h5 className="font-400 text-black text-[16px]">These are the items you liked the most</h5> */}
+      </div>
 
       {userWishlist.length === 0 ? (
         <div className="text-center h-[500px] flex justify-center gap-4 items-center flex-col">
