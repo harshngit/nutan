@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 import withMT from "@material-tailwind/react/utils/withMT";
 
 export default withMT({
@@ -15,7 +15,7 @@ export default withMT({
         alike: ['Alike'],
       },
       screens: {
-        xxl: '1408px', // Custom screen at ~110% of 1280px
+        xxl: '1408px',
       },
       keyframes: {
         marquee: {
@@ -35,10 +35,12 @@ export default withMT({
         "banner": "url('/asset/Home/bgimg.jpg')",
       },
       colors: {
+        text: "#EAD987",
+        bg: "#3B3310",
         primary: "#565449",
         secondary: "#11120D",
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 });

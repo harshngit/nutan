@@ -4,20 +4,24 @@ import Image from 'next/image';
 import React from 'react';
 import img1 from "../../../../public/asset/browse/collection1.webp";
 import img2 from "../../../../public/asset/browse/collection2.webp";
+import DOMPurify from 'dompurify';
 
 const SnapOnBanner = ({productDetails}) => {
   return (
-    <section className="w-full bg-white ">
+    <section className="w-full bg-white px-4 md:px-0">
       {/* Original Section */}
       <div className="max-w-full flex flex-col lg:flex-row items-center">
         {/* Text Content */}
-        <div className="lg:pl-12 text-center lg:text-left lg:w-1/2 ">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
+        <div className="lg:px-12 text-left lg:text-left lg:w-1/2 ">
+          <h2 className="text-2xl md:text-4xl font-bold text-black md:mb-6 mb-2 ">
             {productDetails.bannerTitleOne}
           </h2>
-          <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
-            {productDetails.bannerDescOne.replace(/<[^>]*>/g, '')}
-          </div>
+          <div
+            className="prose text-sm md:text-lg text-black max-w-xl mb-8 lg:mb-0"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(productDetails.bannerDescOne) }}
+          ></div>
+
+
         </div>
 
         {/* Image Content */}
@@ -34,7 +38,7 @@ const SnapOnBanner = ({productDetails}) => {
       </div>
 
       {/* Reversed Section */}
-      <div className="max-w-full flex flex-col-reverse lg:flex-row items-center">
+      <div className="max-w-full flex flex-col-reverse lg:flex-row items-center md:pt-0 pt-8">
         {/* Image Content */}
         <div className="flex justify-center lg:justify-start lg:w-1/2 ">
           <Image
@@ -48,13 +52,16 @@ const SnapOnBanner = ({productDetails}) => {
         </div>
 
         {/* Text Content */}
-        <div className="lg:pl-12 text-center lg:text-left lg:w-1/2">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
+        <div className="lg:px-12 text-left lg:text-left lg:w-1/2">
+          <h2 className="text-2xl md:text-4xl font-bold text-black md:mb-6 mb-2">
            {productDetails.bannerTitleTwo}
           </h2>
-          <div className="text-base md:text-lg text-gray-700 max-w-xl mb-8 lg:mb-0">
-            {productDetails.bannerDescTwo.replace(/<[^>]*>/g, '')}          
-          </div>
+          <div
+            className="prose  text-sm md:text-lg text-black max-w-xl mb-8 lg:mb-0"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(productDetails.bannerDescTwo) }}
+          ></div>
+
+
         </div>
       </div>
     </section>

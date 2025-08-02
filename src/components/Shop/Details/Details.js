@@ -145,7 +145,7 @@ const [notified, setNotified] = useState(false);
   const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
   return (
-    <div className="w-full px-8 py-8 mx-auto font-sans text-[#111]">
+    <div className="w-full px-4 md:px-8 py-8 mx-auto font-sans text-[#111]">
       <h1 className="text-xl md:text-2xl font-medium leading-tight mb-2">
         {productDetails?.productName || 'Product Name'}
       </h1>
@@ -379,13 +379,26 @@ const [notified, setNotified] = useState(false);
 
               {section === "Specifications" && (
                 <div className="space-y-3">
-                  {productDetails?.productDimension?.[0] ? (
-                    <>
-                      {Object.entries(productDetails.productDimension[0]).map(([key, val]) => (
-                        val && <p key={key}><b>{key.replace(/([A-Z])/g, ' $1')}:</b> {val}</p>
-                      ))}
-                    </>
-                  ) : <p>No specifications available.</p>}
+                  {productDetails?.productDimension?.[0] || productDetails?.customDimensions?.length > 0 ? (
+  <>
+    {/* Default productDimension fields */}
+    {productDetails.productDimension?.[0] &&
+      Object.entries(productDetails.productDimension[0]).map(([key, val]) => (
+        val && <p key={key}><b>{key.replace(/([A-Z])/g, ' $1')}:</b> {val}</p>
+      ))
+    }
+
+    {/* Additional customDimensions fields */}
+    {productDetails.customDimensions?.map((item, index) => (
+      item?.title && item?.value && (
+        <p key={`custom-${index}`}><b>{item.title}:</b> {item.value}</p>
+      )
+    ))}
+  </>
+) : (
+  <p>No specifications available.</p>
+)}
+
                 </div>
               )}
 

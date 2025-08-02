@@ -10,7 +10,7 @@ const ProductDetail = ({ productDetails }) => {
     <>
       <div className=' '>
         <div className=' grid lg:grid-cols-2 grid-cols-1'>
-          <div className='lg:sticky col-span-1 lg:top-28 h-fit'>
+          <div className='lg:sticky col-span-1 h-fit'>
           <LightBox  productDetails={productDetails} />
           </div>
           <div className=' col-span-1'>
