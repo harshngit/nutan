@@ -75,7 +75,7 @@ export default function ProductDetailPage({ params }) {
   return (
     <div className="font-poppins">
       <Navbar />
-      <section className="relative lg:pt-[90px] pt-[50px] pb-[50px] lg:pb-0">
+      <section className="relative lg:pt-[0px] pt-[0px] pb-[50px] lg:pb-0">
         <ProductDetail productDetails={productDetails} />
       </section>
 

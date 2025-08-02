@@ -182,7 +182,7 @@ export default function Navbar() {
 
   return (
     <div className="w-full top-0 left-0 z-[9999]">
-      <div className="w-full px-4 lg:px-0 py-4 lg:py-0 transition-all duration-300 bg-[#fff]">
+      <div className="w-full px-4 lg:px-0 py-4 lg:py-2 transition-all duration-300 bg-[#fff]">
         <div className="w-full lg:pl-[20px] lg:pr-[30px] flex">
           <Link href="/" className="lg:w-[30%] w-[60%] flex lg:flex lg:justify-start justify-start items-center">
             <img className="lg:w-[80px] w-[80px]" src="/asset/Navbar/Nutanlogo.png" alt="logo" />
