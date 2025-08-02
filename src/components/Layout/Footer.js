@@ -35,7 +35,7 @@ const Footer = () => {
         // </div>
         <>
             <footer className="bg-gray-200  text-black md:px-14 px-4 w-full md:py-10 py-4 overflow-hidden">
-                <div className='grid lg:grid-cols-4 grid-cols-1'>
+                <div className='grid lg:grid-cols-3 grid-cols-1'>
 
                     {/* Column 1 */}
                     <div className="flex justify-start gap-5 items-start flex-col">
@@ -82,18 +82,18 @@ const Footer = () => {
                         </div>
                     </div>
                     {/* Column 4 */}
-                    <div className="flex items-start flex-col gap-[30px] ">
+                    {/* <div className="flex items-start flex-col gap-[30px] ">
                         <h4 className='lg:text-[12px] text-[10px] text-[#9F9F9F] font-normal'>Newsletter</h4>
                         <div className='flex justify-center items-center gap-[20px]'>
                             <input type="text" placeholder='Enter your email address' className='px-1 py-1 bg-transparent border-b-[1px] border-b-black w-full' />
                             <button className='px-1 py-1 w-[40%] border-b-[1px] border-b-black text-black bg-white'>Subscribe</button>
                         </div>
-                    </div>
+                    </div> */}
                     {/* Vertical Text on Right */}
 
                 </div>
                 <div className='border-t-[1px] border-[#ccc] pt-10 mt-10 flex justify-start items-end'>
-                    <h3 className='text-[#000]'>2025 Nutan. All rights reverved</h3>
+                    <h3 className='text-[#000]'>2025 Nutan. All rights reserved</h3>
                 </div>
             </footer>
         </>

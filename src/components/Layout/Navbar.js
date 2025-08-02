@@ -152,7 +152,7 @@ export default function Navbar() {
 
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
-      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[40px] lg:gap-4 text-black uppercase font-semibold !text-sm tracking-wide">
+      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[20px] lg:gap-4 text-black uppercase font-semibold !text-sm tracking-wide">
         <li><Link href="/allproduct">Shop</Link></li>
         <li><Link href="/bag">Bags</Link></li>
         <li><Link href="/giftsets">Giftsets</Link></li>
@@ -163,8 +163,8 @@ export default function Navbar() {
 
         {isAuthenticated ? (
           <>
-            <li><Link href="/viewProfile">My Account</Link></li>
-            <li><Link href="/myorder">My Order</Link></li>
+            <li><Link href="/myaccount">My Account</Link></li>
+            {/* <li><Link href="/myorder">My Order</Link></li> */}
             <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
           </>
         ) : (
@@ -197,7 +197,7 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
               <img src="/asset/Navbar/search.png" className="w-[20px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
               {openDropdownSearch && (
-  <div className="fixed top-[4rem] left-0 w-full h-screen z-[9999] bg-white px-[20px] py-[20px]  overflow-auto">
+  <div className="fixed md:top-[4rem] top-0 left-0 w-full h-screen z-[9999] bg-white px-[20px] py-[20px]  overflow-auto">
     {/* Search Header */}
     <div className="flex justify-between items-center">
       <label className="text-green-600 font-semibold text-sm uppercase tracking-wide">Search</label>
@@ -214,7 +214,7 @@ export default function Navbar() {
     />
 
     {/* Trending Search */}
-    {/* {!searchQuery && (
+    {!searchQuery && (
       <div className="mt-8">
         <h3 className="text-black font-bold text-sm uppercase mb-4">Trending Search</h3>
         <div className="flex flex-wrap gap-3">
@@ -238,7 +238,7 @@ export default function Navbar() {
           ))}
         </div>
       </div>
-    )} */}
+    )}
 
     {/* Search Results */}
     {searchQuery && (
