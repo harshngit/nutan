@@ -16,6 +16,7 @@ import HomeSlider from '@/components/Home/HomeSlider.js';
 import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider.js';
 import TrendingSlider from '@/components/Productpage/TrendingSlider.js';
 import ServiceFeatures from '@/components/Home/FeaturesSection.js';
+import Newsletter from '@/components/Home/Newsletter.js';
 
 // Shuffle utility function
 function shuffleArray(array) {
@@ -87,8 +88,12 @@ const Home = () => {
         <TechEssentials />
       </section>
 
-      <section className='relative overflow-hidden'>
+      {/* <section className='relative overflow-hidden'>
         <HomeBannerTwo />
+      </section> */}
+
+      <section className='relative overflow-hidden'>
+        <Newsletter />
       </section>
 
       {/* <section className="relative overflow-hidden">

@@ -50,7 +50,7 @@ function TechCard({ category }) {
   // }
 
   return (
-    <div className="relative h-[350px] md:h-[600px] rounded-2xl overflow-hidden cursor-pointer group">
+    <div className="relative h-[350px] md:h-[700px] rounded-xl overflow-hidden cursor-pointer group">
       <Link href={category.href} passHref>
       {/* Image Swiper - Lower z-index */}
       <div className="absolute inset-0 z-0 ">
@@ -81,20 +81,20 @@ function TechCard({ category }) {
       </div>
 
       {/* Content Overlay - Higher z-index */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 md:p-8">
+       <div className="absolute inset-0 z-10 flex flex-col justify-end p-2 md:p-8 pb:2 md:pb-4">
           
           {/* Bottom Row: Title Left, Arrow Right */}
           <div className="flex items-center justify-between">
             
             {/* Title on Bottom-Left */}
-            <h3 className="text-white text-2xl md:text-3xl font-bold tracking-wide drop-shadow-lg">
+             <h3 className="text-white text-lg md:text-2xl font-bold tracking-wide drop-shadow-lg">
               {category.title}
             </h3>
 
             {/* Arrow Button on Bottom-Right */}
             
-              <button className="lg:w-12 w-8 lg:h-12 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
-                <IoArrowForward className="w-5 h-5 text-gray-800" />
+              <button className="lg:w-10 w-6 lg:h-10 h-6 border-white border-2 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg">
+                <IoArrowForward className="md:w-5 md:h-5 w-3 h-3 text-white" />
               </button>
           
             
@@ -110,12 +110,12 @@ export default function TechEssentials() {
     <section className="pb-12 md:pb-16 lg:pb-18 font-poppins bg-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Other Essentials</h2>
+        <div className="mb-4 md:mb-3">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 tracking-tight">Other Essentials</h2>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-4">
           {TechData.map((category) => (
             <TechCard key={category.id} category={category} />
           ))}
