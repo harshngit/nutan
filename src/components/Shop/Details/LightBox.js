@@ -1,27 +1,39 @@
-"use client";
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-const LightBox = ({ productDetails }) => {
+const LightBox = ({ productDetails, selectedVariation }) => {
   const [swiperRef, setSwiperRef] = useState(null);
-  const images = productDetails?.productImages || [];
+
+  const baseImages = productDetails?.productImages || [];
+  const selectedImg = selectedVariation?.img;
+
+  // ✅ Show variation image first, then rest of the base images
+  const images =
+    selectedImg && selectedImg.trim() !== ''
+      ? [selectedImg, ...baseImages.filter(img => img !== selectedImg)]
+      : baseImages;
+
+  // ✅ Reset slider to first slide when selectedVariation changes
+  useEffect(() => {
+    if (swiperRef && selectedVariation) {
+      swiperRef.slideTo(0, 300); // Slide to first slide with 300ms animation
+    }
+  }, [selectedVariation, swiperRef]);
 
   return (
-    <div className=" flex flex-col-reverse md:flex-row gap-8 items-start w-full">
-      
+    <div className="flex flex-col-reverse md:flex-row gap-8 items-start w-full">
       <div className="w-full relative">
-
-        {/* Swiper Container */}
         <Swiper
           modules={[Navigation, Pagination]}
           onSwiper={setSwiperRef}
           loop
-          pagination={{ el: ".custom-pagination", clickable: true }}
+          pagination={{ el: '.custom-pagination', clickable: true }}
           className="w-full"
         >
           {images.map((img, index) => (
@@ -37,24 +49,20 @@ const LightBox = ({ productDetails }) => {
           ))}
         </Swiper>
 
-        {/* Navigation Buttons */}
         <button
           onClick={() => swiperRef?.slidePrev()}
-          className=" text-gray-600 absolute left-2 top-1/2 transform -translate-y-1/2  p-2   z-10"
+          className="text-gray-600 absolute left-2 top-1/2 transform -translate-y-1/2 p-2 z-10"
         >
           <FiChevronLeft size={30} />
         </button>
-
         <button
           onClick={() => swiperRef?.slideNext()}
-          className="text-gray-600 absolute right-2 top-1/2 transform -translate-y-1/2  p-2s z-10"
+          className="text-gray-600 absolute right-2 top-1/2 transform -translate-y-1/2 p-2 z-10"
         >
           <FiChevronRight size={30} />
         </button>
 
-        {/* Center-Bottom Pagination */}
         <div className="custom-pagination absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-10"></div>
-
       </div>
     </div>
   );

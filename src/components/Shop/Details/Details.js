@@ -151,9 +151,18 @@ const [notified, setNotified] = useState(false);
       </h1>
 
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-lg font-bold text-[#111]">{formatPrice(productDetails?.productPrice)}</span>
-        <span className="text-gray-400 line-through text-base">{formatPrice(productDetails?.originalPrice)}</span>
-      </div>
+  <span className="text-lg font-bold text-[#111]">
+    {formatPrice(
+      selectedColor
+        ? variation.find(v => v.color?.toLowerCase() === selectedColor.toLowerCase())?.price
+        : productDetails?.productPrice
+    )}
+  </span>
+  <span className="text-gray-400 line-through text-base">
+    {formatPrice(productDetails?.originalPrice)}
+  </span>
+</div>
+
 
       <div className="flex items-center gap-2 text-green-600 text-sm mb-6">
         {[...Array(4)].map((_, i) => <GoStarFill key={i} className="text-[#FFC700]" />)}
