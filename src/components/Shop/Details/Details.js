@@ -25,11 +25,9 @@ const Details = ({ productDetails, setSelectedVariation }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const [showNotifyPopup, setShowNotifyPopup] = useState(false);
-const [notifyForm, setNotifyForm] = useState({ name: '', email: '', phone: '' });
-const [submitting, setSubmitting] = useState(false);
-const [notified, setNotified] = useState(false);
-
-
+  const [notifyForm, setNotifyForm] = useState({ name: '', email: '', phone: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [notified, setNotified] = useState(false);
 
   const { cartItems } = useSelector(state => state.cart);
   const { userProfile } = useSelector(state => state.user) || {};
@@ -61,7 +59,15 @@ const [notified, setNotified] = useState(false);
       setAvailableSizes(matched.size || []);
       setSelectedSize(matched.size?.[0] || '');
       setSelectedVariation && setSelectedVariation(matched);
+      // Reset quantity to 1 when color changes
+      setQuantity(1);
     }
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+    // Reset quantity to 1 when size changes
+    setQuantity(1);
   };
 
   const getVariantQuantity = () => {
@@ -73,10 +79,26 @@ const [notified, setNotified] = useState(false);
   };
 
   const isSoldOut = getVariantQuantity() <= 0;
+  const availableStock = getVariantQuantity();
 
   const handleQuantityChange = (action) => {
-    setQuantity(prev => action === 'increase' ? prev + 1 : Math.max(1, prev - 1));
+    if (action === 'increase') {
+      if (quantity < availableStock) {
+        setQuantity(prev => prev + 1);
+      } else {
+        toast.warning(`Only ${availableStock} items available in stock`);
+      }
+    } else {
+      setQuantity(prev => Math.max(1, prev - 1));
+    }
   };
+
+  // Reset quantity when stock changes
+  useEffect(() => {
+    if (quantity > availableStock && availableStock > 0) {
+      setQuantity(availableStock);
+    }
+  }, [availableStock, quantity]);
 
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) {
@@ -89,6 +111,11 @@ const [notified, setNotified] = useState(false);
       return;
     }
 
+    if (quantity > availableStock) {
+      toast.error(`Only ${availableStock} items available in stock`);
+      return;
+    }
+
     const existingItem = cartItems.find(
       item =>
         item.product === (productDetails._id || productDetails.id) &&
@@ -97,11 +124,17 @@ const [notified, setNotified] = useState(false);
     );
 
     if (existingItem) {
+      const newQuantity = existingItem.quantity + quantity;
+      if (newQuantity > availableStock) {
+        toast.error(`Cannot add more items. Only ${availableStock} available in stock`);
+        return;
+      }
+      
       dispatch(updateCartQuantity(
         existingItem.product,
         existingItem.size,
         existingItem.color,
-        existingItem.quantity + quantity
+        newQuantity
       ));
       toast.success('Updated quantity in your cart.');
     } else {
@@ -151,18 +184,17 @@ const [notified, setNotified] = useState(false);
       </h1>
 
       <div className="flex items-center gap-3 mb-2">
-  <span className="text-lg font-bold text-[#111]">
-    {formatPrice(
-      selectedColor
-        ? variation.find(v => v.color?.toLowerCase() === selectedColor.toLowerCase())?.price
-        : productDetails?.productPrice
-    )}
-  </span>
-  <span className="text-gray-400 line-through text-base">
-    {formatPrice(productDetails?.originalPrice)}
-  </span>
-</div>
-
+        <span className="text-lg font-bold text-[#111]">
+          {formatPrice(
+            selectedColor
+              ? variation.find(v => v.color?.toLowerCase() === selectedColor.toLowerCase())?.price
+              : productDetails?.productPrice
+          )}
+        </span>
+        <span className="text-gray-400 line-through text-base">
+          {formatPrice(productDetails?.originalPrice)}
+        </span>
+      </div>
 
       <div className="flex items-center gap-2 text-green-600 text-sm mb-6">
         {[...Array(4)].map((_, i) => <GoStarFill key={i} className="text-[#FFC700]" />)}
@@ -174,7 +206,7 @@ const [notified, setNotified] = useState(false);
       {/* Stock Info */}
       {!isSoldOut ? (
         <p className="text-sm text-gray-600 mb-2">
-          Only <span className="font-bold">{getVariantQuantity()}</span> item(s) left in stock!
+          Only <span className="font-bold">{availableStock}</span> item(s) left in stock!
         </p>
       ) : (
         <p className="text-sm text-red-600 mb-2 font-medium">
@@ -197,7 +229,7 @@ const [notified, setNotified] = useState(false);
             return (
               <button
                 key={index}
-                onClick={() => !soldOut && setSelectedSize(size)}
+                onClick={() => !soldOut && handleSizeSelect(size)}
                 disabled={soldOut}
                 className={`border rounded-md px-4 py-2 text-sm
                   ${selectedSize === size
@@ -246,7 +278,9 @@ const [notified, setNotified] = useState(false);
           <div className="px-6 py-3 text-center min-w-[60px] font-medium text-[20px]">{quantity}</div>
           <button
             onClick={() => handleQuantityChange('increase')}
-            className="p-3 hover:bg-gray-50"
+            className="p-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={quantity >= availableStock || isSoldOut}
+            title={quantity >= availableStock ? `Only ${availableStock} items available` : ''}
           >
             <FiPlus className="w-4 h-4" />
           </button>
@@ -293,7 +327,6 @@ const [notified, setNotified] = useState(false);
             {notified ? 'Notified ✅' : 'Notify Me When Available'}
           </button>
 
-
           {showNotifyPopup && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
               <div className="bg-white rounded-xl p-6 w-full max-w-sm">
@@ -334,7 +367,7 @@ const [notified, setNotified] = useState(false);
                           ...notifyForm,
                           productId: productDetails?.id || '',
                           productName: productDetails?.productName,
-                          productPrice: productDetails?.productPrice, // ✅ this line sends the price
+                          productPrice: productDetails?.productPrice,
                           selectedSize,
                           selectedColor,
                           timestamp: new Date(),
@@ -345,15 +378,13 @@ const [notified, setNotified] = useState(false);
                         toast.success('You will be notified when this item is back in stock.');
                         setShowNotifyPopup(false);
                         setNotifyForm({ name: '', email: '', phone: '' });
-                        setNotified(true); // ✅ mark as notified
-
+                        setNotified(true);
                       } catch (error) {
                         toast.error('Failed to save notification request.');
                         console.error(error);
                       }
                       setSubmitting(false);
                     }}
-
                     disabled={!notifyForm.name || !notifyForm.email || submitting}
                     className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                   >
@@ -364,8 +395,7 @@ const [notified, setNotified] = useState(false);
             </div>
           )}
         </>
-)}
-
+      )}
 
       {/* Expandable Sections */}
       {['Product Details', 'Specifications', 'Delivery Time & Returns'].map((section, index) => (
@@ -389,25 +419,24 @@ const [notified, setNotified] = useState(false);
               {section === "Specifications" && (
                 <div className="space-y-3">
                   {productDetails?.productDimension?.[0] || productDetails?.customDimensions?.length > 0 ? (
-  <>
-    {/* Default productDimension fields */}
-    {productDetails.productDimension?.[0] &&
-      Object.entries(productDetails.productDimension[0]).map(([key, val]) => (
-        val && <p key={key}><b>{key.replace(/([A-Z])/g, ' $1')}:</b> {val}</p>
-      ))
-    }
+                    <>
+                      {/* Default productDimension fields */}
+                      {productDetails.productDimension?.[0] &&
+                        Object.entries(productDetails.productDimension[0]).map(([key, val]) => (
+                          val && <p key={key}><b>{key.replace(/([A-Z])/g, ' $1')}:</b> {val}</p>
+                        ))
+                      }
 
-    {/* Additional customDimensions fields */}
-    {productDetails.customDimensions?.map((item, index) => (
-      item?.title && item?.value && (
-        <p key={`custom-${index}`}><b>{item.title}:</b> {item.value}</p>
-      )
-    ))}
-  </>
-) : (
-  <p>No specifications available.</p>
-)}
-
+                      {/* Additional customDimensions fields */}
+                      {productDetails.customDimensions?.map((item, index) => (
+                        item?.title && item?.value && (
+                          <p key={`custom-${index}`}><b>{item.title}:</b> {item.value}</p>
+                        )
+                      ))}
+                    </>
+                  ) : (
+                    <p>No specifications available.</p>
+                  )}
                 </div>
               )}
 
