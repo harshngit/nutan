@@ -46,7 +46,7 @@ const LightBox = ({ productDetails, selectedVariation }) => {
                 <img
                   src={img}
                   alt={`Image ${index + 1}`}
-                  className="w-full h-full object-contain"
+                  className="w-full h-[600px] object-contain"
                 />
               </div>
             </SwiperSlide>

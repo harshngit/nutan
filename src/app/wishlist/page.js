@@ -8,7 +8,7 @@ const Wishlist = () => {
 		<div className=' font-poppins'>
 			<Navbar />
 			<section className="relative pt-[0px] pb-[50px]">
-				{/* Adjust padding to avoid navbar overlap */}
+				
 				<Whislistdetail />
 			</section>
 

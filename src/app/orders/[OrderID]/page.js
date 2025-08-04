@@ -56,7 +56,7 @@ export default function OrderDetails({ params }) {
 	return (
 		<div className="font-poppins">
 			<Navbar />
-			<section className="relative pt-[130px] pb-[50px]">
+			<section className="relative pt-[60px] pb-[50px]">
 				<OrderDetailsPage orderDetails={orderDetails} />
 			</section>
 			<Footer />

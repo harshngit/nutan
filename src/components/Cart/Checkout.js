@@ -55,10 +55,7 @@ export default function Checkout() {
     fetchAddresses();
   }, [userProfile]);
 
-  const formatPrice = (amount) => {
-    if (!mounted) return `Rs. ${amount}`;
-    return `Rs. ${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-  };
+ const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -82,7 +79,7 @@ const handleAddressSelect = (addressObj, index) => {
 
   const handlePlaceOrder = () => {
     const { firstName, lastName, address, city, state, pincode, phone, email } = formData;
-    if (!firstName || !lastName || !address || !city || !state || !pincode || !phone || !email) {
+    if (!firstName || !lastName || !address || !city || !state || !pincode || !phone) {
       toast.error("Please fill all the required details.");
       return;
     }

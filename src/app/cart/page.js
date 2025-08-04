@@ -39,10 +39,10 @@ const Cart = () => {
 	return (
 		<div className=' font-poppins'>
 			<Navbar />
-			<section className="relative lg:pt-[90px] pt-[60px] ">
-				{/* Adjust padding to avoid navbar overlap */}
+			{/* <section className="relative lg:pt-[90px] pt-[60px] ">
+
 				<BreadcrumbHero />
-			</section>
+			</section> */}
 			
 			<section className="relative ">
 				{/* Adjust padding to avoid navbar overlap */}

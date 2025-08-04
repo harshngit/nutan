@@ -14,12 +14,12 @@ const Checkoutpage = () => {
     return (
         <div className=' font-poppins'>
             <Navbar />
-            <section className="relative pt-[130px] ">
-                {/* Adjust padding to avoid navbar overlap */}
+            {/* <section className="relative pt-[130px] ">
+
                 <BreadcrumbHero />
-            </section>
-            <section className="relative pt-[60px] ">
-                {/* Adjust padding to avoid navbar overlap */}
+            </section> */}
+            <section className="relative pt-[0px] ">
+               
                 <Checkout />
             </section>
             {/* <section className="relative lg:pt-[10px] xl:pt-[10px] pt-[60px] overflow-hidden">

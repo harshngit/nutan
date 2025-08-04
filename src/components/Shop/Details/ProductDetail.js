@@ -11,7 +11,7 @@ const ProductDetail = ({ productDetails }) => {
     <>
       <div className=' '>
         <div className=' grid lg:grid-cols-2 grid-cols-1'>
-          <div className='lg:sticky col-span-1 h-fit'>
+          <div className='lg:sticky top-0 col-span-1 h-fit'>
           <LightBox  productDetails={productDetails}
           selectedVariation={selectedVariation} // 🟢 Pass to LightBox
           />

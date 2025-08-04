@@ -94,7 +94,7 @@ const ConfirmationOrder = ({ orderID }) => {
                                             <p className="text-sm text-gray-600">Qty: {item?.p_qty}</p>
                                         </div>
                                     </div>
-                                    <p className="font-semibold">${item?.p_price}</p>
+                                    <p className="font-semibold">AED {item?.p_price}</p>
                                 </div>
                             </div>
                         ))}
@@ -104,11 +104,11 @@ const ConfirmationOrder = ({ orderID }) => {
                             <div className="border-t mt-6 pt-4 space-y-2 text-sm text-gray-700">
                                 <div className="flex justify-between">
                                     <span>Sub Total</span>
-                                    <span>${item?.n_value}</span>
+                                    <span>AED {item?.n_value}</span>
                                 </div>
                                 <div className="flex justify-between font-bold text-lg mt-2">
                                     <span>Order Total</span>
-                                    <span>${item?.n_value}</span>
+                                    <span>AED {item?.n_value}</span>
                                 </div>
                             </div>
                         ))}

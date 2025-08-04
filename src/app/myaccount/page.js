@@ -9,7 +9,7 @@ const MyAccount = () => {
         <div className=' font-poppins'>
             <Navbar />
             <section className="relative pt-[0px] ">
-                {/* Adjust padding to avoid navbar overlap */}
+               
                 <MyAccountdetail />
             </section>
 

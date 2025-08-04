@@ -12,12 +12,14 @@ import RecentlyViewedSlider from '@/components/Shop/Details/RecentlyView';
 import SnapOnBanner from '@/components/Shop/Details/ProductBanner';
 import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider';
 import LoadingScreen from '@/components/Loader/LoaderScreen';
+import ProductReviews from '@/components/Shop/Details/ProductReviews';
 
 export default function ProductDetailPage({ params }) {
   const [productDetails, setProductDetails] = useState(null);
   const [recommendedProducts, setRecommendedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = params?.productid;
+    const productId = params.productid; // Get the product ID from the URL
 
   useEffect(() => {
     if (!id) return;
@@ -82,6 +84,13 @@ export default function ProductDetailPage({ params }) {
       <section className="">
         <SnapOnBanner productDetails={productDetails} />
       </section>
+
+<section className=''>
+  <ProductReviews 
+    productId={productId} 
+    productName={productDetails?.productName || productDetails?.name} 
+  />
+</section>
 
       {/* <section className="relative pb-[50px] border-b-2">
         <ProductDescriptionTabs productDetails={productDetails} />

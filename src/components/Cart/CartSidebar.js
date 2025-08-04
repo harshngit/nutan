@@ -25,8 +25,7 @@ export default function CartSidebar({ isOpen, onClose }) {
     0
   );
 
-  const formatPrice = (price) =>
-    `Rs. ${Number(price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+ const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
   return (
     <>

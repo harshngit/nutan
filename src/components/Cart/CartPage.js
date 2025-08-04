@@ -82,10 +82,7 @@ export default function CartPage() {
     }
   };
 
-  const formatPrice = (amount) => {
-    if (!mounted) return `₹${amount}`;
-    return `₹${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-  };
+ const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
   return (
     <div className="font-poppins bg-white p-4 lg:py-16">
