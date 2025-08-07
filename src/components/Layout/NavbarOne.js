@@ -376,7 +376,7 @@ export default function NavbarOne() {
             <Link href="/about" className="hover:text-[#EAD987] transition-colors">
               About Us
             </Link>
-            <Link href="/contact" className="hover:text-[#EAD987] transition-colors">
+            <Link href="/Contact" className="hover:text-[#EAD987] transition-colors">
               Contact Us
             </Link>
           </div>

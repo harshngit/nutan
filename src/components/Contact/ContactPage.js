@@ -143,7 +143,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition-colors duration-200"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B3310] focus:border-[#3B3310] transition-colors duration-200"
                   placeholder="Abc"
                 />
               </div>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition-colors duration-200"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B3310] focus:border-[#3B3310] transition-colors duration-200"
                   placeholder="Abc@def.com"
                 />
               </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition-colors duration-200"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B3310] focus:border-[#3B3310] transition-colors duration-200"
                   placeholder="This is an optional"
                 />
               </div>
@@ -195,7 +195,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition-colors duration-200 resize-none"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B3310] focus:border-[#3B3310] transition-colors duration-200 resize-none"
                   placeholder="Hi! I'd like to ask about"
                 />
               </div>
@@ -237,7 +237,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-[40%] bg-[#DF9090] hover:bg-pink-500 disabled:bg-pink-300 text-white text-[16px] py-4 px-6 rounded-lg font-[400]  transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed"
+                  className="w-[40%] bg-[#3B3310] hover:bg-[#3B3310] text-white text-[18px] py-4 px-4 rounded-lg font-[400]  transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { logout } from '@/actions/authActions'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const AccountDetails = () => {
 
@@ -53,7 +54,7 @@ const AccountDetails = () => {
 
 	return (
 		<div className="font-poppins">
-			<Navbar />
+			<NavbarOne />
 			<section className="relative pt-[130px] pb-[50px]">
 				<Account accountDetails={accountDetails} deleteUserAccount={deleteUserAccount} />
 			</section>

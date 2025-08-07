@@ -13,6 +13,7 @@ import SnapOnBanner from '@/components/Shop/Details/ProductBanner';
 import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider';
 import LoadingScreen from '@/components/Loader/LoaderScreen';
 import ProductReviews from '@/components/Shop/Details/ProductReviews';
+import NavbarOne from '@/components/Layout/NavbarOne';
 
 export default function ProductDetailPage({ params }) {
   const [productDetails, setProductDetails] = useState(null);
@@ -76,7 +77,7 @@ export default function ProductDetailPage({ params }) {
 
   return (
     <div className="font-poppins">
-      <Navbar />
+      <NavbarOne />
       <section className="relative lg:pt-[0px] pt-[0px] pb-[50px] lg:pb-0">
         <ProductDetail productDetails={productDetails} />
       </section>

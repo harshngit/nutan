@@ -7,6 +7,7 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase.config";
 import { useSelector } from "react-redux";
+import NavbarOne from '@/components/Layout/NavbarOne';
 
 const Orders = () => {
     const [order, setOrder] = useState([]);
@@ -43,7 +44,7 @@ const Orders = () => {
 
 	return (
 		<div className="font-poppins">
-			<Navbar />
+			<NavbarOne />
 			<section className="relative pt-[0px] pb-[50px]">
 				<Orderpage order={order} />
 			</section>

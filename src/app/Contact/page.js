@@ -12,15 +12,15 @@ import ProductPage from '@/components/Shop/ProductPage'
 import ProductGrid from '@/components/Productpage/BackpackGrid'
 import React from 'react'
 import ServiceFeatures from '@/components/Home/FeaturesSection'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const Contact = () => {
     return (
         <div className=' font-poppins'>
-            <Navbar />
-            <section className="relative pt-[90px] pb-[]">
-                {/* Adjust padding to avoid navbar overlap */}
+            <NavbarOne />
+            {/* <section className="relative pt-[90px] pb-[]">
                 <BannerBreadcrumb />
-            </section>
+            </section> */}
 
             <section className="relative ">
                 {/* Adjust padding to avoid navbar overlap */}

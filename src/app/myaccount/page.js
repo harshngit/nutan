@@ -1,5 +1,6 @@
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
+import NavbarOne from '@/components/Layout/NavbarOne'
 import MyAccountdetail from '@/components/MyAccount/MyAccountdetail'
 import Whislistdetail from '@/components/Wishlist/Whislistdetail'
 import React from 'react'
@@ -7,7 +8,7 @@ import React from 'react'
 const MyAccount = () => {
     return (
         <div className=' font-poppins'>
-            <Navbar />
+            <NavbarOne />
             <section className="relative pt-[0px] ">
                
                 <MyAccountdetail />

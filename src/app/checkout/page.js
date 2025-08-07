@@ -6,6 +6,7 @@ import TrendingNow from '@/components/Cart/TrendingNow'
 import ServiceFeatures from '@/components/Home/FeaturesSection'
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
+import NavbarOne from '@/components/Layout/NavbarOne'
 import BreadcrumbHero from '@/components/Shop/BannerBreadcrumb'
 import ProductBadage from '@/components/Shop/ProductBadage'
 import React from 'react'
@@ -13,7 +14,7 @@ import React from 'react'
 const Checkoutpage = () => {
     return (
         <div className=' font-poppins'>
-            <Navbar />
+            <NavbarOne />
             {/* <section className="relative pt-[130px] ">
 
                 <BreadcrumbHero />

@@ -16,6 +16,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import LoadingScreen from '@/components/Loader/LoaderScreen.js'
+import NavbarOne from '@/components/Layout/NavbarOne.js'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -74,7 +75,7 @@ const Shop = () => {
 
 	return (
 		<div className=' font-poppins'>
-			<NavbarTwo />
+			<NavbarOne />
 			{/* <section className="relative lg:pt-[90px] pt-[50px]">
 			
 				<BannerBreadcrumb />

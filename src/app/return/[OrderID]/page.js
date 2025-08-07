@@ -8,6 +8,7 @@ import Navbar from '@/components/Layout/Navbar';
 import { useRouter } from 'next/navigation';
 import ReturnForm from '@/components/Return/ReturnForm';
 import LoadingScreen from '@/components/Loader/LoaderScreen';
+import NavbarOne from '@/components/Layout/NavbarOne';
 
 export default function ReturnPage({ params }) {
 
@@ -47,7 +48,7 @@ export default function ReturnPage({ params }) {
 
 	return (
 		<div className="font-poppins">
-			<Navbar />
+			<NavbarOne />
             <section className="relative pt-[130px] pb-[50px]">
 				<ReturnForm orderDetails={orderDetails} />
 			</section>

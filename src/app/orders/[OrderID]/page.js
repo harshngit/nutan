@@ -15,6 +15,7 @@ import Navbar from '@/components/Layout/Navbar';
 import Footer from '@/components/Layout/Footer';
 import OrderDetailsPage from '@/components/Orders/OrderDetailsPage';
 import LoadingScreen from '@/components/Loader/LoaderScreen';
+import NavbarOne from '@/components/Layout/NavbarOne';
 
 export default function OrderDetails({ params }) {
 	const id = params?.OrderID;
@@ -55,7 +56,7 @@ export default function OrderDetails({ params }) {
 
 	return (
 		<div className="font-poppins">
-			<Navbar />
+			<NavbarOne />
 			<section className="relative pt-[60px] pb-[50px]">
 				<OrderDetailsPage orderDetails={orderDetails} />
 			</section>

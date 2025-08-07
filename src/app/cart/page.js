@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../firebase.config'
 import { orderBy, where } from 'firebase/firestore'
 import ServiceFeatures from '@/components/Home/FeaturesSection'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const Cart = () => {
 	const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -38,7 +39,7 @@ const Cart = () => {
 	}, []);
 	return (
 		<div className=' font-poppins'>
-			<Navbar />
+			<NavbarOne />
 			{/* <section className="relative lg:pt-[90px] pt-[60px] ">
 
 				<BreadcrumbHero />

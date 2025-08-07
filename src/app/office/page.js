@@ -13,6 +13,7 @@ import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
 import OfficeGrid from '@/components/Productpage/OfficeGrid.js'
+import NavbarOne from '@/components/Layout/NavbarOne.js'
 
 const Office = () => {
   const [product, setProduct] = useState([]);
@@ -58,7 +59,7 @@ const fetchProduct = async () => {
 
     return (
         <div className=' font-poppins'>
-            <NavbarTwo />
+            <NavbarOne />
             {/* <section className="relative lg:pt-[90px] pt-[50px]">
             
                 <BannerBreadcrumb />

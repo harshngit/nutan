@@ -4,6 +4,7 @@ import CartPage from '@/components/Cart/CartPage'
 import TrendingNow from '@/components/Cart/TrendingNow'
 import Footer from '@/components/Layout/Footer'
 import Navbar from '@/components/Layout/Navbar'
+import NavbarOne from '@/components/Layout/NavbarOne'
 import BreadcrumbHero from '@/components/Shop/BannerBreadcrumb'
 import ProductBadage from '@/components/Shop/ProductBadage'
 import React from 'react'
@@ -11,7 +12,7 @@ import React from 'react'
 const Cart = () => {
     return (
         <div className=' font-poppins'>
-            <Navbar />
+            <NavbarOne />
             <section className="relative pt-[130px] ">
                 {/* Adjust padding to avoid navbar overlap */}
                 <BreadcrumbHero />
