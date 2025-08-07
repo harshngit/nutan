@@ -26,20 +26,20 @@ export default function ServiceFeatures() {
   ];
 
   return (
-    <div className="bg-[#3B3310] font-poppins py-16 px-4">
+    <div className="bg-gray-200 border-y-2 border-gray-300 font-poppins py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[5rem]">
           {features.map((feature, index) => (
             <div key={index} className="md:text-start text-center ">
               <div className="flex md:justify-start justify-center mb-4">
-                <div className="w-16 h-16  flex items-center justify-center text-white">
-                  <img src={feature.img} alt={feature.title} className="w-12 h-12 object-contain text-white" />
+                <div className="w-16 h-16  flex items-center justify-center">
+                  <img src={feature.img} alt={feature.title} className="w-12 h-12 object-contain" />
                 </div>
               </div>
-              <h3 className="text-[18px] font-semibold text-white mb-2">
+              <h3 className="text-[18px] font-semibold text-black mb-2">
                 {feature.title}
               </h3>
-              <p className="text-[14px] text-white leading-relaxed max-w-xs mx-auto">
+              <p className="text-[14px] text-black leading-relaxed max-w-xs mx-auto">
                 {feature.description}
               </p>
             </div>
