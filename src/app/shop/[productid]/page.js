@@ -85,12 +85,12 @@ export default function ProductDetailPage({ params }) {
         <SnapOnBanner productDetails={productDetails} />
       </section>
 
-<section className=''>
-  <ProductReviews 
-    productId={productId} 
-    productName={productDetails?.productName || productDetails?.name} 
-  />
-</section>
+      <section className=''>
+        <ProductReviews 
+          productId={productId} 
+          productName={productDetails?.productName || productDetails?.name} 
+        />
+      </section>
 
       {/* <section className="relative pb-[50px] border-b-2">
         <ProductDescriptionTabs productDetails={productDetails} />

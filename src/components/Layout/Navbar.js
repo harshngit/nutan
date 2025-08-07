@@ -197,76 +197,76 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
               <img src="/asset/Navbar/search.png" className="w-[20px] cursor-pointer" alt="Search" onClick={() => setOpenDropdownSearch(!openDropdownSearch)} />
               {openDropdownSearch && (
-  <div className="fixed md:top-[4rem] top-0 left-0 w-full h-screen z-[9999] bg-white px-[20px] py-[20px]  overflow-auto">
-    {/* Search Header */}
-    <div className="flex justify-between items-center">
-      <label className="text-green-600 font-semibold text-sm uppercase tracking-wide">Search</label>
-      <RxCross1 className="text-xl cursor-pointer" onClick={() => setOpenDropdownSearch(false)} />
-    </div>
-
-    {/* Search Input */}
-    <input
-      type="text"
-      placeholder=""
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      className="mt-2 w-full border-0 border-b-[2px] border-green-600 text-black text-lg px-1 py-2 focus:outline-none"
-    />
-
-    {/* Trending Search */}
-    {!searchQuery && (
-      <div className="mt-8">
-        <h3 className="text-black font-bold text-sm uppercase mb-4">Trending Search</h3>
-        <div className="flex flex-wrap gap-3">
-          {[
-            "Loop Powerbanks",
-            "Pop Adapter",
-            "Wireless Charger",
-            "Vault Tech Organiser",
-            "Apple Watch Straps",
-            "Wallets",
-            "Leatherite Cases",
-            "Phone Cases"
-          ].map((item, idx) => (
-            <button
-              key={idx}
-              className="border border-gray-400 text-sm px-3 py-1 rounded hover:bg-gray-100"
-              onClick={() => setSearchQuery(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-      </div>
-    )}
-
-    {/* Search Results */}
-    {searchQuery && (
-      <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
-        {product
-          .filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase()))
-          .map((item) => (
-            <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
-              <div className="flex gap-4 items-center p-3 hover:bg-gray-100 cursor-pointer rounded">
-                <img
-                  src={item.productImages?.[0] || "/placeholder.jpg"}
-                  alt={item.productName}
-                  className="w-12 h-12 object-cover rounded"
-                />
-                <div className="flex flex-col">
-                  <span className="text-sm text-gray-500">{item.productCategory}</span>
-                  <span className="text-base font-medium text-gray-800">{item.productName}</span>
-                </div>
+            <div className="fixed md:top-[4rem] top-0 left-0 w-full h-screen z-[9999] bg-white px-[20px] py-[20px]  overflow-auto">
+              {/* Search Header */}
+              <div className="flex justify-between items-center">
+                <label className="text-green-600 font-semibold text-sm uppercase tracking-wide">Search</label>
+                <RxCross1 className="text-xl cursor-pointer" onClick={() => setOpenDropdownSearch(false)} />
               </div>
-            </Link>
-          ))}
-        {product.filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-          <p className="text-sm text-gray-500">No matching products found</p>
-        )}
-      </div>
-    )}
-  </div>
-)}
+
+              {/* Search Input */}
+              <input
+                type="text"
+                placeholder=""
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="mt-2 w-full border-0 border-b-[2px] border-green-600 text-black text-lg px-1 py-2 focus:outline-none"
+              />
+
+              {/* Trending Search */}
+              {!searchQuery && (
+                <div className="mt-8">
+                  <h3 className="text-black font-bold text-sm uppercase mb-4">Trending Search</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "Loop Powerbanks",
+                      "Pop Adapter",
+                      "Wireless Charger",
+                      "Vault Tech Organiser",
+                      "Apple Watch Straps",
+                      "Wallets",
+                      "Leatherite Cases",
+                      "Phone Cases"
+                    ].map((item, idx) => (
+                      <button
+                        key={idx}
+                        className="border border-gray-400 text-sm px-3 py-1 rounded hover:bg-gray-100"
+                        onClick={() => setSearchQuery(item)}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Search Results */}
+              {searchQuery && (
+                <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
+                  {product
+                    .filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase()))
+                    .map((item) => (
+                      <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
+                        <div className="flex gap-4 items-center p-3 hover:bg-gray-100 cursor-pointer rounded">
+                          <img
+                            src={item.productImages?.[0] || "/placeholder.jpg"}
+                            alt={item.productName}
+                            className="w-12 h-12 object-cover rounded"
+                          />
+                          <div className="flex flex-col">
+                            <span className="text-sm text-gray-500">{item.productCategory}</span>
+                            <span className="text-base font-medium text-gray-800">{item.productName}</span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  {product.filter((p) => p.productName?.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+                    <p className="text-sm text-gray-500">No matching products found</p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
             </div>
               
@@ -291,111 +291,108 @@ export default function Navbar() {
 
           <div className="lg:flex hidden lg:w-[20%] gap-6 justify-end items-center">
             {/* Account Dropdown */}
-           <Link
-      href="/myaccount"
-      className="cursor-pointer"
-    >
-      {isAuthenticated ? (
-        <BsPerson className="w-[30px] h-[30px] text-black" />
-      ) : (
-        <img
-          src="/asset/Navbar/Profile-account.png"
-          className="w-[30px] h-[30px]"
-          alt="Account"
-        />
-      )}
-    </Link>
+           <Link href="/myaccount" className="cursor-pointer">
+              {isAuthenticated ? (
+                <BsPerson className="w-[30px] h-[30px] text-black" />
+              ) : (
+                <img
+                  src="/asset/Navbar/Profile-account.png"
+                  className="w-[30px] h-[30px]"
+                  alt="Account"
+                />
+              )}
+            </Link>
 
 
 
             {/* Search with Firebase Integration */}
-<div className="relative" ref={dropdownRef}>
-  <img
-    src="/asset/Navbar/search.png"
-    className="w-[24px] cursor-pointer"
-    alt="Search"
-    onClick={() => setOpenDropdownSearch(!openDropdownSearch)}
-  />
-  {openDropdownSearch && (
-    <div className="fixed top-[5rem] left-0 w-full h-screen z-[9999] bg-white overflow-auto">
-      <div className="max-w-[1200px] mx-auto px-6 py-10">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <label className="text-[#4B4B4B] text-[18px]">Search</label>
-          <RxCross1
-            className="text-[18px] text-black cursor-pointer"
-            onClick={() => setOpenDropdownSearch(false)}
-          />
-        </div>
-
-        {/* Search Input */}
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          // placeholder="Search..."
-          className="w-full text-[18px] text-black border-b border-gray-400 focus:border-black focus:outline-none pb-2"
-        />
-
-        {/* Trending Search Tags */}
-        {!searchQuery && (
-          <div className="mt-8">
-            <h3 className="text-black text-sm font-bold uppercase tracking-wider mb-4">Trending Search</h3>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Loop Powerbanks",
-                "Pop Adapter",
-                "Wireless Charger",
-                "Vault Tech Organiser",
-                "Apple Watch Straps",
-                "Wallets",
-                "Phone Cases"
-              ].map((item, idx) => (
-                <button
-                  key={idx}
-                  className="text-sm border border-gray-300 text-[#1a1a1a] px-4 py-1.5 rounded-md hover:bg-[#f1f1f1] transition"
-                  onClick={() => setSearchQuery(item)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Search Results */}
-        {searchQuery && (
-          <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
-            {product
-              .filter((p) =>
-                p.productName?.toLowerCase().includes(searchQuery.toLowerCase())
-              )
-              .map((item) => (
-                <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
-                  <div className="flex items-center gap-4 p-3 rounded-md hover:bg-[#f9f9f9] transition cursor-pointer">
-                    <img
-                      src={item.productImages?.[0] || "/placeholder.jpg"}
-                      alt={item.productName}
-                      className="w-12 h-12 object-cover rounded"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-xs text-gray-500">{item.productCategory}</span>
-                      <span className="text-sm font-medium text-black">{item.productName}</span>
+            <div className="relative" ref={dropdownRef}>
+              <img
+                src="/asset/Navbar/search.png"
+                className="w-[24px] cursor-pointer"
+                alt="Search"
+                onClick={() => setOpenDropdownSearch(!openDropdownSearch)}
+              />
+              {openDropdownSearch && (
+                <div className="fixed top-[5rem] left-0 w-full h-screen z-[9999] bg-white overflow-auto">
+                  <div className="max-w-[1200px] mx-auto px-6 py-10">
+                    {/* Header */}
+                    <div className="flex justify-between items-center mb-6">
+                      <label className="text-[#4B4B4B] text-[18px]">Search</label>
+                      <RxCross1
+                        className="text-[18px] text-black cursor-pointer"
+                        onClick={() => setOpenDropdownSearch(false)}
+                      />
                     </div>
+
+                    {/* Search Input */}
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      // placeholder="Search..."
+                      className="w-full text-[18px] text-black border-b border-gray-400 focus:border-black focus:outline-none pb-2"
+                    />
+
+                    {/* Trending Search Tags */}
+                    {!searchQuery && (
+                      <div className="mt-8">
+                        <h3 className="text-black text-sm font-bold uppercase tracking-wider mb-4">Trending Search</h3>
+                        <div className="flex flex-wrap gap-3">
+                          {[
+                            "Loop Powerbanks",
+                            "Pop Adapter",
+                            "Wireless Charger",
+                            "Vault Tech Organiser",
+                            "Apple Watch Straps",
+                            "Wallets",
+                            "Phone Cases"
+                          ].map((item, idx) => (
+                            <button
+                              key={idx}
+                              className="text-sm border border-gray-300 text-[#1a1a1a] px-4 py-1.5 rounded-md hover:bg-[#f1f1f1] transition"
+                              onClick={() => setSearchQuery(item)}
+                            >
+                              {item}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Search Results */}
+                    {searchQuery && (
+                      <div className="mt-6 space-y-3 max-h-[60vh] overflow-y-auto">
+                        {product
+                          .filter((p) =>
+                            p.productName?.toLowerCase().includes(searchQuery.toLowerCase())
+                          )
+                          .map((item) => (
+                            <Link href={`/shop/${item.id}`} key={item.id} onClick={() => setOpenDropdownSearch(false)}>
+                              <div className="flex items-center gap-4 p-3 rounded-md hover:bg-[#f9f9f9] transition cursor-pointer">
+                                <img
+                                  src={item.productImages?.[0] || "/placeholder.jpg"}
+                                  alt={item.productName}
+                                  className="w-12 h-12 object-cover rounded"
+                                />
+                                <div className="flex flex-col">
+                                  <span className="text-xs text-gray-500">{item.productCategory}</span>
+                                  <span className="text-sm font-medium text-black">{item.productName}</span>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        {product.filter((p) =>
+                          p.productName?.toLowerCase().includes(searchQuery.toLowerCase())
+                        ).length === 0 && (
+                          <p className="text-sm text-gray-400">No matching products found</p>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </Link>
-              ))}
-            {product.filter((p) =>
-              p.productName?.toLowerCase().includes(searchQuery.toLowerCase())
-            ).length === 0 && (
-              <p className="text-sm text-gray-400">No matching products found</p>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  )}
-</div>
+                </div>
+              )}
+            </div>
 
 
 
@@ -412,18 +409,7 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* <div className="relative">
-              <select
-                value={currency}
 
-                onChange={(e) => setCurrency(e.target.value)}
-                className="border border-gray-300 rounded px-2 py-1 text-sm text-black"
-              >
-                <option value="INR">INR ₹</option>
-                <option value="USD">USD $</option>
-                <option value="EUR">EUR €</option>
-              </select>
-            </div> */}
           </div>
 
           <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

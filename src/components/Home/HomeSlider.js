@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './Home.css';
+import LoadingScreen from '../Loader/LoaderScreen';
 
 // Fallback slides in case no banners are available
 const fallbackSlides = [
@@ -95,20 +96,15 @@ const HomeSlider = () => {
   // Use Firebase banners if available, otherwise use fallback
   const slides = banners.length > 0 ? banners : fallbackSlides;
 
+// Loading screen
   if (loading) {
-    return (
-      <div className="w-full md:mt-1 relative">
-        <div className="w-full h-[30vh] md:h-[650px] bg-gray-200 animate-pulse flex items-center justify-center">
-          <div className="text-gray-500">Loading banners...</div>
-        </div>
-      </div>
-    );
-  }
+    return <LoadingScreen />;
+  }  
 
   console.log('Rendering with slides:', slides.length, slides);
 
   return (
-    <div className="w-full md:mt-1 relative">
+    <div className="w-full relative">
       {/* Navigation Buttons */}
       <div className="swiper-button-prev custom-nav z-30 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer" />
       <div className="swiper-button-next custom-nav z-30 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer" />

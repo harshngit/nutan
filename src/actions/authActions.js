@@ -20,7 +20,7 @@ export const loginUsingEmail = createAsyncThunk(
       return {
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName || user.name || '',
+        displayName: user.name ,
         photoURL: user.photoURL || '',
         phoneNumber: user.phoneNumber || user.contact || '',
         emailVerified: user.emailVerified,

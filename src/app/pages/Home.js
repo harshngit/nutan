@@ -17,6 +17,8 @@ import NewArrivalsSlider from '@/components/Productpage/NewArrivalsSlider.js';
 import TrendingSlider from '@/components/Productpage/TrendingSlider.js';
 import ServiceFeatures from '@/components/Home/FeaturesSection.js';
 import Newsletter from '@/components/Home/Newsletter.js';
+import NavbarOne from '@/components/Layout/NavbarOne.js';
+import CollectionSlider from '@/components/Home/CollectionSlider.js';
 
 // Shuffle utility function
 function shuffleArray(array) {
@@ -66,18 +68,23 @@ const Home = () => {
 
   return (
     <div className='relative'>
-      <NavbarTwo />
+      {/* <NavbarTwo /> */}
+      <NavbarOne />
 
       <section className="relative pt-[0px]">
         <HomeSlider />
       </section>
 
       <section className="relative overflow-hidden">
-        <ShopByCategory />
+        <CollectionSlider/>
+      </section>
+      
+      <section className="relative overflow-hidden">
+        <SimpleBanner />
       </section>
 
       <section className="relative overflow-hidden">
-        <SimpleBanner />
+        <ShopByCategory />
       </section>
 
       <section className="relative overflow-hidden">
