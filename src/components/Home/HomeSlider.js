@@ -22,8 +22,8 @@ const fallbackSlides = [
     buttonText: 'Shop Now',
     buttonLink: '/giftsets',
     textColor: '#ffffff',
-    buttonTextColor: '#EAD987',
-    buttonBgColor: '#3B3310',
+    buttonTextColor: '#3B3310',
+    buttonBgColor: '#ffffff',
   },
   {
     image: '/asset/Home/2.png',
@@ -32,8 +32,8 @@ const fallbackSlides = [
     buttonText: 'Shop Now',
     buttonLink: '/drinkware',
     textColor: '#ffffff',
-    buttonTextColor: '#EAD987',
-    buttonBgColor: '#3B3310',
+    buttonTextColor: '#3B3310',
+    buttonBgColor: '#ffffff',
   },
   {
     image: '/asset/Home/3.png',
@@ -42,8 +42,8 @@ const fallbackSlides = [
     buttonText: 'Shop Now',
     buttonLink: '/technology',
     textColor: '#ffffff',
-    buttonTextColor: '#EAD987',
-    buttonBgColor: '#3B3310',
+    buttonTextColor: '#3B3310',
+    buttonBgColor: '#ffffff',
   },
 ];
 
@@ -74,11 +74,11 @@ const HomeSlider = () => {
           image: data.imageUrl,
           title: data.title || 'Welcome',
           subtitle: data.subtitle || 'Discover our amazing products',
-          buttonText: 'Shop Now',
+          buttonText: 'BUY NOW',
           buttonLink: '/shop',
           textColor: '#ffffff',
-          buttonTextColor: '#EAD987',
-          buttonBgColor: '#3B3310',
+          buttonTextColor: '#3B3310',
+          buttonBgColor: '#ffffff',
         };
       });
       
@@ -150,7 +150,7 @@ const HomeSlider = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id || index}>
-            <div className="relative w-full h-[30vh] md:h-[650px]">
+            <div className="relative w-full h-[35vh] md:h-[700px]">
               <Image
                 src={slide.image}
                 fill
@@ -177,7 +177,7 @@ const HomeSlider = () => {
                 )}
                 <a
                   href={slide.buttonLink}
-                  className="inline-block mt-4 px-2 py-1 md:px-6 md:py-3 text-[12px] md:text-[16px] font-semibold rounded transition hover:opacity-90"
+                  className="inline-block mt-4 px-2 py-1 md:px-[70px] md:py-[25px] text-[12px] md:text-[16px] font-semibold rounded transition hover:opacity-90"
                   style={{
                     backgroundColor: slide.buttonBgColor,
                     color: slide.buttonTextColor,

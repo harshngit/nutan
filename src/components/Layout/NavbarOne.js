@@ -19,13 +19,136 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
 
 const navItems = [
-  { label: "All Category", href: "/allproduct", hasDropdown: true },
-  { label: "Bag", href: "/bag", children: []},
-  { label: "Giftsets", href: "/giftsets"},
-  { label: "Drinkware", href: "/drinkware" },
-  { label: "Technology", href: "/technology"},
-  { label: "Office", href: "/office"},
-  { label: "Stationary", href: "/stationary"},
+  { 
+    label: "All Category", 
+    href: "/allproduct", 
+    hasDropdown: true,
+    isAllCategory: true,
+    children: [
+      {
+        title: "Bags & Carry Items",
+        image: "/asset/categories/phone-cases.jpg",
+        items: ["Apple", "Samsung", "OnePlus", "Google"],
+        viewAllLink: "/category/phone-cases"
+      },
+      {
+        title: "Tech & Gadgets",
+        image: "/asset/categories/watch-accessories.jpg",
+        items: ["Watchbands", "Watch Organisers", "Apple Watch Cases", "Watch Screen protector"],
+        viewAllLink: "/category/watch-accessories"
+      },
+      {
+        title: "Office & Stationery",
+        image: "/asset/categories/charging-solutions.jpg",
+        items: ["Powerbank", "Wireless Chargers", "Charging Cables", "Chargers and Adapters"],
+        viewAllLink: "/category/charging-solutions"
+      },
+      {
+        title: "Drinkware",
+        image: "/asset/categories/tech-addons.jpg",
+        items: ["iPad Cases", "AirPods Cover", "Screen Guards", "Phone Wallets"],
+        viewAllLink: "/category/tech-addons"
+      },
+      {
+        title: "Gift Sets & Kits",
+        image: "/asset/categories/laptop-bags.jpg",
+        items: ["Zippered Sleeves", "Macbook Hardcases", "Messenger Bags", "Backpacks"],
+        viewAllLink: "/category/laptop-bags"
+      },
+      {
+        title: "Eco Lifestyle",
+        image: "/asset/categories/stands.jpg",
+        items: ["Mobile", "Laptop", "Monitor", "iPad"],
+        viewAllLink: "/category/stands"
+      },
+      {
+        title: "Events & Conference Essentials",
+        image: "/asset/categories/organisers.jpg",
+        items: ["Tech Kit", "Folio", "Cables", "Pouches"],
+        viewAllLink: "/category/organisers"
+      }
+    ]
+  },
+  { 
+    label: "Bags", 
+    href: "/bag", 
+    hasDropdown: true,
+    children: [
+      { label: "Laptop Bags", href: "/bag/laptop", icon: "💼" },
+      { label: "Tote Bags", href: "/bag/travel", icon: "🎒" },
+      { label: "Tech Organizers", href: "/bag/backpack", icon: "🎒" },
+      { label: "Drawstring Pouches", href: "/bag/handbag", icon: "👜" },
+      { label: "Welcome Kit Bags", href: "/bag/duffel", icon: "🎒" }
+    ]
+  },
+  { 
+    label: "Gift Sets", 
+    href: "/giftsets",
+    hasDropdown: true,
+    children: [
+      { label: "Welcome Kits", href: "/giftsets/corporate", icon: "🎁" },
+      { label: "Festive Gift Sets", href: "/giftsets/executive", icon: "💼" },
+      { label: "Corporate Combo Packs", href: "/giftsets/holiday", icon: "🎄" },
+      { label: "Custom Bundles (Build Your Own)", href: "/giftsets/premium", icon: "⭐" }
+    ]
+  },
+  { 
+    label: "Drinkware", 
+    href: "/drinkware",
+    hasDropdown: true,
+    children: [
+      { label: "Reusable Bottles", href: "/drinkware/mugs", icon: "☕" },
+      { label: "Eco Mugs with Lids", href: "/drinkware/bottles", icon: "💧" },
+      { label: "Stainless Steel Tumblers", href: "/drinkware/tumblers", icon: "🥤" },
+      { label: "Sippers with Straps", href: "/drinkware/flask", icon: "🌡️" }
+    ]
+  },
+  { 
+    label: "Technology", 
+    href: "/technology",
+    hasDropdown: true,
+    children: [
+      { label: "Wireless Chargers", href: "/technology/powerbank", icon: "🔋" },
+      { label: "Charging Cables", href: "/technology/usb", icon: "💾" },
+      { label: "Wireless Mice", href: "/technology/speakers", icon: "🔊" },
+      { label: "Tech Gift Sets", href: "/technology/headphones", icon: "🎧" },
+      { label: "USB Essentials", href: "/technology/chargers", icon: "⚡" }
+    ]
+  },
+  { 
+    label: "Office & Stationery", 
+    href: "/office",
+    hasDropdown: true,
+    children: [
+      { label: "Eco Notebooks", href: "/office/desk", icon: "🗂️" },
+      { label: "Leather Folders", href: "/office/organizers", icon: "📁" },
+      { label: "Sticky Notes & Memo Pads", href: "/office/calendars", icon: "📅" },
+      { label: "Eco Pens & Writing Tools", href: "/office/cards", icon: "💳" },
+      { label: "Executive Stationery", href: "/office/cards", icon: "💳" }
+    ]
+  },
+  { 
+    label: "Eco Lifestyle", 
+    href: "/stationary",
+    hasDropdown: true,
+    children: [
+      { label: "Bamboo Cutlery Sets", href: "/stationary/notebooks", icon: "📓" },
+      { label: "Eco Coasters", href: "/stationary/pens", icon: "🖊️" },
+      { label: "Cork & Wheat Straw Accessories", href: "/stationary/planners", icon: "📋" },
+      { label: "Recycled Material Goods", href: "/stationary/folders", icon: "📂" }
+    ]
+  },
+  { 
+    label: "Events & Conference Essentials", 
+    href: "/stationary",
+    hasDropdown: true,
+    children: [
+      { label: "Biodegradable Lanyards", href: "/stationary/notebooks", icon: "📓" },
+      { label: "Name Card Holders (future)", href: "/stationary/pens", icon: "🖊️" },
+      { label: "Eco Folders", href: "/stationary/planners", icon: "📋" },
+      { label: "Conference Giveaways", href: "/stationary/folders", icon: "📂" }
+    ]
+  }
 ];
 
 export default function NavbarOne() {
@@ -42,6 +165,7 @@ export default function NavbarOne() {
   const [openDropdownSearch, setOpenDropdownSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [product, setProduct] = useState([]);
+  const [mobileDropdowns, setMobileDropdowns] = useState({});
 
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -64,6 +188,14 @@ export default function NavbarOne() {
   };
 
   const isActive = (href) => pathname === href;
+
+  // Toggle mobile dropdown
+  const toggleMobileDropdown = (label) => {
+    setMobileDropdowns(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -126,14 +258,18 @@ export default function NavbarOne() {
   console.log(userProfile)
 
   const navList = (
-    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-0 text-white font-[poppins] font-medium !text-sm tracking-wide">
+    <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-3 lg:gap-0 text-white font-[poppins] font-medium !text-xs tracking-wide">
       {navItems.map((item, idx) => {
-        const hasChildren = item.children && item.children.length > 0;
+        const hasChildren = item.hasDropdown && item.children && item.children.length > 0;
         const isParentActive = isActive(item.href) || item.children?.some((child) => isActive(child.href));
 
         return (
-          <li key={idx} className="relative">
-            <div onMouseEnter={() => handleMouseEnter(item.label)} onMouseLeave={handleMouseLeave}>
+          <li key={idx} className="relative group">
+            <div 
+              onMouseEnter={() => handleMouseEnter(item.label)} 
+              onMouseLeave={handleMouseLeave}
+              className="relative"
+            >
               <Link href={item.href} className={`group px-4 py-3 transition lg:text-[15px] block flex items-center ${
                 isParentActive ? "text-white bg-[#5A4A2E]" : "text-white hover:text-[#EAD987]"
               } rounded-md`}>
@@ -142,18 +278,85 @@ export default function NavbarOne() {
                   <IoChevronDownOutline className="ml-1 w-3 h-3" />
                 )}
               </Link>
+              
+              {/* Desktop Dropdown - Full Width for All Category, Regular for Others */}
               {hasChildren && openDropdown === item.label && (
-                <div className="absolute left-0 mt-1 z-20 shadow-lg w-48 bg-white rounded-md">
-                  {item.children.map((child, i) => (
-                    <Link key={i} href={child.href}>
-                      <div className={`px-4 py-2 transition cursor-pointer text-gray-700 hover:bg-gray-100 ${
-                        isActive(child.href) ? "bg-gray-100" : ""
-                      }`}>
-                        {child.label}
+                item.isAllCategory ? (
+                  // All Category Mega Menu
+                  <div className="fixed left-0 top-[140px] w-full z-50 bg-white shadow-2xl border-t border-gray-200">
+                    <div className="max-w-7xl mx-auto px-8 py-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 gap-8">
+                        {item.children.map((category, i) => (
+                          <div key={i} className="flex flex-col">
+                            {/* Category Image */}
+                            <div className="mb-4 relative group">
+                              <img
+                                src={category.image}
+                                alt={category.title}
+                                className="w-full h-32 object-cover rounded-lg transition-transform duration-200 group-hover:scale-105"
+                                onError={(e) => {
+                                  e.target.src = "/placeholder-image.jpg"; // Fallback image
+                                }}
+                              />
+                            </div>
+                            
+                            {/* Category Title */}
+                            <h3 className="text-sm font-bold text-gray-800 mb-3 uppercase tracking-wider">
+                              {category.title}
+                            </h3>
+                            
+                            {/* Category Items */}
+                            <ul className="space-y-1 mb-4">
+                              {category.items.map((item, idx) => (
+                                <li key={idx}>
+                                  <Link 
+                                    href={`${category.viewAllLink}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                    className="text-sm text-gray-600 hover:text-[#6B5A3F] transition-colors duration-150 block py-1"
+                                  >
+                                    {item}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                            
+                            {/* View All Link */}
+                            <Link 
+                              href={category.viewAllLink}
+                              className="text-sm text-teal-600 font-medium hover:text-teal-700 transition-colors duration-150 mt-auto"
+                            >
+                              View All +
+                            </Link>
+                          </div>
+                        ))}
                       </div>
-                    </Link>
-                  ))}
-                </div>
+                    </div>
+                  </div>
+                ) : (
+                  // Regular Category Dropdown - Full Width
+                  <div className="fixed left-0 top-[140px] w-full z-50 bg-white shadow-2xl border-t border-gray-200">
+                    <div className="max-w-7xl mx-auto px-8 py-8">
+                      {/* <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+                        {item.label} Categories
+                      </h3> */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                        {item.children.map((child, i) => (
+                          <Link key={i} href={child.href}>
+                            <div className={`flex flex-col items-center justify-center gap-3 p-6 rounded-xl transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:shadow-md hover:scale-105 ${
+                              isActive(child.href) ? "bg-gray-100 shadow-md" : ""
+                            }`}>
+                              <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-3xl hover:from-[#6B5A3F] hover:to-[#5A4A2E] hover:text-white transition-all duration-200">
+                                {child.icon}
+                              </div>
+                              <span className="text-sm font-semibold text-gray-700 hover:text-[#6B5A3F] text-center transition-colors">
+                                {child.label}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
               )}
             </div>
           </li>
@@ -164,26 +367,102 @@ export default function NavbarOne() {
 
   const navListMobile = (
     <div className="flex flex-col gap-[40px]">
-      <ul className="flex flex-col lg:flex-row items-start lg:items-center lg:flex-wrap gap-[20px] lg:gap-4 text-black uppercase font-semibold !text-sm tracking-wide">
-        <li><Link href="/allproduct">All Category</Link></li>
-        <li><Link href="/bag">Bags</Link></li>
-        <li><Link href="/giftsets">Giftsets</Link></li>
-        <li><Link href="/drinkware">Drinkware</Link></li>
-        <li><Link href="/technology">Technology</Link></li>
-        <li><Link href="/office">Office</Link></li>
-        <li><Link href="/stationary">Stationary</Link></li>
+      <ul className="flex flex-col gap-[20px] text-black uppercase font-semibold !text-sm tracking-wide">
+        {navItems.map((item, idx) => {
+          const hasChildren = item.hasDropdown && item.children && item.children.length > 0;
+          const isDropdownOpen = mobileDropdowns[item.label];
+          
+          return (
+            <li key={idx} className="w-full">
+              <div className="flex items-center justify-between">
+                <Link href={item.href} className="flex-1">
+                  {item.label}
+                </Link>
+                {hasChildren && (
+                  <button
+                    onClick={() => toggleMobileDropdown(item.label)}
+                    className="p-2 hover:bg-gray-100 rounded-md"
+                  >
+                    <IoChevronDownOutline 
+                      className={`w-4 h-4 transition-transform ${
+                        isDropdownOpen ? 'rotate-180' : ''
+                      }`} 
+                    />
+                  </button>
+                )}
+              </div>
+              
+              {/* Mobile Dropdown */}
+              {hasChildren && isDropdownOpen && (
+                <div className="mt-2 ml-4 space-y-2 border-l-2 border-gray-200 pl-4">
+                  {item.isAllCategory ? (
+                    // All Category Mobile Layout
+                    item.children.map((category, i) => (
+                      <div key={i} className="mb-4">
+                        <h4 className="text-xs font-bold text-gray-800 mb-2 uppercase tracking-wider">
+                          {category.title}
+                        </h4>
+                        {category.items.slice(0, 3).map((subItem, idx) => (
+                          <Link 
+                            key={idx}
+                            href={`${category.viewAllLink}/${subItem.toLowerCase().replace(/\s+/g, '-')}`}
+                            onClick={() => setOpenDrawer(false)}
+                          >
+                            <div className="py-1 text-xs text-gray-600 hover:text-[#6B5A3F] transition-colors">
+                              {subItem}
+                            </div>
+                          </Link>
+                        ))}
+                        <Link 
+                          href={category.viewAllLink}
+                          onClick={() => setOpenDrawer(false)}
+                        >
+                          <div className="text-xs text-teal-600 font-medium mt-1">
+                            View All +
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    // Regular Category Mobile Layout
+                    item.children.map((child, i) => (
+                      <Link 
+                        key={i} 
+                        href={child.href}
+                        onClick={() => setOpenDrawer(false)}
+                      >
+                        <div className="flex items-center gap-3 py-2 text-sm text-gray-600 hover:text-[#6B5A3F] transition-colors">
+                          <span className="text-base">{child.icon}</span>
+                          <span className="capitalize font-normal">{child.label}</span>
+                        </div>
+                      </Link>
+                    ))
+                  )}
+                </div>
+              )}
+            </li>
+          );
+        })}
 
-        {isAuthenticated ? (
-          <>
-            <li><Link href="/myaccount">My Account</Link></li>
-            <li onClick={() => { handleLogout(); setOpenDrawer(false); }} className="cursor-pointer">Logout</li>
-          </>
-        ) : (
-          <>
-            <li><Link href="/login">Login</Link></li>
-            <li><Link href="/register">Register</Link></li>
-          </>
-        )}
+        {/* Authentication Links */}
+        <li className="border-t border-gray-200 pt-4">
+          {isAuthenticated ? (
+            <>
+              <Link href="/myaccount" className="block py-2">My Account</Link>
+              <button 
+                onClick={() => { handleLogout(); setOpenDrawer(false); }} 
+                className="block py-2 text-left w-full"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="block py-2">Login</Link>
+              <Link href="/register" className="block py-2">Register</Link>
+            </>
+          )}
+        </li>
       </ul>
     </div>
   );
@@ -212,7 +491,7 @@ export default function NavbarOne() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setOpenDropdownSearch(true)}
-                className="w-full px-4 py-2.5 pr-12 bg-gray-300 text-gray-800 rounded-full focus:outline-none  text-sm"
+                className="w-full px-4 py-2.5 pr-12 bg-gray-300 text-gray-800 rounded-full focus:outline-none  text-base font-semibold"
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#5A4A2E] p-2 rounded-full hover:bg-[#4A3D28] transition-colors">
                 <IoSearchOutline className="w-4 h-4 text-white" />
@@ -361,7 +640,7 @@ export default function NavbarOne() {
       </div>
 
       {/* Navigation Menu Bar - Desktop */}
-      <div className="hidden lg:block w-full bg-[#6B5A3F] px-8 py-2">
+      <div className="hidden lg:block w-full bg-[#3B3310] px-8 py-2">
         <div className="flex items-center justify-between">
           {navList}
           
@@ -443,7 +722,9 @@ export default function NavbarOne() {
           <h2 className="text-xl font-semibold">Menu</h2>
           <RxCross1 className="text-[20px] cursor-pointer" onClick={() => setOpenDrawer(false)} />
         </div>
-        {navListMobile}
+        <div className="overflow-y-auto max-h-[calc(100vh-120px)]">
+          {navListMobile}
+        </div>
       </div>
 
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
