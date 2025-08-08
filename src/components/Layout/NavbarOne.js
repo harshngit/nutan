@@ -116,7 +116,7 @@ const navItems = [
     ]
   },
   { 
-    label: "Office & Stationery", 
+    label: "Office", 
     href: "/office",
     hasDropdown: true,
     children: [
@@ -139,7 +139,7 @@ const navItems = [
     ]
   },
   { 
-    label: "Events & Conference Essentials", 
+    label: "Events", 
     href: "/stationary",
     hasDropdown: true,
     children: [

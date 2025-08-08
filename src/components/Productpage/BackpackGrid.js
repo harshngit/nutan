@@ -63,7 +63,7 @@ export default function BackpackGrid({ product = [] }) {
     ${showFilters ? "lg:ml-64" : ""}
   `}
 >
-        <h1 className="flex justify-center items-center text-[42px] font-bold mx-auto">Bags</h1>
+        {/* <h1 className="flex justify-center items-center text-[42px] font-bold mx-auto">Bags</h1> */}
         <div className="flex items-center justify-between px-4 py-6 border-b">
           {!showFilters && (
             <button

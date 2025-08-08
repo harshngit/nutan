@@ -74,7 +74,7 @@ const fetchProduct = async () => {
             </section> */}
       
       
-            <section className="relative pt-[120px] pb-[20px]">
+            <section className="relative pt-[30px] pb-[20px]">
                 
                 <GiftsGrid product={product} />
             </section>

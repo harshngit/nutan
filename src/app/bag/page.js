@@ -13,12 +13,11 @@ import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
 import NavbarOne from '@/components/Layout/NavbarOne.js'
+import BagCollection from '@/components/Collections/BagCollection.js'
+import BannerTitle from '@/components/Collections/BannerTitle.js'
 
 const Bag = () => {
   const [product, setProduct] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  
 
 const fetchProduct = async () => {
     try {
@@ -59,38 +58,29 @@ const fetchProduct = async () => {
     return (
         <div className=' font-poppins'>
             <NavbarOne />
-            {/* <section className="relative lg:pt-[90px] pt-[50px]">
-            
-                <BannerBreadcrumb />
-            </section> */}
-            
-            {/* <section className="relative pt-[0px] pb-[46px]">
-            
-                <ProductPage 
-                  products={visibleProducts} 
-                  loading={loading}
-                  
-                
+
+             <section className="relative pt-[10px] pb-[0px]">
+                <BannerTitle
+                    title={"For Bags"}
+                    // desc={
+                    //     "Welcome to Different Clothing, where style meets comfort in every piece. Our collection is designed to offer the perfect balance of quality, versatility, and modern design, making it easy for you to express your unique style."
+                    // }
                 />
-            </section> */}
+            </section>
+
+            <section className="relative">
+                <BagCollection />
+            </section>
+
       
-      
-            <section className="relative pt-[120px] pb-[20px]">
+            <section className="relative pt-[30px] pb-[20px]">
                 
                 <BackpackGrid product={product} />
             </section>
 
-            {/* <section className="relative pt-[0px] pb-[20px]">
-                <ProductBadage />
-            </section> */}
-
       <section className='relative overflow-hidden'>
         <ServiceFeatures />
       </section>
-
-            <section className="relative">
-                {/* <BannerCta /> */}
-            </section>
 
             <section className="relative">
                 <Footer />
