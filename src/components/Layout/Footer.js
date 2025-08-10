@@ -1,99 +1,150 @@
 "use client"
 import React from 'react'
 import { IoMdArrowRoundUp } from 'react-icons/io'
-import { PiLinkedinLogo } from "react-icons/pi";
-import { PiInstagramLogo } from "react-icons/pi";
-import { PiYoutubeLogo } from "react-icons/pi";
+import { PiLinkedinLogo, PiInstagramLogo, PiYoutubeLogo } from "react-icons/pi";
+import { FaFacebookF, FaTwitter, FaPinterestP } from "react-icons/fa";
 import Link from "next/link"
 import Image from 'next/image';
+
 const Footer = () => {
     return (
-        // <div className='flex flex-col w-full bg-[#D9D9D9]'>
-        //     <div className='flex p-6 justify-between  items-center lg:flex-row flex-col gap-10 '>
-        //         <div className=''>
-        //             <h2 className='lg:text-[32px] text-[20px] text-[#484848]'>Different Clothing</h2>
-        //         </div>
-        //         <div className='flex justify-between lg:gap-[60px] items-center lg:flex-row flex-col'>
-        //             <Link className='lg:text-[26px] text-[#8A8A8A]' href="/">
-        //                 Home
-        //             </Link>
-        //             <Link className='lg:text-[26px] text-[#8A8A8A]' href="/shop">
-        //                 Shop
-        //             </Link>
-        //             <Link className='lg:text-[26px] text-[#8A8A8A]' href="/">
-        //                 About
-        //             </Link>
-
-        //             <Link className='lg:text-[26px] text-[#8A8A8A]' href="/">
-        //                 Contact Us
-        //             </Link>
-        //         </div>
-        //     </div>
-        //     <div className='text-[#8A8A8A] text-[12px] text-center p-5'>
-        //         <p>Copyright © 2022 Diff Clothing . All Rights Reseved.</p>
-        //     </div>
-        // </div>
         <>
-            <footer className="bg-gray-200  text-black md:px-14 px-4 w-full md:py-10 py-4 overflow-hidden">
-                <div className='grid lg:grid-cols-3 grid-cols-1'>
+            <footer className="bg-gray-200 text-black md:px-14 px-4 w-full md:py-10 py-4 overflow-hidden">
+                <div className='grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-8 lg:gap-4'>
 
-                    {/* Column 1 */}
+                    {/* Column 1 - Brand */}
                     <div className="flex justify-start gap-5 items-start flex-col">
-                        <h4 className='lg:text-[24px] font-bold'>Nutan.</h4>
-                        <p className='lg:text-[16px] text-[#9F9F9F] w-[60%] font-light'>400 University Drive Suite 200 Coral Gables,
-                            FL 33134 USA</p>
+                        <h4 className='lg:text-[24px] text-[20px] font-bold'>Nutan.</h4>
+                        <p className='lg:text-[16px] text-[14px] text-[#9F9F9F] lg:w-[80%] w-full font-light'>
+                            400 University Drive Suite 200 Coral Gables, FL 33134 USA
+                        </p>
                     </div>
 
-                    {/* Column 2 */}
+                    {/* Column 2 - Links */}
                     <div className='flex justify-start gap-5 items-start flex-col'>
-                        <h4 className='lg:text-[12px] font-normal text-[#9F9F9F] uppercase'>Links</h4>
+                        <h4 className='lg:text-[12px] text-[11px] font-normal text-[#9F9F9F] uppercase'>Links</h4>
                         <div className="flex flex-col justify-start gap-5 font-normal">
-                            <Link href="/" className='text-black text-[16px]'>
+                            <Link href="/" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 Home
                             </Link>
-                            <Link href="/allproduct" className='text-black text-[16px]'>
+                            <Link href="/allproduct" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 Shop
                             </Link>
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/about" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 About
                             </Link>
-                            <Link href="/blog" className='text-black text-[16px]'>
-                                blog
+                            <Link href="/blog" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Blog
                             </Link>
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/contact" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 Contact
                             </Link>
                         </div>
                     </div>
 
-                    {/* Column 3 */}
-                    <div className="flex items-start flex-col gap-[30px] ">
-                        <h4 className='lg:text-[12px] text-[#9F9F9F] font-normal uppercase'>Help</h4>
+                    {/* Column 3 - Links */}
+                    <div className='flex justify-start gap-5 items-start flex-col'>
+                        <h4 className='lg:text-[12px] text-[11px] font-normal text-[#9F9F9F] uppercase'>Products</h4>
                         <div className="flex flex-col justify-start gap-5 font-normal">
-                            <Link href="" className='text-black text-[16px]'>
-                                Payment Options
+                            <Link href="/bag" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Bag
                             </Link>
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/giftsets" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Gift Sets
+                            </Link>
+                            <Link href="/drinkware" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Drinkware
+                            </Link>
+                            <Link href="/technology" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Technology
+                            </Link>
+                            <Link href="/stationary" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Office & Stationery
+                            </Link>
+                            <Link href="/ecolifestyle" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Eco Lifestyle
+                            </Link>
+                            <Link href="/events" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Events
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Column 3 - Help */}
+                    <div className="flex items-start flex-col gap-5">
+                        <h4 className='lg:text-[12px] text-[11px] text-[#9F9F9F] font-normal uppercase'>Help</h4>
+                        <div className="flex flex-col justify-start gap-5 font-normal">
+                            <Link href="/termsandconditions" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
+                                Terms & Conditions
+                            </Link>
+                            <Link href="/returnpolicypage" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 Returns
                             </Link>
-                            <Link href="" className='text-black text-[16px]'>
+                            <Link href="/privacypolicypage" className='text-black text-[16px] hover:text-gray-600 transition-colors'>
                                 Privacy Policies
                             </Link>
                         </div>
                     </div>
-                    {/* Column 4 */}
-                    {/* <div className="flex items-start flex-col gap-[30px] ">
-                        <h4 className='lg:text-[12px] text-[10px] text-[#9F9F9F] font-normal'>Newsletter</h4>
-                        <div className='flex justify-center items-center gap-[20px]'>
-                            <input type="text" placeholder='Enter your email address' className='px-1 py-1 bg-transparent border-b-[1px] border-b-black w-full' />
-                            <button className='px-1 py-1 w-[40%] border-b-[1px] border-b-black text-black bg-white'>Subscribe</button>
-                        </div>
-                    </div> */}
-                    {/* Vertical Text on Right */}
 
+                    {/* Column 4 - Social Media */}
+                    <div className="flex items-start flex-col gap-5">
+                        <h4 className='lg:text-[12px] text-[11px] text-[#9F9F9F] font-normal uppercase'>Follow Us On</h4>
+                        <div className="flex flex-wrap gap-4">
+                            <Link 
+                                href="https://instagram.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on Instagram"
+                            >
+                                <PiInstagramLogo size={20} />
+                            </Link>
+                            <Link 
+                                href="https://facebook.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on Facebook"
+                            >
+                                <FaFacebookF size={20} />
+                            </Link>
+                            <Link 
+                                href="https://youtube.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on YouTube"
+                            >
+                                <PiYoutubeLogo size={20} />
+                            </Link>
+                            <Link 
+                                href="https://twitter.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on Twitter"
+                            >
+                                <FaTwitter size={20} />
+                            </Link>
+                            <Link 
+                                href="https://pinterest.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on Pinterest"
+                            >
+                                <FaPinterestP size={20} />
+                            </Link>
+                            <Link 
+                                href="https://linkedin.com" 
+                                target="_blank"
+                                className='p-2 border border-black rounded hover:bg-black hover:text-white transition-all duration-300'
+                                aria-label="Follow us on LinkedIn"
+                            >
+                                <PiLinkedinLogo size={20} />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-                <div className='border-t-[1px] border-[#ccc] pt-10 mt-10 flex justify-start items-end'>
-                    <h3 className='text-[#000]'>2025 Nutan. All rights reserved</h3>
+
+                {/* Footer Bottom */}
+                <div className='border-t-[1px] border-[#ccc] pt-4 md:pt-8 mt-6 md:mt-8 flex justify-start items-end'>
+                    <h3 className='text-[#000] text-[14px] md:text-[16px]'>2025 Nutan. All rights reserved</h3>
                 </div>
             </footer>
         </>
