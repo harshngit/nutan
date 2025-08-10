@@ -25,47 +25,85 @@ const navItems = [
     hasDropdown: true,
     isAllCategory: true,
     children: [
-      {
+       {
         title: "Bags & Carry Items",
         image: "/asset/categories/phone-cases.jpg",
-        items: ["Apple", "Samsung", "OnePlus", "Google"],
-        viewAllLink: "/category/phone-cases"
+        items: [
+          { label: "Laptop Bags", href: "/bag/laptopbags" },
+          { label: "Tote Bags", href: "/bag/totebags" },
+          { label: "Tech Organizers", href: "/bag/techorganizers" },
+          { label: "Drawstring Pouches", href: "/bag/drawstringpouches" },
+          { label: "Welcome Kit Bags", href: "/bag/welcomekitbags" }
+        ],
+        viewAllLink: "/bag"
       },
       {
         title: "Tech & Gadgets",
         image: "/asset/categories/watch-accessories.jpg",
-        items: ["Watchbands", "Watch Organisers", "Apple Watch Cases", "Watch Screen protector"],
-        viewAllLink: "/category/watch-accessories"
+        items: [
+          { label: "Wireless Chargers", href: "/technology/wirelesschargers" },
+          { label: "Charging Cables", href: "/technology/chargingcables" },
+          { label: "Wireless Mice", href: "/technology/wirelessmice" },
+          { label: "Tech Gift Sets", href: "/technology/techgiftsets" },
+          { label: "USB Essentials", href: "/technology/usbessentials" }
+        ],
+        viewAllLink: "/technology"
       },
       {
         title: "Office & Stationery",
         image: "/asset/categories/charging-solutions.jpg",
-        items: ["Powerbank", "Wireless Chargers", "Charging Cables", "Chargers and Adapters"],
-        viewAllLink: "/category/charging-solutions"
+        items: [
+          { label: "Eco Notebooks", href: "/office/econotebooks" },
+          { label: "Leather Folders", href: "/office/leatherfolders" },
+          { label: "Sticky Notes & Memo Pads", href: "/office/stickynotes" },
+          { label: "Eco Pens & Writing Tools", href: "/office/ecopens" },
+          { label: "Executive Stationery", href: "/office/executivestationery" }
+        ],
+        viewAllLink: "/office"
       },
       {
         title: "Drinkware",
         image: "/asset/categories/tech-addons.jpg",
-        items: ["iPad Cases", "AirPods Cover", "Screen Guards", "Phone Wallets"],
-        viewAllLink: "/category/tech-addons"
+        items: [
+          { label: "Reusable Bottles", href: "/drinkware/reusablebottles" },
+          { label: "Eco Mugs with Lids", href: "/drinkware/ecomugs" },
+          { label: "Stainless Steel Tumblers", href: "/drinkware/stainlesssteel" },
+          { label: "Sippers with Straps", href: "/drinkware/sipperswithstraps" }
+        ],
+        viewAllLink: "/drinkware"
       },
       {
         title: "Gift Sets & Kits",
         image: "/asset/categories/laptop-bags.jpg",
-        items: ["Zippered Sleeves", "Macbook Hardcases", "Messenger Bags", "Backpacks"],
-        viewAllLink: "/category/laptop-bags"
+        items: [
+          { label: "Welcome Kits", href: "/giftsets/welcomekits" },
+          { label: "Festive Gift Sets", href: "/giftsets/festivegiftsets" },
+          { label: "Corporate Combo Packs", href: "/giftsets/corporatecombopacks" },
+          { label: "Custom Bundles (Build Your Own)", href: "/giftsets/custombundles" }
+        ],
+        viewAllLink: "/giftsets"
       },
       {
         title: "Eco Lifestyle",
         image: "/asset/categories/stands.jpg",
-        items: ["Mobile", "Laptop", "Monitor", "iPad"],
-        viewAllLink: "/category/stands"
+        items: [
+          { label: "Bamboo Cutlery Sets", href: "/ecolifestyle/bamboocutlerysets" },
+      { label: "Eco Coasters", href: "/ecolifestyle/ecocoasters" },
+      { label: "Cork & Wheat Straw Accessories", href: "/ecolifestyle/corkwheatstraw" },
+      { label: "Recycled Material Goods", href: "/ecolifestyle/recycledmaterialgoods" }
+        ],
+        viewAllLink: "/ecolifestyle"
       },
       {
         title: "Events & Conference Essentials",
         image: "/asset/categories/organisers.jpg",
-        items: ["Tech Kit", "Folio", "Cables", "Pouches"],
-        viewAllLink: "/category/organisers"
+        items: [
+          { label: "Biodegradable Lanyards", href: "/events/biodegradablelanyards" },
+          { label: "Name Card Holders (future)", href: "/events/namecardholders" },
+          { label: "Eco Folders", href: "/events/ecofolders" },
+          { label: "Conference Giveaways", href: "/events/conferencegiveaways" }
+        ],
+        viewAllLink: "/events"
       }
     ]
   },
@@ -74,11 +112,11 @@ const navItems = [
     href: "/bag", 
     hasDropdown: true,
     children: [
-      { label: "Laptop Bags", href: "/bag/laptop", icon: "💼" },
-      { label: "Tote Bags", href: "/bag/travel", icon: "🎒" },
-      { label: "Tech Organizers", href: "/bag/backpack", icon: "🎒" },
-      { label: "Drawstring Pouches", href: "/bag/handbag", icon: "👜" },
-      { label: "Welcome Kit Bags", href: "/bag/duffel", icon: "🎒" }
+      { label: "Laptop Bags", href: "/bag/laptopbags", icon: "💼" },
+      { label: "Tote Bags", href: "/bag/totebags", icon: "🎒" },
+      { label: "Tech Organizers", href: "/bag/techorganizers", icon: "🎒" },
+      { label: "Drawstring Pouches", href: "/bag/drawstringpouches", icon: "👜" },
+      { label: "Welcome Kit Bags", href: "/bag/welcomekitbags", icon: "🎒" }
     ]
   },
   { 
@@ -86,10 +124,10 @@ const navItems = [
     href: "/giftsets",
     hasDropdown: true,
     children: [
-      { label: "Welcome Kits", href: "/giftsets/corporate", icon: "🎁" },
-      { label: "Festive Gift Sets", href: "/giftsets/executive", icon: "💼" },
-      { label: "Corporate Combo Packs", href: "/giftsets/holiday", icon: "🎄" },
-      { label: "Custom Bundles (Build Your Own)", href: "/giftsets/premium", icon: "⭐" }
+      { label: "Welcome Kits", href: "/giftsets/welcomekits", icon: "🎁" },
+      { label: "Festive Gift Sets", href: "/giftsets/festivegiftsets", icon: "💼" },
+      { label: "Corporate Combo Packs", href: "/giftsets/corporatecombopacks", icon: "🎄" },
+      { label: "Custom Bundles (Build Your Own)", href: "/giftsets/custombundles", icon: "⭐" }
     ]
   },
   { 
@@ -97,10 +135,10 @@ const navItems = [
     href: "/drinkware",
     hasDropdown: true,
     children: [
-      { label: "Reusable Bottles", href: "/drinkware/mugs", icon: "☕" },
-      { label: "Eco Mugs with Lids", href: "/drinkware/bottles", icon: "💧" },
-      { label: "Stainless Steel Tumblers", href: "/drinkware/tumblers", icon: "🥤" },
-      { label: "Sippers with Straps", href: "/drinkware/flask", icon: "🌡️" }
+      { label: "Reusable Bottles", href: "/drinkware/reusablebottles", icon: "☕" },
+      { label: "Eco Mugs with Lids", href: "/drinkware/ecomugs", icon: "💧" },
+      { label: "Stainless Steel Tumblers", href: "/drinkware/stainlesssteel", icon: "🥤" },
+      { label: "Sippers with Straps", href: "/drinkware/sipperswithstraps", icon: "🌡️" }
     ]
   },
   { 
@@ -108,45 +146,45 @@ const navItems = [
     href: "/technology",
     hasDropdown: true,
     children: [
-      { label: "Wireless Chargers", href: "/technology/powerbank", icon: "🔋" },
-      { label: "Charging Cables", href: "/technology/usb", icon: "💾" },
-      { label: "Wireless Mice", href: "/technology/speakers", icon: "🔊" },
-      { label: "Tech Gift Sets", href: "/technology/headphones", icon: "🎧" },
-      { label: "USB Essentials", href: "/technology/chargers", icon: "⚡" }
+      { label: "Wireless Chargers", href: "/technology/wirelesschargers", icon: "🔋" },
+      { label: "Charging Cables", href: "/technology/chargingcables", icon: "💾" },
+      { label: "Wireless Mice", href: "/technology/wirelessmice", icon: "🔊" },
+      { label: "Tech Gift Sets", href: "/technology/techgiftsets", icon: "🎧" },
+      { label: "USB Essentials", href: "/technology/usbessentials", icon: "⚡" }
     ]
   },
   { 
     label: "Office", 
-    href: "/office",
+    href: "/stationary",
     hasDropdown: true,
     children: [
-      { label: "Eco Notebooks", href: "/office/desk", icon: "🗂️" },
-      { label: "Leather Folders", href: "/office/organizers", icon: "📁" },
-      { label: "Sticky Notes & Memo Pads", href: "/office/calendars", icon: "📅" },
-      { label: "Eco Pens & Writing Tools", href: "/office/cards", icon: "💳" },
-      { label: "Executive Stationery", href: "/office/cards", icon: "💳" }
+      { label: "Eco Notebooks", href: "/office/econotebooks", icon: "🗂️" },
+      { label: "Leather Folders", href: "/office/leatherfolders", icon: "📁" },
+      { label: "Sticky Notes & Memo Pads", href: "/office/stickynotes", icon: "📅" },
+      { label: "Eco Pens & Writing Tools", href: "/office/ecopens", icon: "💳" },
+      { label: "Executive Stationery", href: "/office/executivestationery", icon: "💳" }
     ]
   },
   { 
     label: "Eco Lifestyle", 
-    href: "/stationary",
+    href: "/ecolifestyle",
     hasDropdown: true,
     children: [
-      { label: "Bamboo Cutlery Sets", href: "/stationary/notebooks", icon: "📓" },
-      { label: "Eco Coasters", href: "/stationary/pens", icon: "🖊️" },
-      { label: "Cork & Wheat Straw Accessories", href: "/stationary/planners", icon: "📋" },
-      { label: "Recycled Material Goods", href: "/stationary/folders", icon: "📂" }
+      { label: "Bamboo Cutlery Sets", href: "/ecolifestyle/bamboocutlerysets", icon: "📓" },
+      { label: "Eco Coasters", href: "/ecolifestyle/ecocoasters", icon: "🖊️" },
+      { label: "Cork & Wheat Straw Accessories", href: "/ecolifestyle/corkwheatstraw", icon: "📋" },
+      { label: "Recycled Material Goods", href: "/ecolifestyle/recycledmaterialgoods", icon: "📂" }
     ]
   },
   { 
     label: "Events", 
-    href: "/stationary",
+    href: "/events",
     hasDropdown: true,
     children: [
-      { label: "Biodegradable Lanyards", href: "/stationary/notebooks", icon: "📓" },
-      { label: "Name Card Holders (future)", href: "/stationary/pens", icon: "🖊️" },
-      { label: "Eco Folders", href: "/stationary/planners", icon: "📋" },
-      { label: "Conference Giveaways", href: "/stationary/folders", icon: "📂" }
+      { label: "Biodegradable Lanyards", href: "/events/biodegradablelanyards", icon: "📓" },
+      { label: "Name Card Holders (future)", href: "/events/namecardholders", icon: "🖊️" },
+      { label: "Eco Folders", href: "/events/ecofolders", icon: "📋" },
+      { label: "Conference Giveaways", href: "/events/conferencegiveaways", icon: "📂" }
     ]
   }
 ];
@@ -304,20 +342,21 @@ export default function NavbarOne() {
                             <h3 className="text-sm font-bold text-gray-800 mb-3 uppercase tracking-wider">
                               {category.title}
                             </h3>
-                            
+
                             {/* Category Items */}
                             <ul className="space-y-1 mb-4">
                               {category.items.map((item, idx) => (
                                 <li key={idx}>
                                   <Link 
-                                    href={`${category.viewAllLink}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                    href={item.href}
                                     className="text-sm text-gray-600 hover:text-[#6B5A3F] transition-colors duration-150 block py-1"
                                   >
-                                    {item}
+                                    {item.label}
                                   </Link>
                                 </li>
                               ))}
                             </ul>
+
                             
                             {/* View All Link */}
                             <Link 

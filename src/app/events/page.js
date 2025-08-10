@@ -12,11 +12,14 @@ import BackpackGrid from '@/components/Productpage/BackpackGrid.js'
 import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
-import OfficeGrid from '@/components/Productpage/OfficeGrid.js'
 import NavbarOne from '@/components/Layout/NavbarOne.js'
-import OfficeCollection from '@/components/Collections/OfficeCollection.js'
+import DrinkwareCollection from '@/components/Collections/DrinkwareCollection.js'
+import EcolifestyleCollection from '@/components/Collections/EcolifestyleCollection.js'
+import EcoLifestyleGrid from '@/components/Productpage/EcoLifestyleGrid.js'
+import EventsCollection from '@/components/Collections/EventsCollection.js'
+import EventsGrid from '@/components/Productpage/EventsGrid.js'
 
-const Office = () => {
+const Events = () => {
   const [product, setProduct] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -28,7 +31,7 @@ const fetchProduct = async () => {
       const q = query(
   productRef,
   where("productStatus", "==", "Published"),
-  where("productCategory", "==", "office"), // ✅ category value must match DB
+  where("productCategory", "==", "drinkware"), // ✅ category value must match DB
   orderBy("createdAtDate", "desc")
 );
       const querySnapshot = await getDocs(q);
@@ -61,15 +64,15 @@ const fetchProduct = async () => {
     return (
         <div className=' font-poppins'>
             <NavbarOne />
-
-          <section className="relative pt-[0px] pb-[20px]">
-              <OfficeCollection />
-          </section>
+            
+            <section className="relative pt-[0px] pb-[20px]">
+                <EventsCollection />
+            </section>
       
       
             <section className="relative pt-[30px] pb-[20px]">
                 
-                <OfficeGrid product={product} />
+                <EventsGrid product={product} />
             </section>
 
             {/* <section className="relative pt-[0px] pb-[20px]">
@@ -92,4 +95,4 @@ const fetchProduct = async () => {
     )
 }
 
-export default Office
+export default Events;

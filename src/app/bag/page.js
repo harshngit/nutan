@@ -72,7 +72,6 @@ const fetchProduct = async () => {
                 <BagCollection />
             </section>
 
-      
             <section className="relative pt-[30px] pb-[20px]">
                 
                 <BackpackGrid product={product} />

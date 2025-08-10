@@ -2,15 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, where, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
 import ReviewForm from './ReviewForm';
-import { FaStar, FaRegStar, FaUser, FaCalendarAlt } from "react-icons/fa";
+import { FaStar, FaRegStar, FaUser, FaCalendarAlt, FaChevronDown } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const ProductReviews = ({ productId, productName }) => {
   const [reviews, setReviews] = useState([]);
+  const [displayedReviews, setDisplayedReviews] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [expandedImage, setExpandedImage] = useState(null);
+  
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [reviewsPerLoad, setReviewsPerLoad] = useState(2);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  // Set reviews per load based on screen size
+  useEffect(() => {
+    const updateReviewsPerLoad = () => {
+      if (window.innerWidth >= 768) {
+        setReviewsPerLoad(4); // Desktop: load 4 more reviews
+      } else {
+        setReviewsPerLoad(2); // Mobile: load 2 more reviews
+      }
+    };
+
+    updateReviewsPerLoad();
+    window.addEventListener('resize', updateReviewsPerLoad);
+    
+    return () => window.removeEventListener('resize', updateReviewsPerLoad);
+  }, []);
+
+  // Update displayed reviews when reviews or currentPage changes
+  useEffect(() => {
+    const startIndex = 0;
+    const endIndex = currentPage * 2; // Always show 2 reviews initially, then add more
+    setDisplayedReviews(reviews.slice(startIndex, endIndex));
+  }, [reviews, currentPage]);
 
   // Real-time listener for reviews
   useEffect(() => {
@@ -117,6 +146,20 @@ const ProductReviews = ({ productId, productName }) => {
     console.log("ProductReviews: Adding new review:", newReview);
     // The real-time listener will automatically update the reviews
     setShowReviewForm(false);
+    // Reset pagination to show the new review
+    setCurrentPage(1);
+  };
+
+  const loadMoreReviews = () => {
+    setIsLoadingMore(true);
+    
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      const currentDisplayed = displayedReviews.length;
+      const newEndIndex = currentDisplayed + reviewsPerLoad;
+      setDisplayedReviews(reviews.slice(0, newEndIndex));
+      setIsLoadingMore(false);
+    }, 300);
   };
 
   const calculateAverageRating = () => {
@@ -184,23 +227,22 @@ const ProductReviews = ({ productId, productName }) => {
 
   const averageRating = calculateAverageRating();
   const ratingDistribution = getRatingDistribution();
+  const hasMoreReviews = displayedReviews.length < reviews.length;
 
   return (
     <div className="bg-gray-50 p-6 w-full max-w-full my-6">
-      
-
       <div className="mb-6">
         <h2 className="md:text-3xl text-xl font-bold mb-4 text-gray-800">Customer Reviews</h2>
         
         {reviews.length > 0 && (
           <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
             {/* Product Title */}
-      {productName && (
-        <div className="mb-6 text-center">
-          <h1 className="md:text-2xl text-lg font-bold text-gray-800 mb-2">{productName}</h1>
-          <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
-        </div>
-      )}
+            {productName && (
+              <div className="mb-6 text-center">
+                <h1 className="md:text-2xl text-lg font-bold text-gray-800 mb-2">{productName}</h1>
+                <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
+              </div>
+            )}
             <div className="flex items-center gap-6 mb-4">
               <div className="text-center">
                 <div className="md:text-4xl text-2xl font-bold text-gray-800">{averageRating}</div>
@@ -238,19 +280,19 @@ const ProductReviews = ({ productId, productName }) => {
 
       {reviews.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg shadow-sm">
-            {/* Product Title */}
-      {productName && (
-        <div className="mb-6 text-center">
-          <h1 className="md:text-2xl text-lg px-2 font-bold text-gray-800 mb-2">{productName}</h1>
-          <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
-        </div>
-      )}
+          {/* Product Title */}
+          {productName && (
+            <div className="mb-6 text-center">
+              <h1 className="md:text-2xl text-lg px-2 font-bold text-gray-800 mb-2">{productName}</h1>
+              <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
+            </div>
+          )}
           <div className="mb-4">
             <div className="flex justify-center items-center gap-1 mb-2">
               {renderStars(0, "text-2xl")}
             </div>
             <p className="md:text-2xl text-base text-gray-500 mb-2">No reviews yet</p>
-            <p className="text-gray-600 md:text-xl text-base ">Be the first to share your thoughts!</p>
+            <p className="text-gray-600 md:text-xl text-base">Be the first to share your thoughts!</p>
           </div>
           <button
             onClick={() => setShowReviewForm(true)}
@@ -261,9 +303,14 @@ const ProductReviews = ({ productId, productName }) => {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <h3 className="md:text-xl text-base font-semibold text-gray-800">
               All Reviews ({reviews.length})
+              {displayedReviews.length < reviews.length && (
+                <span className="text-sm text-gray-500 ml-2">
+                  - Showing {displayedReviews.length} of {reviews.length}
+                </span>
+              )}
             </h3>
             <button
               onClick={() => setShowReviewForm(true)}
@@ -274,22 +321,16 @@ const ProductReviews = ({ productId, productName }) => {
           </div>
 
           <div className="space-y-6">
-            {reviews.map((review, index) => (
+            {displayedReviews.map((review, index) => (
               <div key={review.id || index} className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
                 <div className="flex items-start gap-4">
-                  {/* <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <FaUser className="text-green-600 text-lg" />
-                    </div>
-                  </div> */}
-                  
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
                       <h4 className="font-semibold text-gray-800 md:text-lg text-base">{review.name || 'Anonymous'}</h4>
                       <div className="flex items-center gap-1">
                         {renderStars(review.rating, "text-sm")}
                       </div>
-                      <div className="flex flex-row  items-center gap-1 text-sm text-gray-500">
+                      <div className="flex items-center gap-1 text-sm text-gray-500">
                         <FaCalendarAlt className="text-xs" />
                         {formatDate(review.createdAt)}
                       </div>
@@ -318,6 +359,32 @@ const ProductReviews = ({ productId, productName }) => {
               </div>
             ))}
           </div>
+
+          {/* Load More Button */}
+          {hasMoreReviews && (
+            <div className="text-center py-6">
+              <button
+                onClick={loadMoreReviews}
+                disabled={isLoadingMore}
+                className="bg-white text-green-600 border-2 border-green-600 md:px-8 md:py-3 px-6 py-2 md:text-base text-sm rounded-lg hover:bg-green-50 transition duration-200 font-medium shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 mx-auto"
+              >
+                {isLoadingMore ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-600"></div>
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    <span>Load More Reviews</span>
+                    <FaChevronDown className="text-sm" />
+                    <span className="text-xs bg-green-100 px-2 py-1 rounded-full">
+                      +{Math.min(reviewsPerLoad, reviews.length - displayedReviews.length)}
+                    </span>
+                  </>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       )}
 

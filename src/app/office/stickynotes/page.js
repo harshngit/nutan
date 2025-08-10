@@ -6,8 +6,9 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
+import { Stick } from 'next/font/google'
 
-const LaptopBags = () => {
+const StickyNotes = () => {
 	const [product, setProduct] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -88,4 +89,4 @@ const LaptopBags = () => {
 	)
 }
 
-export default LaptopBags;
+export default StickyNotes;

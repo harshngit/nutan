@@ -6,8 +6,9 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
+import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid'
 
-const ToteBags = () => {
+const ReusableBottles = () => {
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -50,13 +51,13 @@ const ToteBags = () => {
             <Navbar />
 
             <section className="relative pt-[10px] pb-[0px]">
-				<BannerTitle
-					title={"For Tote Bags"}
-					// desc={
-					// 	"Welcome to Different Clothing, where style meets comfort in every piece. Our collection is designed to offer the perfect balance of quality, versatility, and modern design, making it easy for you to express your unique style."
-					// }
-				/>
-			</section>
+                <BannerTitle
+                    title={"For Laptop Bags"}
+                    // desc={
+                    //     "Welcome to Different Clothing, where style meets comfort in every piece. Our collection is designed to offer the perfect balance of quality, versatility, and modern design, making it easy for you to express your unique style."
+                    // }
+                />
+            </section>
             
             <section className="relative px-4 py-6">
                 {loading ? (
@@ -75,9 +76,9 @@ const ToteBags = () => {
                     </div>
                 ) : (
                         <section className="relative pt-[30px] pb-[20px]">
-                            
-                            <BackpackGrid product={product} />
-                        </section>				
+                                        
+                            <DrinkwareGrid product={product} />
+                        </section>			
                 )}
             </section>
             
@@ -88,4 +89,4 @@ const ToteBags = () => {
     )
 }
 
-export default ToteBags;
+export default ReusableBottles;

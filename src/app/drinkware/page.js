@@ -13,6 +13,7 @@ import ServiceFeatures from '@/components/Home/FeaturesSection.js'
 import GiftsGrid from '@/components/Productpage/GiftsGrid.js'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid.js'
 import NavbarOne from '@/components/Layout/NavbarOne.js'
+import DrinkwareCollection from '@/components/Collections/DrinkwareCollection.js'
 
 const Drinkware = () => {
   const [product, setProduct] = useState([]);
@@ -59,20 +60,10 @@ const fetchProduct = async () => {
     return (
         <div className=' font-poppins'>
             <NavbarOne />
-            {/* <section className="relative lg:pt-[90px] pt-[50px]">
             
-                <BannerBreadcrumb />
-            </section> */}
-            
-            {/* <section className="relative pt-[0px] pb-[46px]">
-            
-                <ProductPage 
-                  products={visibleProducts} 
-                  loading={loading}
-                  
-                
-                />
-            </section> */}
+            <section className="relative pt-[0px] pb-[20px]">
+                <DrinkwareCollection />
+            </section>
       
       
             <section className="relative pt-[30px] pb-[20px]">

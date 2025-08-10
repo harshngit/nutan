@@ -7,7 +7,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
 
-const LaptopBags = () => {
+const Recycledmaterialgoods = () => {
 	const [product, setProduct] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -88,4 +88,4 @@ const LaptopBags = () => {
 	)
 }
 
-export default LaptopBags;
+export default Recycledmaterialgoods;

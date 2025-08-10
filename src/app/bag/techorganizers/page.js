@@ -7,7 +7,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
 
-const ToteBags = () => {
+const TechOrganizers = () => {
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -50,13 +50,13 @@ const ToteBags = () => {
             <Navbar />
 
             <section className="relative pt-[10px] pb-[0px]">
-				<BannerTitle
-					title={"For Tote Bags"}
-					// desc={
-					// 	"Welcome to Different Clothing, where style meets comfort in every piece. Our collection is designed to offer the perfect balance of quality, versatility, and modern design, making it easy for you to express your unique style."
-					// }
-				/>
-			</section>
+                <BannerTitle
+                    title={"For Tech Organizers"}
+                    // desc={
+                    // 	"Welcome to Different Clothing, where style meets comfort in every piece. Our collection is designed to offer the perfect balance of quality, versatility, and modern design, making it easy for you to express your unique style."
+                    // }
+                />
+            </section>
             
             <section className="relative px-4 py-6">
                 {loading ? (
@@ -88,4 +88,4 @@ const ToteBags = () => {
     )
 }
 
-export default ToteBags;
+export default TechOrganizers;

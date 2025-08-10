@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import React from 'react'
 
-const BagCollection = () => {
+const TechnologyCollection = () => {
 	const categories = [
-		{ name: "Laptop Bags", image: "/asset/Shop/collectionher/Hoddie.webp", href: "/bag/laptopbags" },
-		{ name: "Tote Bags", image: "/asset/Shop/collectionher/sweatshirt.webp", href: "/bag/totebags" },
-		{ name: "Tech Organizers", image: "/asset/Shop/collectionher/oversized.webp", href: "/bag/techorganizers" },
-		{ name: "Drawstring Pouches", image: "/asset/Shop/collectionher/sweatpants.webp", href: "/bag/drawstringpouches" },
-		{ name: "Welcome Kit Bags", image: "/asset/Shop/collectionher/leggings.webp", href: "/bag/welcomekitbags" },
+		{ name: "Wireless Chargers", image: "/asset/Shop/collectionher/Hoddie.webp", href: "/technology/wirelesschargers" },
+		{ name: "Charging Cables", image: "/asset/Shop/collectionher/sweatshirt.webp", href: "/technology/chargingcables" },
+		{ name: "Wireless Mice", image: "/asset/Shop/collectionher/oversized.webp", href: "/technology/wirelessmice" },
+		{ name: "Tech Gift Sets", image: "/asset/Shop/collectionher/sweatpants.webp", href: "/technology/techgiftsets" },
+		{ name: "USB Essentials", image: "/asset/Shop/collectionher/leggings.webp", href: "/technology/usbessentials" },
 	];
 	return (
 		<div className="bg-[#fff] py-10 px-4 text-center mb-10">
-			<h2 className="text-2xl md:text-3xl font-semibold mb-2">Best For Bag Collection</h2>
+			<h2 className="text-2xl md:text-3xl font-semibold mb-2">Best For Technology Collection</h2>
 			<p className="text-gray-600 mb-8 text-sm md:text-base"></p>
 			<div className="flex flex-wrap justify-center gap-12">
 				{categories.map((category, index) => (
@@ -33,4 +33,4 @@ const BagCollection = () => {
 	)
 }
 
-export default BagCollection
+export default TechnologyCollection
