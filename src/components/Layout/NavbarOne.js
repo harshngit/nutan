@@ -302,11 +302,11 @@ export default function NavbarOne() {
         const isParentActive = isActive(item.href) || item.children?.some((child) => isActive(child.href));
 
         return (
-          <li key={idx} className="relative group">
+          <li key={idx} className="">
             <div 
               onMouseEnter={() => handleMouseEnter(item.label)} 
               onMouseLeave={handleMouseLeave}
-              className="relative"
+              className=""
             >
               <Link href={item.href} className={`group px-4 py-3 transition lg:text-[15px] block flex items-center ${
                 isParentActive ? "text-white bg-[#5A4A2E]" : "text-white hover:text-[#EAD987]"
@@ -321,7 +321,7 @@ export default function NavbarOne() {
               {hasChildren && openDropdown === item.label && (
                 item.isAllCategory ? (
                   // All Category Mega Menu
-                  <div className="fixed left-0 top-[140px] w-full z-50 bg-white shadow-2xl border-t border-gray-200">
+                  <div className="absolute !left-0 right-0 w-full z-50 bg-white shadow-2xl border-t border-gray-200">
                     <div className="max-w-7xl mx-auto px-8 py-8">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 gap-8">
                         {item.children.map((category, i) => (
@@ -372,8 +372,8 @@ export default function NavbarOne() {
                   </div>
                 ) : (
                   // Regular Category Dropdown - Full Width
-                  <div className="fixed left-0 top-[140px] w-full z-50 bg-white shadow-2xl border-t border-gray-200">
-                    <div className="max-w-7xl mx-auto px-8 py-8">
+                  <div className="absolute !left-0 right-0  w-[100%] z-50 bg-white shadow-2xl border-t border-gray-200">
+                    <div className=" mx-auto px-8 py-8">
                       {/* <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                         {item.label} Categories
                       </h3> */}
@@ -622,7 +622,7 @@ export default function NavbarOne() {
               <HiOutlineShoppingCart className="w-6 h-6 mr-1" />
               <span className="text-sm">Cart</span>
               {cartItems.length > 0 && (
-                <div className="absolute -top-1 -right-1 bg-red-500 text-black text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                <div className="absolute -top-1 -right-1 bg-[#3B3310] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   {cartItems.length}
                 </div>
               )}
@@ -661,7 +661,7 @@ export default function NavbarOne() {
               >
                 <HiOutlineShoppingCart className="w-5 h-5" />
                 {cartItems.length > 0 && (
-                  <div className="absolute -top-1 -right-1 bg-red-500 text-black text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  <div className="absolute -top-1 -right-1 bg-[#3B3310] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     {cartItems.length}
                   </div>
                 )}
@@ -679,7 +679,7 @@ export default function NavbarOne() {
       </div>
 
       {/* Navigation Menu Bar - Desktop */}
-      <div className="hidden lg:block w-full bg-[#3B3310] px-8 py-2">
+      <div className="relative lg:block w-full bg-[#3B3310] px-8 py-2">
         <div className="flex items-center justify-between">
           {navList}
           
