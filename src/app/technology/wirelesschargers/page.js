@@ -7,7 +7,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
 
-const Wirelesschargers = () => {
+const WirelessChargers = () => {
 	const [product, setProduct] = useState([]);
 	const [loading, setLoading] = useState(true);
 
