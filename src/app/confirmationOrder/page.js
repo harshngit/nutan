@@ -1,26 +1,30 @@
-"use client"
+"use client";
 
 import { fetchOrderDetails } from '@/actions/orderAction';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useCurrency } from '@/Context/CurrencyProvider';  // ✅ import useCurrency hook
 
 const ConfirmationOrder = ({ orderID }) => {
     const dispatch = useDispatch();
-        const { orderDetails, loading, error } = useSelector((state) => state.order);
+    const { orderDetails, loading, error } = useSelector((state) => state.order);
     
-        useEffect(() => {
-            if (orderID) {
-                dispatch(fetchOrderDetails(orderID));
-            }
-        }, [orderID]);
-    
-        console.log(orderDetails)
-    
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p className="text-red-500">Error: {error}</p>;
-  return (
-   <>
+    const { formatPrice } = useCurrency(); // ✅ use formatPrice
+
+    useEffect(() => {
+        if (orderID) {
+            dispatch(fetchOrderDetails(orderID));
+        }
+    }, [orderID]);
+
+    console.log(orderDetails)
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p className="text-red-500">Error: {error}</p>;
+
+    return (
+        <>
             <div className='bg-gray-400 flex justify-center items-center h-screen'>
                 <div className="min-h-[80%] rounded-md w-[90%] font-poppins bg-white flex flex-col lg:flex-row justify-center items-center px-6 py-10 gap-10">
                     {/* Left Side */}
@@ -34,20 +38,9 @@ const ConfirmationOrder = ({ orderID }) => {
                             <h3 className="font-bold text-lg mb-2">Billing address</h3>
                             <div className="text-sm text-gray-700 space-y-2">
                                 <p><strong className='pr-1'>Name:</strong> {orderDetails?.customerName}</p>
-                                <p><strong className='pr-1'>Address:</strong>{orderDetails?.dropoff_location?.address
-                                },{orderDetails?.dropoff_location?.city
-                                    },{orderDetails?.dropoff_location?.region
-                                    },{orderDetails?.dropoff_location?.zip
-                                    }</p>
-                                <p><strong className='pr-1'>Phone:</strong>{orderDetails?.dropoff_location?.phone
-                                }</p>
-                                <p><strong className='pr-1'>Email:</strong>
-                                    {orderDetails?.email || 
-                                    orderDetails?.customer?.email || 
-                                    orderDetails?.customerEmail || 
-                                    orderDetails?.user?.email || 
-                                    'Not provided'}
-                                    </p>
+                                <p><strong className='pr-1'>Address:</strong>{orderDetails?.dropoff_location?.address}, {orderDetails?.dropoff_location?.city}, {orderDetails?.dropoff_location?.region}, {orderDetails?.dropoff_location?.zip}</p>
+                                <p><strong className='pr-1'>Phone:</strong>{orderDetails?.dropoff_location?.phone}</p>
+                                <p><strong className='pr-1'>Email:</strong>{orderDetails?.email || orderDetails?.customer?.email || orderDetails?.customerEmail || orderDetails?.user?.email || 'Not provided'}</p>
                             </div>
                         </div>
    
@@ -65,9 +58,7 @@ const ConfirmationOrder = ({ orderID }) => {
                             <div className="flex justify-between text-sm text-gray-700">
                                 <span><strong>Date</strong><br />02 May 2023</span>
                                 <span><strong>Order Number</strong><br />{orderDetails?.OrderID}</span>
-                                <span><strong>Coupon Code</strong><br />{orderDetails?.coupon?.map((item) => (<>
-									{item?.couponCode}
-								</>))}</span>
+                                <span><strong>Coupon Code</strong><br />{orderDetails?.coupon?.map((item) => (<>{item?.couponCode}</>))}</span>
                                 <span><strong>Payment Method</strong><br />COD</span>
                             </div>
                         </div>
@@ -94,7 +85,7 @@ const ConfirmationOrder = ({ orderID }) => {
                                             <p className="text-sm text-gray-600">Qty: {item?.p_qty}</p>
                                         </div>
                                     </div>
-                                    <p className="font-semibold">AED {item?.p_price}</p>
+                                    <p className="font-semibold">{formatPrice(item?.p_price)}</p> {/* Format the price */}
                                 </div>
                             </div>
                         ))}
@@ -104,11 +95,11 @@ const ConfirmationOrder = ({ orderID }) => {
                             <div className="border-t mt-6 pt-4 space-y-2 text-sm text-gray-700">
                                 <div className="flex justify-between">
                                     <span>Sub Total</span>
-                                    <span>AED {item?.n_value}</span>
+                                    <span>{formatPrice(item?.n_value)}</span> {/* Format the sub total */}
                                 </div>
                                 <div className="flex justify-between font-bold text-lg mt-2">
                                     <span>Order Total</span>
-                                    <span>AED {item?.n_value}</span>
+                                    <span>{formatPrice(item?.n_value)}</span> {/* Format the order total */}
                                 </div>
                             </div>
                         ))}
@@ -116,7 +107,7 @@ const ConfirmationOrder = ({ orderID }) => {
                 </div>
             </div>
         </>
-  )
+    )
 }
 
-export default ConfirmationOrder
+export default ConfirmationOrder;

@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { toggleWishlistItem, loadWishlistFromStorage } from "@/actions/wishlistActions";
+import { useCurrency } from "@/Context/CurrencyProvider";
 
 export default function ProductCard({ item }) {
   const dispatch = useDispatch();
+  const { formatPrice } = useCurrency();
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const { userProfile } = useSelector((state) => state.user);
   const userId = userProfile?.uid;
@@ -63,10 +65,12 @@ export default function ProductCard({ item }) {
         <div className="mt-2 px-2 pb-2">
           <p className="text-sm">{item.title}</p>
           <div className="flex items-center space-x-2 mt-1">
-            <span className="font-semibold">AED {item.price}</span>
-            <span className="line-through text-gray-400 text-sm">
-              AED {item.original}
-            </span>
+            <span className="font-semibold">{formatPrice(item.price)}</span>
+            {item.original && item.original > item.price && (
+              <span className="line-through text-gray-400 text-sm">
+                {formatPrice(item.original)}
+              </span>
+            )}
           </div>
         </div>
       </div>

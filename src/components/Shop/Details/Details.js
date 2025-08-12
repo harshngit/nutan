@@ -13,6 +13,9 @@ import {
   toggleWishlistItem,
   loadWishlistFromStorage
 } from '@/actions/wishlistActions';
+import { useCurrency } from '@/Context/CurrencyProvider';   // ✅ import
+
+
 
 const Details = ({ productDetails, setSelectedVariation }) => {
   const dispatch = useDispatch();
@@ -35,6 +38,9 @@ const Details = ({ productDetails, setSelectedVariation }) => {
   const userId = userProfile?.uid;
 
   const uniqueColors = [...new Set(variation.map(v => v.color))];
+
+    const { formatPrice } = useCurrency();
+
 
   // Load wishlist
   useEffect(() => {
@@ -175,7 +181,11 @@ const Details = ({ productDetails, setSelectedVariation }) => {
     }
   };
 
-  const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
+  // ✅ Use formatPrice from the currency context everywhere you show a price
+  const priceAED = Number(productDetails?.productPrice) || 0;
+  const mrpAED   = Number(productDetails?.productMrp) || 0;
+
+  // const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
 
   return (
     <div className="w-full px-4 md:px-8 py-8 mx-auto font-sans text-[#111]">
@@ -185,16 +195,16 @@ const Details = ({ productDetails, setSelectedVariation }) => {
 
       <div className="flex items-center gap-3 mb-2">
         <span className="text-lg font-bold text-[#111]">
-          {formatPrice(productDetails?.productPrice)}
+          {formatPrice(priceAED)}
         </span>
 
-        {productDetails?.productMrp && productDetails.productMrp > productDetails.productPrice && (
+        {mrpAED > priceAED && (
           <span className="text-gray-400 line-through text-base">
-            {formatPrice(productDetails.productMrp)}
+            {formatPrice(mrpAED)}
           </span>
         )}
 
-        {productDetails?.productMrp && productDetails.productMrp > productDetails.productPrice && (
+        {mrpAED > priceAED && (
           <span className="text-sm text-green-600 font-medium">
             {Math.round(productDetails.discountPercentage)}% OFF
           </span>

@@ -1,15 +1,16 @@
 "use client";
 
-import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { removeCartItem, updateCartQuantity, applyCouponToCart } from "@/actions/cartAction";
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { db } from "@/app/firebase.config";
 import { collection, query, where, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { useCurrency } from "@/Context/CurrencyProvider"; // Import the useCurrency hook
 
 export default function CartPage() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -82,7 +83,8 @@ export default function CartPage() {
     }
   };
 
- const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
+  // ✅ Use formatPrice from the currency context
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="font-poppins bg-white p-4 lg:py-16">
@@ -128,6 +130,7 @@ export default function CartPage() {
                       </div>
 
                       <div className="col-span-3 md:col-span-2 text-center">
+                        {/* Format price using currency context */}
                         <span className="text-sm md:text-base">{formatPrice(item.price)}</span>
                       </div>
 
@@ -138,6 +141,7 @@ export default function CartPage() {
                       </div>
 
                       <div className="col-span-2 md:col-span-3 text-center font-medium">
+                        {/* Format subtotal price */}
                         {formatPrice(item.price * item.quantity)}
                       </div>
 
@@ -163,6 +167,7 @@ export default function CartPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
+                  {/* Format the subtotal price */}
                   <span>{formatPrice(cartItems.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0))}</span>
                 </div>
                 <div className="flex justify-between font-medium text-[18px]">

@@ -17,6 +17,7 @@ import { useCurrency } from "@/Context/CurrencyProvider";
 // Firebase
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
+import CurrencySelector from "../CurrencySelector";
 
 const navItems = [
   { 
@@ -588,6 +589,11 @@ export default function NavbarOne() {
           {/* Right Side - User Info & Actions */}
           <div className="flex items-center gap-4">
             
+            {/* Replace the old currency selector with the new CurrencySelector component */}
+            <div className="hidden lg:block">
+              <CurrencySelector />
+            </div>
+
             {/* Currency Selector with flag - Desktop Only */}
             <div className="hidden lg:flex items-center px-3 py-2 rounded-lg  cursor-pointer">
                 <img className="w-5 mr-2" src="/asset/flag/aed.png" alt="logo" />
@@ -679,7 +685,7 @@ export default function NavbarOne() {
       </div>
 
       {/* Navigation Menu Bar - Desktop */}
-      <div className="relative lg:block w-full bg-[#3B3310] px-8 py-2">
+      <div className="relative hidden lg:block w-full bg-[#3B3310] px-8 py-2">
         <div className="flex items-center justify-between">
           {navList}
           

@@ -76,17 +76,7 @@ const Shop = () => {
 	return (
 		<div className=' font-poppins'>
 			<NavbarOne />
-			{/* <section className="relative lg:pt-[90px] pt-[50px]">
-			
-				<BannerBreadcrumb />
-			</section> */}
-			{/* <section className="relative pt-[0px] pb-[46px]">
-				
-				<ProductFilterToolbar 
-          onFilterChange={handleFilterChange}
-          totalProducts={filteredProducts.length}
-        />
-			</section> */}
+
 			<section className="relative pt-[0px] pb-[46px]">
 			
 				<ProductPage 
@@ -97,16 +87,11 @@ const Shop = () => {
           onPageChange={setCurrentPage}
         />
 			</section>
-      
-      
+         
 			<section className="relative pt-[120px] pb-[20px]">
 				
 				<BackpackGrid />
 			</section>
-
-			{/* <section className="relative pt-[0px] pb-[20px]">
-				<ProductBadage />
-			</section> */}
 
       <section className='relative overflow-hidden'>
         <ServiceFeatures />

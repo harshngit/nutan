@@ -7,6 +7,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
 import DrinkwareGrid from '@/components/Productpage/DrinkwareGrid'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const ReusableBottles = () => {
     const [product, setProduct] = useState([]);
@@ -48,7 +49,7 @@ const ReusableBottles = () => {
 
     return (
         <div className='font-poppins'>
-            <Navbar />
+            <NavbarOne />
 
             <section className="relative pt-[10px] pb-[0px]">
                 <BannerTitle

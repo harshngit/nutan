@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { db } from "@/app/firebase.config";
 import { doc, onSnapshot, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import FAQS from "../Faqs/Faqs";
 
 export default function MyAccount() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -205,9 +206,10 @@ export default function MyAccount() {
         );
       case "faqs":
         return (
-          <div className="p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-            <p>FAQs coming soon...</p>
+          <div className="w-full ">
+            {/* <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p>FAQs coming soon...</p> */}
+            <FAQS />
           </div>
         );
       default:
@@ -227,12 +229,12 @@ export default function MyAccount() {
 
       <div className="flex flex-col lg:flex-row px-4 md:px-6 min-h-[calc(100vh-80px)]">
         {/* Sidebar */}
-        <div className="w-full lg:w-80 mb-8 lg:mb-0 pt-8 border-r-2 border-gray-200">
+        <div className="w-full lg:w-80 mb-4 lg:mb-0 pt-8 border-r-2 border-gray-200">
           <div className="mb-6 flex items-center gap-2">
             <span className="w-1 h-4 bg-green-600 rounded-sm"></span>
-            <span className="text-gray-900 font-semibold text-sm md:text-base">
-              {isAuthenticated && userProfile?.name
-                ? userProfile.name.toUpperCase()
+            <span className="text-gray-900 font-semibold text-sm md:text-lg">
+              {isAuthenticated && userProfile?.displayName
+                ? userProfile.displayName.toUpperCase()
                 : "GUEST"}
             </span>
           </div>

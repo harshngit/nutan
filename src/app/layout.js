@@ -55,12 +55,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
      
        <body className={inter.className}>
+        <CurrencyProvider>
         <ReduxProvider>
           <CurrencyProvider>
           <LoadUser />
             {children}
             </CurrencyProvider>
           </ReduxProvider>
+        </CurrencyProvider>
         </body>
     </html>
   );

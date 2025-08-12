@@ -6,6 +6,7 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const TechGiftSets = () => {
 	const [product, setProduct] = useState([]);
@@ -47,7 +48,7 @@ const TechGiftSets = () => {
 
 	return (
 		<div className='font-poppins'>
-			<Navbar />
+			<NavbarOne />
 
              <section className="relative pt-[10px] pb-[0px]">
                             <BannerTitle

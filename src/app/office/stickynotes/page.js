@@ -7,6 +7,7 @@ import { db } from '@/app/firebase.config'
 import BackpackGrid from '@/components/Productpage/BackpackGrid'
 import BannerTitle from '@/components/Collections/BannerTitle'
 import { Stick } from 'next/font/google'
+import NavbarOne from '@/components/Layout/NavbarOne'
 
 const StickyNotes = () => {
 	const [product, setProduct] = useState([]);
@@ -48,7 +49,7 @@ const StickyNotes = () => {
 
 	return (
 		<div className='font-poppins'>
-			<Navbar />
+			<NavbarOne />
 
              <section className="relative pt-[10px] pb-[0px]">
                             <BannerTitle

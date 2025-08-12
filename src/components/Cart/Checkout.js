@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
+import { useCurrency } from "@/Context/CurrencyProvider"; // Import useCurrency hook
 
 export default function Checkout() {
   const [mounted, setMounted] = useState(false);
@@ -19,7 +20,6 @@ export default function Checkout() {
   const { userProfile } = useSelector((state) => state.user);
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
-
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -55,27 +55,26 @@ export default function Checkout() {
     fetchAddresses();
   }, [userProfile]);
 
- const formatPrice = (price) => `AED ${price?.toLocaleString('en-IN') || '0'} `;
+  const { formatPrice } = useCurrency(); // ✅ Use formatPrice from currency context
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleAddressSelect = (addressObj, index) => {
-  setFormData({
-    ...formData,
-    firstName: addressObj.name.split(" ")[0] || "",
-    lastName: addressObj.name.split(" ")[1] || "",
-    address: addressObj.address,
-    city: addressObj.city,
-    state: addressObj.state,
-    pincode: addressObj.pincode,
-    phone: addressObj.phone,
-  });
-  setSelectedAddressIndex(index); // ✅ set selected index
-};
-
+  const handleAddressSelect = (addressObj, index) => {
+    setFormData({
+      ...formData,
+      firstName: addressObj.name.split(" ")[0] || "",
+      lastName: addressObj.name.split(" ")[1] || "",
+      address: addressObj.address,
+      city: addressObj.city,
+      state: addressObj.state,
+      pincode: addressObj.pincode,
+      phone: addressObj.phone,
+    });
+    setSelectedAddressIndex(index); // ✅ set selected index
+  };
 
   const handlePlaceOrder = () => {
     const { firstName, lastName, address, city, state, pincode, phone, email } = formData;
@@ -112,39 +111,93 @@ const handleAddressSelect = (addressObj, index) => {
 
               {/* Address Selector */}
               <div className="flex flex-wrap gap-8 mb-8">
-{addresses.map((addr, index) => (
-  <div
-    key={index}
-    className={`border-2 p-4 rounded cursor-pointer lg:w-[300px] w-[280px] bg-white shadow transition-all duration-200 ${
-      selectedAddressIndex === index ? "border-blue-500" : "border-gray-300"
-    } hover:bg-gray-100`}
-    onClick={() => handleAddressSelect(addr, index)}
-  >
-    <p><strong>{addr.name}</strong></p>
-    <p>{addr.address}, {addr.city}, {addr.state} - {addr.pincode}</p>
-    <p>{addr.phone}</p>
-  </div>
-))}
-</div>
+                {addresses.map((addr, index) => (
+                  <div
+                    key={index}
+                    className={`border-2 p-4 rounded cursor-pointer lg:w-[300px] w-[280px] bg-white shadow transition-all duration-200 ${
+                      selectedAddressIndex === index ? "border-blue-500" : "border-gray-300"
+                    } hover:bg-gray-100`}
+                    onClick={() => handleAddressSelect(addr, index)}
+                  >
+                    <p><strong>{addr.name}</strong></p>
+                    <p>{addr.address}, {addr.city}, {addr.state} - {addr.pincode}</p>
+                    <p>{addr.phone}</p>
+                  </div>
+                ))}
+              </div>
 
               {/* Billing Form */}
               <div className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block mb-2">First Name</label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="w-full border px-4 py-3 rounded"
+                    />
                   </div>
                   <div>
                     <label className="block mb-2">Last Name</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full border px-4 py-3 rounded"
+                    />
                   </div>
                 </div>
-                <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
-                <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
-                <input type="text" name="state" placeholder="State" value={formData.state} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
-                <input type="text" name="pincode" placeholder="Pincode" value={formData.pincode} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
-                <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
-                <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className="w-full border px-4 py-3 rounded" />
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
+                <input
+                  type="text"
+                  name="pincode"
+                  placeholder="Pincode"
+                  value={formData.pincode}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="Phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full border px-4 py-3 rounded"
+                />
               </div>
             </div>
 
@@ -154,37 +207,52 @@ const handleAddressSelect = (addressObj, index) => {
               {cartItems.map((item, index) => (
                 <div key={index} className="flex justify-between text-gray-700 mb-2">
                   <span>{item.name} × {item.quantity}</span>
-                  <span>{formatPrice(item.price * item.quantity)}</span>
+                  <span>{formatPrice(item.price * item.quantity)}</span> {/* Format the price */}
                 </div>
               ))}
               <div className="flex justify-between mt-4 font-medium">
                 <span>Subtotal</span>
-                <span>{formatPrice(subtotal)}</span>
+                <span>{formatPrice(subtotal)}</span> {/* Format the subtotal */}
               </div>
               {totalDiscount > 0 && (
                 <div className="flex justify-between font-medium text-green-700">
                   <span>Discount</span>
-                  <span>-{formatPrice(totalDiscount)}</span>
+                  <span>-{formatPrice(totalDiscount)}</span> {/* Format the discount */}
                 </div>
               )}
               <div className="flex justify-between text-xl font-bold mt-2">
                 <span>Total</span>
-                <span className="text-[#B88E2F]">{formatPrice(finalTotal)}</span>
+                <span className="text-[#B88E2F]">{formatPrice(finalTotal)}</span> {/* Format the final total */}
               </div>
 
               {/* Payment Options */}
               <div className="space-y-3 mt-6">
                 <div className="flex items-center gap-3">
-                  <input type="radio" name="paymentMethod" value="directBankTransfer" checked={formData.paymentMethod === "directBankTransfer"} onChange={handleInputChange} />
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="directBankTransfer"
+                    checked={formData.paymentMethod === "directBankTransfer"}
+                    onChange={handleInputChange}
+                  />
                   <label>Direct Bank Transfer</label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <input type="radio" name="paymentMethod" value="cashOnDelivery" checked={formData.paymentMethod === "cashOnDelivery"} onChange={handleInputChange} />
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="cashOnDelivery"
+                    checked={formData.paymentMethod === "cashOnDelivery"}
+                    onChange={handleInputChange}
+                  />
                   <label>Cash On Delivery</label>
                 </div>
               </div>
 
-              <button onClick={handlePlaceOrder} className="mt-6 w-full bg-black text-white py-3 rounded hover:bg-gray-800">
+              <button
+                onClick={handlePlaceOrder}
+                className="mt-6 w-full bg-black text-white py-3 rounded hover:bg-gray-800"
+              >
                 Place Order
               </button>
             </div>

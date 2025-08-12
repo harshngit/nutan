@@ -60,20 +60,6 @@ const fetchProduct = async () => {
     return (
         <div className=' font-poppins'>
             <NavbarOne />
-            {/* <section className="relative lg:pt-[90px] pt-[50px]">
-            
-                <BannerBreadcrumb />
-            </section> */}
-            
-            {/* <section className="relative pt-[0px] pb-[46px]">
-            
-                <ProductPage 
-                  products={visibleProducts} 
-                  loading={loading}
-                  
-                
-                />
-            </section> */}
       
       
             <section className="relative pt-[30px] pb-[20px]">

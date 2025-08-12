@@ -28,7 +28,7 @@ const SimpleBanner = () => {
               It is the season to celebrate and nurture everlasting bonds. Build lasting 
               relationships with our bespoke corporate solutions.
             </p>
-            <button className="bg-[#3B3310] text-[#EAD987] lg:px-8 px-4 lg:py-3 py-2 rounded-lg font-bold md:text-sm text-[10px] tracking-wider hover:bg-gray-100 transition-colors duration-300">
+            <button className="bg-[#3B3310] text-[#EAD987] lg:px-8 px-4 lg:py-3 py-2 rounded-lg font-bold md:text-sm text-[10px] tracking-wider transition-colors duration-300">
             ENQUIRE NOW
           </button>
           </div>
