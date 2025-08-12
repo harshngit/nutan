@@ -251,7 +251,7 @@ export default function Checkout() {
 
               <button
                 onClick={handlePlaceOrder}
-                className="mt-6 w-full bg-black text-white py-3 rounded hover:bg-gray-800"
+                className="mt-6 w-full bg-[#3B3310] text-white py-3 rounded hover:bg-gray-800"
               >
                 Place Order
               </button>

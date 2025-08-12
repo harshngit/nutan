@@ -35,7 +35,7 @@ const CurrencySelector = () => {
         className="flex items-center px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
       >
         <img 
-          className="w-5 h-4 mr-2 object-cover rounded-sm" 
+          className="w-5 h-5 mr-2 object-contain rounded-sm" 
           src={currentCurrency.flag} 
           alt={`${currency} flag`}
           onError={(e) => {
@@ -59,7 +59,7 @@ const CurrencySelector = () => {
               }`}
             >
               <img 
-                className="w-5 h-4 mr-2 object-cover rounded-sm" 
+                className="w-5 h-5 mr-2 object-contain rounded-sm" 
                 src={info.flag} 
                 alt={`${currencyCode} flag`}
                 onError={(e) => {

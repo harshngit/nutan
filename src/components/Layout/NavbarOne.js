@@ -595,12 +595,12 @@ export default function NavbarOne() {
             </div>
 
             {/* Currency Selector with flag - Desktop Only */}
-            <div className="hidden lg:flex items-center px-3 py-2 rounded-lg  cursor-pointer">
+            {/* <div className="hidden lg:flex items-center px-3 py-2 rounded-lg  cursor-pointer">
                 <img className="w-5 mr-2" src="/asset/flag/aed.png" alt="logo" />
 
               <span className="text-black text-sm font-medium mr-1">AED</span>
               <IoChevronDownOutline className="w-3 h-3 text-black" />
-            </div>
+            </div> */}
 
             {/* User Icon and Welcome Message */}
             <div className="hidden lg:flex flex-row items-center text-white">

@@ -5,10 +5,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 // Exchange rates relative to AED (1 AED = x currency)
 const EXCHANGE_RATES = {
   AED: { rate: 1, symbol: 'AED', flag: '/asset/flag/aed.png' },
+  INR: { rate: 23.85, symbol: '₹', flag: '/asset/flag/inr.png' },
   USD: { rate: 0.27, symbol: '$', flag: '/asset/flag/usd.png' },
-  EUR: { rate: 0.25, symbol: '€', flag: '/asset/flag/eur.png' },
-  GBP: { rate: 0.21, symbol: '£', flag: '/asset/flag/gbp.png' },
-  INR: { rate: 22.50, symbol: '₹', flag: '/asset/flag/inr.png' },
+  GBP: { rate: 0.20, symbol: '£', flag: '/asset/flag/gbp.png' },
+  EUR: { rate: 0.23, symbol: '€', flag: '/asset/flag/eur.png' },
 };
 
 const CurrencyContext = createContext();

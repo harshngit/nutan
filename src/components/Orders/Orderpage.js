@@ -6,6 +6,8 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/app/firebase.config";
 import { FaBoxOpen } from "react-icons/fa";
 import Link from "next/link"; 
+import LoadingScreen from "../Loader/LoaderScreen";
+import { useCurrency } from "@/Context/CurrencyProvider"; // ✅ import useCurrency hook
 
 const Orderpage = () => {
   const [orders, setOrders] = useState([]);
@@ -13,6 +15,8 @@ const Orderpage = () => {
 
   const { userProfile } = useSelector((state) => state.user) || {};
   const uid = userProfile?.uid;
+
+  const { formatPrice } = useCurrency(); // ✅ use formatPrice
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -40,7 +44,7 @@ const Orderpage = () => {
   }, [uid]);
 
   if (loading) {
-    return <p className="p-10">Loading orders...</p>;
+    return <LoadingScreen />;
   }
 
   if (!orders.length) {
@@ -76,14 +80,14 @@ const Orderpage = () => {
                 </div>
               </div>
               <span className={`font-medium text-sm px-3 py-1 rounded-full ${
-  order.status === "cancelled"
-    ? "bg-red-200 text-red-800"
-    : order.status === "delivered"
-    ? "bg-green-200 text-green-800"
-    : "bg-gray-200 text-gray-800"
-}`}>
-  {order.status === "cancelled" ? "Cancelled" : order.orderStatus || "Pending"}
-</span>
+                order.status === "cancelled"
+                  ? "bg-red-200 text-red-800"
+                  : order.status === "delivered"
+                  ? "bg-green-200 text-green-800"
+                  : "bg-gray-200 text-gray-800"
+              }`}>
+                {order.status === "cancelled" ? "Cancelled" : order.orderStatus || "Pending"}
+              </span>
             </div>
 
             <div className="flex justify-start items-start gap-[5px] flex-col mb-2">
@@ -104,7 +108,7 @@ const Orderpage = () => {
                   <span>
                     {item.p_name} x {item.p_qty}
                   </span>
-                  <span>${item.p_price}</span>
+                  <span>{formatPrice(item.p_price)}</span> {/* Use formatPrice here */}
                 </div>
               ))}
             </div>
@@ -112,13 +116,11 @@ const Orderpage = () => {
             {order?.invoices.map((item, index) => (
               <div className="flex justify-between font-semibold text-base mb-4" key={index}>
                 <span>Total</span>
-                <span>${item.n_value?.toFixed(2) || "0.00"}</span>
+                <span>{formatPrice(item.n_value)}</span> {/* Format total */}
               </div>
             ))}
 
             <div className="flex gap-2">
-              {/* Use Link to navigate and pass the orderId */}
-              
               <Link href={`/orders/${order?.OrderID}`}>
                 <button className="bg-gray-100 text-gray-800 text-sm px-4 py-2 rounded-md">
                   See Details

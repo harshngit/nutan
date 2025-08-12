@@ -4,6 +4,7 @@ import { fetchOrderDetails } from '@/actions/orderAction';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import LoadingScreen from '../Loader/LoaderScreen';
 
 const OrderConfirmationpage = ({ orderID }) => {
 	const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const OrderConfirmationpage = ({ orderID }) => {
 
 	console.log(orderDetails)
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <LoadingScreen />;
 	if (error) return <p className="text-red-500">Error: {error}</p>;
 	return (
 		<>
